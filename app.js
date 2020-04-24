@@ -296,11 +296,11 @@ function UpdatePosition() {
 	}
 
 	// TODO change score of character
-	if (score == 100) 
-    Draw();
+	if (score == 100) {
+    	Draw();
 		window.clearInterval(interval);		
 		window.alert("Game completed");
-  }else {
+  	}else {
 		Draw();
 	}
 }
