@@ -19,6 +19,14 @@ var keyDownCode = 40;
 var keyRightCode = 39;
 var keyLeftCode = 37;
 
+var food_color5 = "black";
+var food_color15 = "#e66465";
+var food_color25 = "#f6b73c";
+var wall_color = "grey";
+var ghost_color = "blue"
+
+//TODO fix colors here (character color and pacman)
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -28,6 +36,7 @@ $(document).ready(function() {
 
 function Start() {
 	createWalls();
+	pickColor();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -145,34 +154,44 @@ function Draw() {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
+				context.fillStyle = pac_color;
 				context.fill();
 				context.beginPath();
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = "black";
 				context.fill();
-			} else if (board[i][j] == 1) {
+			} else if (board[i][j] == 1) { // 5 points food 
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = food_color5;
 				context.fill();
-			} else if (board[i][j] == 4) {
+			} else if (board[i][j] == 12) { // 15 points food 
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = food_color15;
+				context.fill();
+			} else if (board[i][j] == 13) { // 25 points food 
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = food_color25;
+				context.fill();
+			} else if (board[i][j] == 4) { // wall 
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
+				context.fillStyle = wall_color;
 				context.fill();
-			}else if (board[i][j] == 5) {
+			}else if (board[i][j] == 5) { // bonus character
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
-				context.fillStyle = character_color; //color
+				context.fillStyle = character_color;
 				context.fill();
 				context.beginPath();
-			}else if (board[i][j] == 6 || board[i][j] == 7 || board[i][j] == 8 || board[i][j] == 9) {
+			}else if (board[i][j] == 6 || board[i][j] == 7 || board[i][j] == 8 || board[i][j] == 9) { //ghosts
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
-				context.fillStyle = "bule"; 
+				context.fillStyle = ghost_color; 
 				context.fill();
 				context.beginPath();
 			}
@@ -343,4 +362,45 @@ function isAWall(i, j){
 
 function isAMonster(i, j){
 	return board[i][j] == 6;
+}
+
+//color logic
+
+function pickColor() {
+	// five points
+	fivePoints = document.querySelector("#five_points");
+	fivePoints.value = food_color5;	
+	fivePoints.addEventListener("change", updateFivePointsColor, false);
+	fivePoints.select();
+
+	// fifteen points
+	fifteenPoints = document.querySelector("#fifteen_points");
+	fifteenPoints.value = food_color15;	
+	fifteenPoints.addEventListener("change", updateFifteenPointsColor, false);
+	fifteenPoints.select();
+
+	// twenty five points
+	twentyfivePoints = document.querySelector("#twentyfive_points");
+	twentyfivePoints.value = food_color25;	
+	twentyfivePoints.addEventListener("change", updateTwentyFivePointsColor, false);
+	twentyfivePoints.select();
+  }
+
+function updateFivePointsColor (event){
+	food_color5 =  event.target.value;
+}
+
+function updateFifteenPointsColor (event){
+	food_color15 =  event.target.value;
+}
+
+function updateTwentyFivePointsColor (event){
+	food_color25 =  event.target.value;
+}
+
+
+//set the settings
+
+function submit_settings(){
+	
 }
