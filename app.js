@@ -8,6 +8,9 @@ var character_color;
 var start_time;
 var time_elapsed;
 var interval;
+var board_width = 20;
+var board_height = 15;
+var walls;
 
 
 $(document).ready(function() {
@@ -16,6 +19,7 @@ $(document).ready(function() {
 });
 
 function Start() {
+	createWalls();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -24,7 +28,7 @@ function Start() {
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < board_width; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
@@ -78,7 +82,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 70);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -241,9 +245,42 @@ function UpdatePosition() {
 		pac_color = "green";
 	}
 	if (score == 50) {
-		window.clearInterval(interval);		
+		Draw();
+		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
 		Draw();
 	}
+}
+
+function createWalls(){
+	walls = new Array();
+	for (j = 0; j < board_width; j++){
+		walls [0][j] = 0;
+		walls [1][j] = 0;
+	}
+	walls [2] = [0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [3] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [4] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0];
+	walls [5] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [6] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [7] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [8] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0];
+	walls [9] = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [10]= [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [11]= [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [12]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
+	walls [13]= [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
+	walls [14]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0];
+	for (j = 0; j < board_width; j++){
+		walls [15][j] = 0;
+	}
+}
+
+function isAWall(i, j){
+	return walls[i][j] == 1;
+}
+
+function isAMonster(i, j){
+	return board[i][j] == 6;
 }
