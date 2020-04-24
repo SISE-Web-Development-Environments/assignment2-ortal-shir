@@ -20,5 +20,39 @@
 		<div id="game">
 			<canvas id="canvas" height="1000" width="1250"></canvas>
 		</div>
+
+		<div class="main">
+			<form name="form_name" id="form_id" class="form_class" >
+			<label>Name :</label>
+			<input type="text" name="name" id="name" placeholder="Name" />
+			<label>Email :</label>
+			<input type="text" name="Number of food balls" id="food" placeholder="between 50 and 90" />
+
+			<p>Choose your food balls colors:</p>
+
+			<div>
+				<input type="color" id="5points" name="head"
+					   value="#e66465">
+				<label for="head">5 points balls</label>
+			</div>
+			
+			<div>
+				<input type="color" id="15points" name="body"
+						value="#f6b73c">
+				<label for="body">15 points balls</label>
+			</div>
+
+			<div>
+				<input type="color" id="25points" name="body"
+						value="#f6b73c">
+				<label for="body">25 points balls</label>
+			</div>
+
+			<input type="button" name="submit_id" id="btn_id" value="Submit by Id" onclick="submit_by_id()"/>
+			<input type="button" name="submit_name" id="btn_name" value="Submit by Name" onclick="submit_by_name()"/>
+			<input type="button" name="submit_class" id="btn_class" value="Submit by Class" onclick="submit_by_class()"/>
+			<input type="button" name="submit_tag" id="btn_tag" value="Submit by Tag" onclick="submit_by_tag()"/>
+			</form>
+		</div>
 	</body>
 </html>
