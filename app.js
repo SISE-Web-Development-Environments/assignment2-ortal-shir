@@ -1,6 +1,7 @@
 var context;
 var shape = new Object();
 var character = new Object();
+var monster = new Array();
 var board;
 var score;
 var pac_color;
@@ -8,12 +9,14 @@ var character_color;
 var start_time;
 var time_elapsed;
 var interval;
+var food_was = new Array();
 
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
 });
+
 
 function Start() {
 	board = new Array();
@@ -24,10 +27,11 @@ function Start() {
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
-	for (var i = 0; i < 10; i++) {
+	positionMonster()
+	for (var i = 0; i < 19; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
+		for (var j = 0; j < 14; j++) {
 			if(i == 0 && j == 0){
 				character.i = i;
 				character.j = j;
@@ -78,7 +82,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 70);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -103,6 +107,18 @@ function GetKeyPressed() {
 	}
 	if (keysDown[39]) {
 		return 4;
+	}
+}
+
+//A function that defines the monster's location at the beginning of the game
+function positionMonster(){
+	let index = 6;
+	for(i = 0 ; i < monster.length ; i++ ){
+		monster[i] =  new Object();
+		board[19][15] = index; //Monster
+		monster[i].i = 19;
+		monster[i].j = 15;
+		index++;
 	}
 }
 
@@ -142,15 +158,23 @@ function Draw() {
 				context.fillStyle = character_color; //color
 				context.fill();
 				context.beginPath();
+			}else if (board[i][j] == 6 || board[i][j] == 7 || board[i][j] == 8 || board[i][j] == 9) {
+				context.beginPath();
+				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = "bule"; 
+				context.fill();
+				context.beginPath();
 			}
 		}
 	}
 }
 
-
-function changPositionCharacter(){
-	board[character.i][character.j] = 0;
-	//0 - 
+//A function that updates the character's location
+function changPositionCharacter(was){
+	if(was == false){
+		board[character.i][character.j] = 0;
+	}
 	let found = false;
 	while (found == false){
 		let move = Math.floor(Math.random() * Math.floor(4));
@@ -179,53 +203,78 @@ function changPositionCharacter(){
 	board[character.i][character.j] = 5;
 }
 
+
+//Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(){
+	if(character.j > 0 && board[character.i][character.j - 1] == 1){
+		food_was[0] =[character.i,character.j-1];
+	}
 	return character.j > 0 && board[character.i][character.j - 1] != 4;
 
 }
-
+//Function that checks whether the figure can be moved to the Right
 function checkMoveRight(){
+	if(character.j < 9 && board[character.i][character.j + 1] == 1){
+		food_was[0] = [character.i,character.j + 1];
+	}
 	return character.j < 9 && board[character.i][character.j + 1] != 4;
 }
-
+//Function that checks whether the figure can be moved to the Down
 function checkMoveDown(){
+	if(character.i > 0 && board[character.i - 1][character.j] == 1){
+		food_was[0] = [character.i-1,character.j];
+	}
 	return character.i > 0 && board[character.i - 1][character.j] != 4;
 
 }
-
+//Function that checks whether the figure can be moved to the Up
 function checkMoveUp(){
+	if(character.i < 9 && board[character.i + 1][character.j] == 1){
+		food_was[0] = [character.i+1,character.j];
+	}
 	return character.i < 9 && board[character.i + 1][character.j] != 4;
 
+}
+
+function return_food_was(){
+	for( let i=0 ; i < food_was.length ; i++){
+		obj = food_was[i];
+		board[obj[0]][obj[1]] = 1;
+	}
+	if(food_was.length == 0){
+		food_was = new Array();
+		return false
+	}
+	food_was = new Array();
+	return true
 }
 
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
+	was = return_food_was();
+	changPositionCharacter(was);
 	//i -x
 	//j - y
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
-			changPositionCharacter()
 		}
 	}
 	if (x == 2) {
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
-			changPositionCharacter()
 		}
 	}
 	if (x == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
-			changPositionCharacter()
 		}
 	}
 	if (x == 4) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
-			changPositionCharacter()
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
@@ -240,7 +289,8 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+	// TODO change score of character
+	if (score == 100) {
 		window.clearInterval(interval);		
 		window.alert("Game completed");
 	} else {
