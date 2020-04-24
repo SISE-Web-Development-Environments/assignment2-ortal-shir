@@ -10,6 +10,9 @@ var start_time;
 var time_elapsed;
 var interval;
 var food_was = new Array();
+var board_width = 20;
+var board_height = 16;
+var walls;
 
 
 $(document).ready(function() {
@@ -19,31 +22,26 @@ $(document).ready(function() {
 
 
 function Start() {
+	createWalls();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	character_color = "pink"
-	var cnt = 100;
+	var cnt = board_height * board_width;
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
 	positionMonster()
-	for (var i = 0; i < 19; i++) {
+	for (var i = 0; i < board_height; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 14; j++) {
+		for (var j = 0; j < board_width; j++) {
 			if(i == 0 && j == 0){
 				character.i = i;
 				character.j = j;
 				board[i][j] = 5;
 			}
-			else if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
+			else if (isAWall(i,j)) {
 				board[i][j] = 4;//block
 			} else {
 				var randomNum = Math.random();
@@ -66,6 +64,13 @@ function Start() {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
+	}
+	while (pacman_remain > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+		board[emptyCell[0]][emptyCell[1]] = 2;
+		pacman_remain--;
 	}
 	keysDown = {};
 	addEventListener(
@@ -126,11 +131,11 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < board_height; i++) {
+		for (var j = 0; j < board_width; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.y = i * 60 + 30;
+			center.x = j * 60 + 30;
 			if (board[i][j] == 2) {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
@@ -289,11 +294,48 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
+
 	// TODO change score of character
-	if (score == 100) {
+	if (score == 100) 
+    Draw();
 		window.clearInterval(interval);		
 		window.alert("Game completed");
-	} else {
+  }else {
 		Draw();
 	}
+}
+
+function createWalls(){
+	walls = new Array();
+	for (i = 0; i < board_height; i++){
+		walls [i] = new Array();
+	}
+	for (j = 0; j < board_width; j++){
+		walls [0][j] = 0;
+		walls [1][j] = 0;
+	}
+	walls [2] = [0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [3] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [4] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0];
+	walls [5] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [6] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [7] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+	walls [8] = [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0];
+	walls [9] = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [10]= [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [11]= [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	walls [12]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
+	walls [13]= [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
+	walls [14]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0];
+	for (j = 0; j < board_width; j++){
+		walls [15][j] = 0;
+	}
+}
+
+function isAWall(i, j){
+	return walls[i][j] == 1;
+}
+
+function isAMonster(i, j){
+	return board[i][j] == 6;
 }
