@@ -14,6 +14,11 @@ var board_width = 20;
 var board_height = 16;
 var walls;
 
+var keyUpCode = 38;
+var keyDownCode = 40;
+var keyRightCode = 39;
+var keyLeftCode = 37;
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -87,7 +92,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 100);
+	interval = setInterval(UpdatePosition, 50);
 }
 
 function findRandomEmptyCell(board) {
@@ -101,16 +106,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[keyLeftCode]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[keyRightCode]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[keyUpCode]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[keyDownCode]) {
 		return 4;
 	}
 }
@@ -262,22 +267,22 @@ function UpdatePosition() {
 	changPositionCharacter(was);
 	//i -x
 	//j - y
-	if (x == 1) {
+	if (x == 1) { //left
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
 	}
-	if (x == 2) {
+	if (x == 2) { //right
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
-	if (x == 3) {
+	if (x == 3) { //up
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
 	}
-	if (x == 4) {
+	if (x == 4) { //down
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
@@ -297,10 +302,10 @@ function UpdatePosition() {
 
 	// TODO change score of character
 	if (score == 100) {
-    	Draw();
+    Draw();
 		window.clearInterval(interval);		
 		window.alert("Game completed");
-  	}else {
+  }else {
 		Draw();
 	}
 }
