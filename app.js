@@ -200,8 +200,8 @@ function changPositionMonster(index){
 	monster[index].i = monster[index].i + vx
 	if(monster[index].i < 0 ){
 		monster[index].i = 0;
-	}else if (monster[index].i > 19){
-		monster[index].i = 19;
+	}else if (monster[index].i > 15){
+		monster[index].i = 15;
 	}
 	monster[index].j =monster[index].j + vy
 	if(monster[index].j < 0){
@@ -295,8 +295,8 @@ function UpdatePosition() {
 	var x = GetKeyPressed();
 	board[character.i][character.j] = 0;
 	returnFoodWas();
-	changPositionCharacter();
 	changPositionMonster(0);
+	changPositionCharacter();
 	//i -x
 	//j - y
 	if (x == 1) {
