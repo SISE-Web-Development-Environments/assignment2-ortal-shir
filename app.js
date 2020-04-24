@@ -1,7 +1,7 @@
 var context;
 var shape = new Object();
 var character = new Object();
-var monster = new Array();
+var monster = new Array(1);
 var board;
 var score;
 var pac_color;
@@ -13,6 +13,7 @@ var food_was = new Array();
 var board_width = 20;
 var board_height = 16;
 var walls;
+var index_food_was = 0;
 
 var keyUpCode = 38;
 var keyDownCode = 40;
@@ -36,12 +37,14 @@ function Start() {
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
-	positionMonster()
 	for (var i = 0; i < board_height; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < board_width; j++) {
-			if(i == 0 && j == 0){
+			if(isAMonster(i,j)){
+				continue;
+			}
+			else if(i == 0 && j == 0){
 				character.i = i;
 				character.j = j;
 				board[i][j] = 5;
@@ -77,6 +80,19 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		pacman_remain--;
 	}
+	for (let h =0; h<monster.length; h++){
+		if(h == 0){
+			positionMonster(0,15,19,6);
+		}else if(h==1){
+			positionMonster(1,15,0,7);
+		}else if(h==2){
+			positionMonster(2,0,19,8);
+		}else if(h==3){
+			positionMonster(3,15,1,9);
+		}
+
+	}
+	
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -92,7 +108,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 50);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -121,15 +137,11 @@ function GetKeyPressed() {
 }
 
 //A function that defines the monster's location at the beginning of the game
-function positionMonster(){
-	let index = 6;
-	for(i = 0 ; i < monster.length ; i++ ){
-		monster[i] =  new Object();
-		board[19][15] = index; //Monster
-		monster[i].i = 19;
-		monster[i].j = 15;
-		index++;
-	}
+function positionMonster(number_monster, i, j, index_board){
+	monster[number_monster] =  new Object();
+	board[i][j] = index_board; 
+	monster[number_monster].i = i;
+	monster[number_monster].j = j
 }
 
 function Draw() {
@@ -172,7 +184,7 @@ function Draw() {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
-				context.fillStyle = "bule"; 
+				context.fillStyle = "blue"; 
 				context.fill();
 				context.beginPath();
 			}
@@ -180,11 +192,54 @@ function Draw() {
 	}
 }
 
-//A function that updates the character's location
-function changPositionCharacter(was){
-	if(was == false){
-		board[character.i][character.j] = 0;
+function changPositionMonster(index, number_monster){
+	let found = false;
+	while (found == false){
+		let opposite = shape.j - monster[index].j;
+		let adjacent= shape.i - monster[index].i;
+		let angle = Math.atan(opposite/adjacent);
+		if (monster[index].i > shape.i){
+			angle = angle + 180;
+		}	  
+		let velocity= 1;
+		let vx = 0;
+		let vy = 0;
+		let move = Math.random() * Math.floor(1);
+		if(move < 0.5){
+			vx = Math.floor(velocity * Math.cos(angle));
+			monster[index].i = monster[index].i + vx;
+			if(monster[index].i < 0 ){
+				monster[index].i = 0;
+			}else if (monster[index].i > 15){
+				monster[index].i = 15;
+			}
+		}else{
+			vy = Math.floor(velocity * Math.sin(angle));
+			monster[index].j =monster[index].j + vy
+			if(monster[index].j < 0){
+				monster[index].j = 0;
+			}else if (monster[index].j > 19){
+				monster[index].j = 19;
+			}
+		}
+		if(checkMoveMonster( monster[index].i,monster[index].j)){
+			found =true;
+		}
+	}	
+	board[monster[index].i][monster[index].j] = number_monster;
+}
+
+function checkMoveMonster(i, j){
+	if(i < 16 && i >= 0 && j >= 0 && j < 20 && board[i][j] == 1){
+		food_was[index_food_was] =[i,j];
+		index_food_was++;
 	}
+	return (i < 16 && i >= 0 && j >= 0 && j < 20 && board[i][j] != 4);
+}
+
+
+//A function that updates the character's location
+function changPositionCharacter(){
 	let found = false;
 	while (found == false){
 		let move = Math.floor(Math.random() * Math.floor(4));
@@ -217,54 +272,64 @@ function changPositionCharacter(was){
 //Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(){
 	if(character.j > 0 && board[character.i][character.j - 1] == 1){
-		food_was[0] =[character.i,character.j-1];
+		food_was[index_food_was] =[character.i,character.j-1];
+		index_food_was++;
 	}
 	return character.j > 0 && board[character.i][character.j - 1] != 4;
 
 }
 //Function that checks whether the figure can be moved to the Right
 function checkMoveRight(){
-	if(character.j < 9 && board[character.i][character.j + 1] == 1){
-		food_was[0] = [character.i,character.j + 1];
+	if(character.j < 19 && board[character.i][character.j + 1] == 1){
+		food_was[index_food_was] = [character.i,character.j + 1];
+		index_food_was++;
 	}
-	return character.j < 9 && board[character.i][character.j + 1] != 4;
+	return character.j < 19 && board[character.i][character.j + 1] != 4;
 }
 //Function that checks whether the figure can be moved to the Down
 function checkMoveDown(){
 	if(character.i > 0 && board[character.i - 1][character.j] == 1){
-		food_was[0] = [character.i-1,character.j];
+		food_was[index_food_was] = [character.i-1,character.j];
+		index_food_was++;
 	}
 	return character.i > 0 && board[character.i - 1][character.j] != 4;
 
 }
 //Function that checks whether the figure can be moved to the Up
 function checkMoveUp(){
-	if(character.i < 9 && board[character.i + 1][character.j] == 1){
-		food_was[0] = [character.i+1,character.j];
+	if(character.i < 15 && board[character.i + 1][character.j] == 1){
+		food_was[index_food_was] = [character.i+1,character.j];
+		index_food_was++;
 	}
-	return character.i < 9 && board[character.i + 1][character.j] != 4;
+	return character.i < 15 && board[character.i + 1][character.j] != 4;
 
 }
 
-function return_food_was(){
+function returnFoodWas(){
 	for( let i=0 ; i < food_was.length ; i++){
 		obj = food_was[i];
 		board[obj[0]][obj[1]] = 1;
 	}
-	if(food_was.length == 0){
-		food_was = new Array();
-		return false
-	}
+	index_food_was = 0;
 	food_was = new Array();
-	return true
+}
+
+function mainChangPositionMonster(){
+	let index = 6
+	for(let i=0; i< monster.length; i++){
+		board[monster[i].i][monster[i].j] = 0;
+		changPositionMonster(i,index);
+	}
 }
 
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	was = return_food_was();
-	changPositionCharacter(was);
+	board[character.i][character.j] = 0;
+	returnFoodWas();
+	//mainChangPositionMonster();
+	changPositionCharacter();
 	//i -x
 	//j - y
 	if (x == 1) { //left
@@ -272,8 +337,8 @@ function UpdatePosition() {
 			shape.j--;
 		}
 	}
-	if (x == 2) { //right
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+	if (x == 2) {
+		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
@@ -282,8 +347,8 @@ function UpdatePosition() {
 			shape.i--;
 		}
 	}
-	if (x == 4) { //down
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+	if (x == 4) {
+		if (shape.i < 15 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
@@ -291,7 +356,7 @@ function UpdatePosition() {
 		score++;
 	}
 	if (board[shape.i][shape.j] == 5) {
-		score += 50;
+		score = score + 50;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
@@ -301,8 +366,8 @@ function UpdatePosition() {
 	}
 
 	// TODO change score of character
-	if (score == 100) {
-    Draw();
+	if (score == 100 ) {
+    	Draw();
 		window.clearInterval(interval);		
 		window.alert("Game completed");
   }else {
@@ -342,5 +407,6 @@ function isAWall(i, j){
 }
 
 function isAMonster(i, j){
-	return board[i][j] == 6;
+	return i==15 & j ==19;
 }
+
