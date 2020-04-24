@@ -1,7 +1,7 @@
 var context;
 var shape = new Object();
 var character = new Object();
-var monster = new Array(4);
+var monster = new Array(1);
 var board;
 var score;
 var pac_color;
@@ -80,7 +80,19 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		pacman_remain--;
 	}
-	positionMonster()
+	for (let h =0; h<monster.length; h++){
+		if(h == 0){
+			positionMonster(0,15,19,6);
+		}else if(h==1){
+			positionMonster(1,15,0,7);
+		}else if(h==2){
+			positionMonster(2,0,19,8);
+		}else if(h==3){
+			positionMonster(3,15,1,9);
+		}
+
+	}
+	
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -96,7 +108,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 50);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -125,15 +137,11 @@ function GetKeyPressed() {
 }
 
 //A function that defines the monster's location at the beginning of the game
-function positionMonster(){
-	let index = 6;
-	for(let i = 0 ; i < monster.length ; i++ ){
-		monster[i] =  new Object();
-		board[15][19] = index; //Monster
-		monster[i].i = 15;
-		monster[i].j = 19;
-		index++;
-	}
+function positionMonster(number_monster, i, j, index_board){
+	monster[number_monster] =  new Object();
+	board[i][j] = index_board; 
+	monster[number_monster].i = i;
+	monster[number_monster].j = j
 }
 
 function Draw() {
@@ -184,37 +192,49 @@ function Draw() {
 	}
 }
 
-function changPositionMonster(index){
+function changPositionMonster(index, number_monster){
+	let found = false;
+	while (found == false){
+		let opposite = shape.j - monster[index].j;
+		let adjacent= shape.i - monster[index].i;
+		let angle = Math.atan(opposite/adjacent);
+		if (monster[index].i > shape.i){
+			angle = angle + 180;
+		}	  
+		let velocity= 1;
+		let vx = 0;
+		let vy = 0;
+		let move = Math.random() * Math.floor(1);
+		if(move < 0.5){
+			vx = Math.floor(velocity * Math.cos(angle));
+			monster[index].i = monster[index].i + vx;
+			if(monster[index].i < 0 ){
+				monster[index].i = 0;
+			}else if (monster[index].i > 15){
+				monster[index].i = 15;
+			}
+		}else{
+			vy = Math.floor(velocity * Math.sin(angle));
+			monster[index].j =monster[index].j + vy
+			if(monster[index].j < 0){
+				monster[index].j = 0;
+			}else if (monster[index].j > 19){
+				monster[index].j = 19;
+			}
+		}
+		if(checkMoveMonster( monster[index].i,monster[index].j)){
+			found =true;
+		}
+	}	
+	board[monster[index].i][monster[index].j] = number_monster;
+}
 
-	board[monster[index].i][monster[index].j] = 5;
-	opposite = shape.j - monster[index].j;
-	adjacent= shape.i - monster[index].i;
-	angle = Math.atan(opposite/adjacent);
-	if (monster[index].i > shape.i){
-		angle=angle+180
+function checkMoveMonster(i, j){
+	if(i < 16 && i >= 0 && j >= 0 && j < 20 && board[i][j] == 1){
+		food_was[index_food_was] =[i,j];
+		index_food_was++;
 	}
-	  
-	//Use this angle to calculate the velocity vector of the Ghost
-	//Once again using SOH-CAH-TOA trignometic rations
-	velocity= 3; //pixels per frame
-	
-	vx = Math.floor(velocity * Math.cos(angle));
-	vy = Math.floor(velocity * Math.sin(angle));
-	
-	//Apply velocity vector to the Ghost coordinates to move/translate the ghost
-	monster[index].i = monster[index].i + vx
-	if(monster[index].i < 0 ){
-		monster[index].i = 0;
-	}else if (monster[index].i > 15){
-		monster[index].i = 15;
-	}
-	monster[index].j =monster[index].j + vy
-	if(monster[index].j < 0){
-		monster[index].j = 0;
-	}else if (monster[index].j > 19){
-		monster[index].j = 19;
-	}
-	board[monster[index].i][monster[index].j] = 6;
+	return (i < 16 && i >= 0 && j >= 0 && j < 20 && board[i][j] != 4);
 }
 
 
@@ -294,13 +314,21 @@ function returnFoodWas(){
 	food_was = new Array();
 }
 
+function mainChangPositionMonster(){
+	let index = 6
+	for(let i=0; i< monster.length; i++){
+		board[monster[i].i][monster[i].j] = 0;
+		changPositionMonster(i,index);
+	}
+}
+
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	board[character.i][character.j] = 0;
 	returnFoodWas();
-	changPositionMonster(0);
+	//mainChangPositionMonster();
 	changPositionCharacter();
 	//i -x
 	//j - y
@@ -338,8 +366,8 @@ function UpdatePosition() {
 	}
 
 	// TODO change score of character
-	if (score == 100) {
-    Draw();
+	if (score == 100 ) {
+    	Draw();
 		window.clearInterval(interval);		
 		window.alert("Game completed");
   }else {
