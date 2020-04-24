@@ -44,6 +44,7 @@ function Start() {
 	character_color = "pink"
 	var cnt = board_height * board_width;
 	var food_remain = 50;
+	let food_division = divisionFood(food_remain)
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < board_height; i++) {
@@ -62,10 +63,16 @@ function Start() {
 				board[i][j] = 4;//block
 			} else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-					board[i][j] = 1;//food
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+				if (randomNum <= (1.0 * food_division[0]) / cnt) {
+					food_division[0]--;
+					board[i][j] = 1;//food 60%
+				} else if (randomNum <= (1.0 * food_division[1]) / cnt) {
+					food_division[1]--;
+					board[i][j] = 12;//food 30%
+				} else if (randomNum <= (1.0 * food_division[2]) / cnt) {
+					food_division[2]--;
+					board[i][j] = 13;//food 10%
+				} else if (randomNum < (1.0 * (pacman_remain) / cnt)) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;//pacamne
@@ -77,13 +84,23 @@ function Start() {
 			}
 		}
 	}
-	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+	while (food_division[0] > 0) {
+		let emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
-		food_remain--;
+		food_division[0]--;
+	}
+	while (food_division[1] > 0) {
+		let emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 12;
+		food_division[1]--;
+	}
+	while (food_division[2] > 0) {
+		let emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 13;
+		food_division[2]--;
 	}
 	while (pacman_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+		let emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
 		shape.j = emptyCell[1];
 		board[emptyCell[0]][emptyCell[1]] = 2;
@@ -106,6 +123,15 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 100);
+}
+
+function divisionFood(food_remain){
+	all_food = food_remain;
+	food_60 = Math.floor(food_remain*0.6);
+	all_food -= food_60;
+	food_30 = Math.floor(food_remain*0.3);
+	all_food -= food_30;
+	return [food_60,food_30,all_food]	
 }
 
 function positinBegin(){
