@@ -1,7 +1,7 @@
 var context;
 var shape = new Object();
 var character = new Object();
-var monster = new Array();
+var monster = new Array(4);
 var board;
 var score;
 var pac_color;
@@ -13,6 +13,7 @@ var food_was = new Array();
 var board_width = 20;
 var board_height = 16;
 var walls;
+var index_food_was = 0;
 
 
 $(document).ready(function() {
@@ -31,12 +32,14 @@ function Start() {
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
-	positionMonster()
 	for (var i = 0; i < board_height; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < board_width; j++) {
-			if(i == 0 && j == 0){
+			if(isAMonster(i,j)){
+				continue;
+			}
+			else if(i == 0 && j == 0){
 				character.i = i;
 				character.j = j;
 				board[i][j] = 5;
@@ -72,6 +75,7 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		pacman_remain--;
 	}
+	positionMonster()
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -118,11 +122,11 @@ function GetKeyPressed() {
 //A function that defines the monster's location at the beginning of the game
 function positionMonster(){
 	let index = 6;
-	for(i = 0 ; i < monster.length ; i++ ){
+	for(let i = 0 ; i < monster.length ; i++ ){
 		monster[i] =  new Object();
-		board[19][15] = index; //Monster
-		monster[i].i = 19;
-		monster[i].j = 15;
+		board[15][19] = index; //Monster
+		monster[i].i = 15;
+		monster[i].j = 19;
 		index++;
 	}
 }
@@ -167,7 +171,7 @@ function Draw() {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
-				context.fillStyle = "bule"; 
+				context.fillStyle = "blue"; 
 				context.fill();
 				context.beginPath();
 			}
@@ -175,11 +179,42 @@ function Draw() {
 	}
 }
 
-//A function that updates the character's location
-function changPositionCharacter(was){
-	if(was == false){
-		board[character.i][character.j] = 0;
+function changPositionMonster(index){
+
+	board[monster[index].i][monster[index].j] = 5;
+	opposite = shape.j - monster[index].j;
+	adjacent= shape.i - monster[index].i;
+	angle = Math.atan(opposite/adjacent);
+	if (monster[index].i > shape.i){
+		angle=angle+180
 	}
+	  
+	//Use this angle to calculate the velocity vector of the Ghost
+	//Once again using SOH-CAH-TOA trignometic rations
+	velocity= 3; //pixels per frame
+	
+	vx = Math.floor(velocity * Math.cos(angle));
+	vy = Math.floor(velocity * Math.sin(angle));
+	
+	//Apply velocity vector to the Ghost coordinates to move/translate the ghost
+	monster[index].i = monster[index].i + vx
+	if(monster[index].i < 0 ){
+		monster[index].i = 0;
+	}else if (monster[index].i > 19){
+		monster[index].i = 19;
+	}
+	monster[index].j =monster[index].j + vy
+	if(monster[index].j < 0){
+		monster[index].j = 0;
+	}else if (monster[index].j > 19){
+		monster[index].j = 19;
+	}
+	board[monster[index].i][monster[index].j] = 6;
+}
+
+
+//A function that updates the character's location
+function changPositionCharacter(){
 	let found = false;
 	while (found == false){
 		let move = Math.floor(Math.random() * Math.floor(4));
@@ -212,54 +247,56 @@ function changPositionCharacter(was){
 //Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(){
 	if(character.j > 0 && board[character.i][character.j - 1] == 1){
-		food_was[0] =[character.i,character.j-1];
+		food_was[index_food_was] =[character.i,character.j-1];
+		index_food_was++;
 	}
 	return character.j > 0 && board[character.i][character.j - 1] != 4;
 
 }
 //Function that checks whether the figure can be moved to the Right
 function checkMoveRight(){
-	if(character.j < 9 && board[character.i][character.j + 1] == 1){
-		food_was[0] = [character.i,character.j + 1];
+	if(character.j < 19 && board[character.i][character.j + 1] == 1){
+		food_was[index_food_was] = [character.i,character.j + 1];
+		index_food_was++;
 	}
-	return character.j < 9 && board[character.i][character.j + 1] != 4;
+	return character.j < 19 && board[character.i][character.j + 1] != 4;
 }
 //Function that checks whether the figure can be moved to the Down
 function checkMoveDown(){
 	if(character.i > 0 && board[character.i - 1][character.j] == 1){
-		food_was[0] = [character.i-1,character.j];
+		food_was[index_food_was] = [character.i-1,character.j];
+		index_food_was++;
 	}
 	return character.i > 0 && board[character.i - 1][character.j] != 4;
 
 }
 //Function that checks whether the figure can be moved to the Up
 function checkMoveUp(){
-	if(character.i < 9 && board[character.i + 1][character.j] == 1){
-		food_was[0] = [character.i+1,character.j];
+	if(character.i < 15 && board[character.i + 1][character.j] == 1){
+		food_was[index_food_was] = [character.i+1,character.j];
+		index_food_was++;
 	}
-	return character.i < 9 && board[character.i + 1][character.j] != 4;
+	return character.i < 15 && board[character.i + 1][character.j] != 4;
 
 }
 
-function return_food_was(){
+function returnFoodWas(){
 	for( let i=0 ; i < food_was.length ; i++){
 		obj = food_was[i];
 		board[obj[0]][obj[1]] = 1;
 	}
-	if(food_was.length == 0){
-		food_was = new Array();
-		return false
-	}
+	index_food_was = 0;
 	food_was = new Array();
-	return true
 }
 
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	was = return_food_was();
-	changPositionCharacter(was);
+	board[character.i][character.j] = 0;
+	returnFoodWas();
+	changPositionCharacter();
+	changPositionMonster(0);
 	//i -x
 	//j - y
 	if (x == 1) {
@@ -268,7 +305,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
@@ -278,7 +315,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < 15 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
@@ -286,7 +323,7 @@ function UpdatePosition() {
 		score++;
 	}
 	if (board[shape.i][shape.j] == 5) {
-		score += 50;
+		score = score + 50;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
@@ -337,5 +374,6 @@ function isAWall(i, j){
 }
 
 function isAMonster(i, j){
-	return board[i][j] == 6;
+	return i==15 & j ==19;
 }
+
