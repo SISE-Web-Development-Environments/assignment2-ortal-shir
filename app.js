@@ -4,8 +4,6 @@ var character = new Object();
 var monster = new Array(4);
 var board;
 var score;
-var pac_color;
-var character_color;
 var start_time;
 var time_elapsed;
 var interval;
@@ -16,18 +14,25 @@ var walls;
 var index_food_was = 0;
 var game_over =5;
 
+//initial settings definition
+var food_from_user = 50;
+var game_time_from_user = 200;
+//TODO end game if time ended
+
+//default keys definition
 var keyUpCode = 38;
 var keyDownCode = 40;
 var keyRightCode = 39;
 var keyLeftCode = 37;
 
+//initial color definition
 var food_color5 = "black";
 var food_color15 = "#e66465";
 var food_color25 = "#f6b73c";
 var wall_color = "grey";
-var ghost_color = "blue"
-
-//TODO fix colors here (character color and pacman)
+var ghost_color = "blue";
+var pac_color = "yellow";
+var character_color = "pink";
 
 
 $(document).ready(function() {
@@ -42,10 +47,8 @@ function Start() {
 	pickColor();
 	board = new Array();
 	score = 0;
-	pac_color = "yellow";
-	character_color = "pink"
 	var cnt = board_height * board_width;
-	var food_remain = 50;
+	var food_remain = food_from_user;
 	let food_division = divisionFood(food_remain)
 	var pacman_remain = 1;
 	var hourglass = 1;
@@ -587,6 +590,57 @@ function updateTwentyFivePointsColor (event){
 
 //set the settings
 
-function submit_settings(){
-	
+function submitSettings(){
+	// keyboard
+	// num_of_ghosts
+	// random button	
+	var submitOK = true;
+
+	//amount of food
+	var food_balls_number = document.getElementById("food_balls_number").value;
+	if (isNaN(food_balls_number) || food_balls_number < 50 || food_balls_number > 90) {
+		alert("The amount of food balls must be between 50 and 90");
+		submitOK = false;
+	}
+
+	//game time
+	var game_time = document.getElementById("game_time").value;
+	if (isNaN(game_time) || game_time < 60) {
+		alert("Game time must be at least 60 seconds");
+		submitOK = false;
+	}
+
+	//amount of ghosts
+	var food_balls_number = document.getElementById("ghosts_number").value;
+	if (isNaN(food_balls_number)) {
+		alert("Select amount of ghosts");
+		submitOK = false;
+	}
+
+	if(submitOK){
+		// update global parameters
+		food_from_user = Math.floor(food_balls_number); //in case user input is not an int
+		game_time_from_user = Math.floor(game_time); //in case user input is not an int
+		Start() // TODO -> is this here?
+	}
+}
+
+function oneGhost(){
+	document.getElementById("ghosts_number").value = "1";
+	document.getElementById("ghosts_number").innerHTML = "1";
+}
+
+function twoGhosts(){
+	document.getElementById("ghosts_number").value = "2";
+	document.getElementById("ghosts_number").innerHTML = "2";
+}
+
+function threeGhosts(){
+	document.getElementById("ghosts_number").value = "3";
+	document.getElementById("ghosts_number").innerHTML = "3";
+}
+
+function fourGhosts(){
+	document.getElementById("ghosts_number").value = "4";
+	document.getElementById("ghosts_number").innerHTML = "4";
 }
