@@ -160,6 +160,7 @@ function divisionFood(food_remain){
 	all_food -= food_30;
 	return [food_60,food_30,all_food]	
 }
+
 //Function for the location of monsters
 function positinBeginMonster(){
 	for (let h =0; h < monster.length; h++){
