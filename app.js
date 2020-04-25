@@ -644,8 +644,7 @@ function updateTwentyFivePointsColor (event){
 //set the settings
 
 function submitSettings(){
-	//TODO keyboard
-	// random button	
+	//TODO keyboard	
 	let submitOK = true;
 
 	//amount of food
@@ -682,26 +681,67 @@ function submitSettings(){
 		monster = new Array(parseInt(num));
 
 		//set settings display
-		setSettingsDisplayForUser()
+		setSettingsDisplayForUser();
+		pickColor();
 
-		Start() // TODO -> is this here?
+		Start(); // TODO -> is this here?
 	}
 }
 
-function oneMonster(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
+function setMostersBtn(num){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: "+num;
+	$("#one").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
+	});
+	$("#two").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 2";
+	});
+	$("#three").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 3";
+	});
+	$("#four").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 4";
+	});	
 }
 
-function twoMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 2";
+function randomSettings(){
+
+	let food_number = randomIntFromInterval(50,90);
+	food_from_user = food_number;
+	document.getElementById("food_balls_number").value = food_number;
+
+	let game_number = randomIntFromInterval(60,300);
+	game_time_from_user = game_number;
+	document.getElementById("game_time").value = game_number;
+
+	let monster_num = randomIntFromInterval(1,4);
+	monster = new Array(monster_num);
+	setMostersBtn(monster_num);
+	
+	food_color5 = getRandomColor();
+	document.querySelector("#five_points").value = food_color5;
+	food_color15 = getRandomColor();
+	document.querySelector("#fifteen_points").value = food_color15;
+	food_color25 = getRandomColor();
+	document.querySelector("#twentyfive_points").value = food_color25;
+
 }
 
-function threeMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 3";
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+	  color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
 }
 
-function fourMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 4";
+function randomIntFromInterval(min, max) { // min and max included 
+	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function setSettingsDisplayForUser(){
