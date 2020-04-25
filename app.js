@@ -796,6 +796,7 @@ function login(){
 	}
 	else{
 		window.alert("login successful");
+		//TODO go to game
 	}
 } 
 
