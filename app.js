@@ -263,7 +263,6 @@ function saveFood( i, j,number){
 }
 
 
-
 //Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(object){
 	mainSavefood(object.i,object.j-1);
@@ -290,6 +289,9 @@ function checkMoveUp(object){
 
 //A function that returns the drawing of the food if it was present
 function returnFoodWas(){
+	for(let j=0; j< monster.length; j++){
+		board[monster[j].i][monster[j].j] = 0;
+	}
 	for( let i=0 ; i < food_was.length ; i++){
 		obj = food_was[i];
 		board[obj[0]][obj[1]] = obj[2];
@@ -304,7 +306,6 @@ function returnFoodWas(){
 function mainChangPositionMonster(position_pacman){
 	let index = 6
 	for(let i=0; i< monster.length; i++){
-		board[monster[i].i][monster[i].j] = 0;
 		changPositionMonster(i,index,position_pacman);
 		index++;
 	}
@@ -415,13 +416,15 @@ function otherPositin(up, right, dowm, left,index){
 
 //Check if a monster has eaten the pacamn
 function MonsterAtePacman(){
+	let index = 6;
 	for(let i=0; i< monster.length; i++){
 		if (monster[i].i == shape.i && monster[i].j == shape.j){
 			score = score - 10;
-			return true;
+			return [i,index];
 		}	
+		index++;
 	}
-	return false
+	return [-1,-1];
 }
 
 
@@ -563,7 +566,7 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 5) {
 		score = score + 50;
 	}
-	if(MonsterAtePacman()){
+	if(MonsterAtePacman()[0] != -1){
 		if(game_over == 1){
 			game_over --;
 			Draw();
@@ -572,7 +575,11 @@ function UpdatePosition() {
 		}else{
 			game_over--;
 			window.alert("We believe in you! Keep playing");
-			Start();	
+			let index = MonsterAtePacman();
+			let emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = index[1];
+			monster[index[0]].i = emptyCell[0]
+			monster[index[0]].j = emptyCell[1]
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
@@ -684,6 +691,16 @@ function submitSettings(){
 		monster = new Array(parseInt(num));
 
 		//set settings display
+
+		setSettingsDisplayForUser()
+		Start() // TODO -> is this here?
+	}
+}
+
+function oneMonster(){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
+}
+
 		setSettingsDisplayForUser();
 		pickColor();
 
@@ -732,6 +749,7 @@ function randomSettings(){
 	food_color25 = getRandomColor();
 	document.querySelector("#twentyfive_points").value = food_color25;
 
+
 }
 
 function getRandomColor() {
@@ -776,6 +794,20 @@ function displaySettings() {
 	document.getElementById("settings").style.display = "block";
 }
 
+
+function keyCodeUp(event) {
+	keyUpCode = event.keyCode;
+}
+
+function keyCodeDown(event) {
+	keyDownCode = event.keyCode;
+}
+function keyCodeRight(event) {
+	keyRightCode = event.keyCode;
+}
+function keyCodeLeft(event) {
+	keyLeftCode = event.keyCode;
+}
 function hideLogin(){
 	document.getElementById("login_form").style.display = "none"
 }

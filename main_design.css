@@ -43,3 +43,25 @@ ul {
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .inputkey{
+    padding: 5px;
+    margin:10px 0;
+    width: 92px;
+    text-align: center;
+  }
+
+  #keyUpCode , #keyDownCode {
+    margin:10px 60px;
+  }
+
+  #keyRightCode{
+    margin:10px ;
+  }
+
+  .icon {
+    padding: 10px;
+    background:rgb(17, 4, 75);
+    color: white;
+    min-width: 20px;
+  }
