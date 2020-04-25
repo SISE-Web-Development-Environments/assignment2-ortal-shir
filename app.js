@@ -39,6 +39,7 @@ var character_color = "pink";
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	initiateKeyListener();
+	registerP();
 	hideGame();
 	displaySettings();
 });
@@ -774,3 +775,38 @@ function hideSettings(){
 function displaySettings() {
 	document.getElementById("settings").style.display = "block";
 }
+
+function hideLogin(){
+	document.getElementById("login_form").style.display = "none"
+}
+
+function displayLogin() {
+	document.getElementById("login_form").style.display = "block";
+}
+// -----------------------------------------------------login----------------------------------------------------------//
+function login(){
+	let password_input = document.getElementById("password_input").value;
+	let user_input = localStorage.getItem(document.getElementById("username_input").value);
+	let correct_user_password;
+	if(user_input != null){
+		correct_user_password = JSON.parse(user_input)['password'];
+	}
+	if(password_input != correct_user_password || user_input == null){
+		window.alert("wrong username or password");
+	}
+	else{
+		window.alert("login successful");
+	}
+} 
+
+function registerP(){
+	let pData = {
+        password:  "p",
+        firstname: "p",
+        lastname: "p",
+        email: "p@gmail.com",
+        date:  ""
+    };
+    localStorage.setItem("p",JSON.stringify(pData));
+}
+
