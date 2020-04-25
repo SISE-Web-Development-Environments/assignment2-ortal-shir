@@ -22,38 +22,54 @@
 			<canvas id="canvas" height="1000" width="1250"></canvas>
 		</div>
 
-		<div class="main">
+		<!----------------------------------------------- settings display -------------------------------------------------->
+		<div id="settings_display">
+			<ul>
+				<li>
+					<label>Amount of food: <span id="food_display">50</span></label>
+				</li>
+				<li>
+					<label>Time for game: <span id="time_display">60</span> seconds</label>
+				</li>
+				<li>
+					<label>Amount of monsters:<span id="monster_display">1</span></label>						
+				</li>					
+			</ul>
+		</div>
+		
+		<!----------------------------------------------- settings definition -------------------------------------------------->
+		<div class="main" id="settings">
 			<form name="form_name" id="form_id" class="form_class" >
 			<label>Number of food balls :</label>
-			<input type="text" id="food_balls_number" placeholder="between 50 and 90" />
+			<input type="text" id="food_balls_number" placeholder="50 to 90" />
 			<label>Game time in seconds :</label>
-			<input type="text" id="game_time" placeholder="more than 60" />
+			<input type="text" id="game_time" placeholder="60 or more" />
 
 			<div class="dropdown">
-				<input type="button" id="ghosts_number" class="dropbtn" value="Amount of ghosts"/>
+				<input type="button" id="mosterts_number" class="dropbtn" value="Amount of Monsters: 1"/>
 				<div class="dropdown-content">
 				<ul>
 				<li>
-				  <input name="one_ghost" type="button" onclick="oneGhost()">
-				  <label for="one_ghost">1</label>
+				  <input name="one" type="button" onclick="oneMonster()">
+				  <label for="one">1</label>
 				</li>
 				<li>
-				  <input name="two_ghosts" type="button" onclick="twoGhosts()">
-				  <label for="two_ghosts">2</label>
+				  <input name="two" type="button" onclick="twoMonsters()">
+				  <label for="two">2</label>
 				</li>
 				<li>
-				  <input name="three_ghosts" type="button" onclick="threeGhosts()">
-				  <label for="three_ghosts">3</label>
+				  <input name="three" type="button" onclick="threeMonsters()">
+				  <label for="three">3</label>
 				</li>
 				<li>
-				  <input name="four_ghosts" type="button" onclick="fourGhosts()">
-				  <label for="four_ghosts">4</label>
+				  <input name="four" type="button" onclick="fourMonsters()">
+				  <label for="four">4</label>
 				</li>
 				</ul>
 				</div>
 			</div>
 
-			<input type="button" id="submit_settings_btn" value="Apply" onclick="submitSettings()"/>
+			<input type="button" id="submit_settings_btn" value="Start New Game" onclick="submitSettings()"/>
 
 			<p>Choose your food balls colors:</p>
 

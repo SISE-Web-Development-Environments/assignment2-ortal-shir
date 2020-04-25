@@ -1,7 +1,7 @@
 var context;
 var shape = new Object();
 var character = new Object();
-var monster = new Array(4);
+var monster = new Array(1);
 var board;
 var score;
 var start_time;
@@ -37,7 +37,8 @@ var character_color = "pink";
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+	hideGame();
+	displaySettings();
 });
 /*-------------------------------- Start Game------------------------------------ */
 
@@ -45,11 +46,14 @@ $(document).ready(function() {
 function Start() {
 	createWalls();
 	pickColor();
+	setSettingsDisplayForUser();
+	hideSettings();
+	displayGame();
 	board = new Array();
 	score = 0;
+	game_over = 5;
 	var cnt = board_height * board_width;
-	var food_remain = food_from_user;
-	let food_division = divisionFood(food_remain)
+	let food_division = divisionFood(food_from_user)
 	var pacman_remain = 1;
 	var hourglass = 1;
 	start_time = new Date();
@@ -369,9 +373,10 @@ function heuristic(i, j) {
 }
 
 //Check if a monster has eaten the pacamn
-function MonsterEatPacamn(){
+function MonsterAtePacman(){
 	for(let i=0; i< monster.length; i++){
 		if (monster[i].i == shape.i && monster[i].j == shape.j){
+			score = score - 10;
 			return true;
 		}	
 	}
@@ -518,13 +523,11 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 5) {
 		score = score + 50;
 	}
-	if(MonsterEatPacamn()){
+	if(MonsterAtePacman()){
 		if(game_over == 1){
 			game_over --;
 			Draw();
-			window.clearInterval(interval);		
-			window.alert("you lose - Try again");
-			game_over = 5;
+			endGame("You lost - Try again");		
 			Start();
 		}else{
 			game_over--;
@@ -538,24 +541,35 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = ((currentTime - start_time) / 1000) + more_time;
+	if(time_elapsed >= game_time_from_user){
+		//time ended
+		endGame("You lost - Try again");
+	}
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 	// TODO change score of character
-	if (score == 100 ) {
-    	Draw();
-		window.clearInterval(interval);		
-		window.alert("Game completed");
+	if (score >= 100 ) {
+		Draw();
+		endGame("Game completed");
   	}else {
 		Draw();
 	}
 }
 
-/*-------------------------------- Setting---------------------------------------- */
+function endGame(msg){
+	window.clearInterval(interval);		
+	window.alert(msg);
+}
+
+/*--------------------------------------- Setting---------------------------------------- */
 
 //color logic
 
 function pickColor() {
+	//restart pacman color
+	pac_color = "yellow";
+
 	// five points
 	fivePoints = document.querySelector("#five_points");
 	fivePoints.value = food_color5;	
@@ -591,56 +605,91 @@ function updateTwentyFivePointsColor (event){
 //set the settings
 
 function submitSettings(){
-	// keyboard
-	// num_of_ghosts
+	//TODO keyboard
 	// random button	
-	var submitOK = true;
+	let submitOK = true;
 
 	//amount of food
-	var food_balls_number = document.getElementById("food_balls_number").value;
-	if (isNaN(food_balls_number) || food_balls_number < 50 || food_balls_number > 90) {
+	let food_balls_number = document.getElementById("food_balls_number").value;
+	if (food_balls_number != "" && (food_balls_number < 50 || food_balls_number > 90)) {
 		alert("The amount of food balls must be between 50 and 90");
 		submitOK = false;
 	}
 
 	//game time
-	var game_time = document.getElementById("game_time").value;
-	if (isNaN(game_time) || game_time < 60) {
+	let game_time = document.getElementById("game_time").value;
+	if (game_time != "" && game_time < 60) {
 		alert("Game time must be at least 60 seconds");
-		submitOK = false;
-	}
-
-	//amount of ghosts
-	var food_balls_number = document.getElementById("ghosts_number").value;
-	if (isNaN(food_balls_number)) {
-		alert("Select amount of ghosts");
 		submitOK = false;
 	}
 
 	if(submitOK){
 		// update global parameters
-		food_from_user = Math.floor(food_balls_number); //in case user input is not an int
-		game_time_from_user = Math.floor(game_time); //in case user input is not an int
+		if(food_balls_number == ""){
+			food_from_user = 50; //default
+		}
+		else{
+			food_from_user = Math.floor(food_balls_number); //in case user input is not an int
+		}
+		if(game_time == ""){
+			game_time_from_user = 200; // default
+		}
+		else{
+			game_time_from_user = Math.floor(game_time); //in case user input is not an int
+		}
+		
+		//taking amount of monsterts from user
+		let num = document.getElementById("mosterts_number").value.substring(document.getElementById("mosterts_number").value.length-1);
+		monster = new Array(parseInt(num));
+
+		//set settings display
+		setSettingsDisplayForUser()
+
 		Start() // TODO -> is this here?
 	}
 }
 
-function oneGhost(){
-	document.getElementById("ghosts_number").value = "1";
-	document.getElementById("ghosts_number").innerHTML = "1";
+function oneMonster(){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
 }
 
-function twoGhosts(){
-	document.getElementById("ghosts_number").value = "2";
-	document.getElementById("ghosts_number").innerHTML = "2";
+function twoMonsters(){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: 2";
 }
 
-function threeGhosts(){
-	document.getElementById("ghosts_number").value = "3";
-	document.getElementById("ghosts_number").innerHTML = "3";
+function threeMonsters(){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: 3";
 }
 
-function fourGhosts(){
-	document.getElementById("ghosts_number").value = "4";
-	document.getElementById("ghosts_number").innerHTML = "4";
+function fourMonsters(){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: 4";
+}
+
+function setSettingsDisplayForUser(){
+	document.getElementById("food_display").innerHTML = food_from_user;
+	document.getElementById("time_display").innerHTML = game_time_from_user;
+	document.getElementById("monster_display").innerHTML = monster.length;
+}
+
+// ----------------------------------- hide and display of divs-----------------------------------------//
+function hideGame(){
+	document.getElementById("game").style.display = "none";
+	document.getElementById("settings_display").style.display = "none";
+	document.getElementById("score").style.display = "none";
+	document.getElementById("time").style.display = "none";
+}
+
+function displayGame() {
+	document.getElementById("game").style.display = "block";
+	document.getElementById("settings_display").style.display = "block";
+	document.getElementById("score").style.display = "block";
+	document.getElementById("time").style.display = "block";
+}
+
+function hideSettings(){
+	document.getElementById("settings").style.display = "none"
+}
+
+function displaySettings() {
+	document.getElementById("settings").style.display = "block";
 }
