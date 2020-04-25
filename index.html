@@ -3,6 +3,7 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" href="./main_design.css"></script>
 		<title>
 			Pacman Game
 		</title>
@@ -23,10 +24,36 @@
 
 		<div class="main">
 			<form name="form_name" id="form_id" class="form_class" >
-			<label>Name :</label>
-			<input type="text" name="name" id="name" placeholder="Name" />
 			<label>Number of food balls :</label>
-			<input type="text" name="Number of food balls" id="food" placeholder="between 50 and 90" />
+			<input type="text" id="food_balls_number" placeholder="between 50 and 90" />
+			<label>Game time in seconds :</label>
+			<input type="text" id="game_time" placeholder="more than 60" />
+
+			<div class="dropdown">
+				<input type="button" id="ghosts_number" class="dropbtn" value="Amount of ghosts"/>
+				<div class="dropdown-content">
+				<ul>
+				<li>
+				  <input name="one_ghost" type="button" onclick="oneGhost()">
+				  <label for="one_ghost">1</label>
+				</li>
+				<li>
+				  <input name="two_ghosts" type="button" onclick="twoGhosts()">
+				  <label for="two_ghosts">2</label>
+				</li>
+				<li>
+				  <input name="three_ghosts" type="button" onclick="threeGhosts()">
+				  <label for="three_ghosts">3</label>
+				</li>
+				<li>
+				  <input name="four_ghosts" type="button" onclick="fourGhosts()">
+				  <label for="four_ghosts">4</label>
+				</li>
+				</ul>
+				</div>
+			</div>
+
+			<input type="button" id="submit_settings_btn" value="Apply" onclick="submitSettings()"/>
 
 			<p>Choose your food balls colors:</p>
 
@@ -46,8 +73,7 @@
 				<input type="color" id="twentyfive_points" name="body"
 						value="#f6b73c">
 				<label for="body">25 points balls</label>
-			</div>
-			<input type="button" id="submit_settings_btn" value="Set Settings" onclick="submit_settings()"/>
+			</div>			
 			</form>
 		</div>
 	</body>
