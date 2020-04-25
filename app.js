@@ -13,6 +13,7 @@ var board_height = 16;
 var walls;
 var index_food_was = 0;
 var game_over =5;
+var more_time;
 
 //initial settings definition
 var food_from_user = 50;
@@ -49,6 +50,7 @@ function Start() {
 	setSettingsDisplayForUser();
 	hideSettings();
 	displayGame();
+	more_time = 0;
 	board = new Array();
 	score = 0;
 	game_over = 5;
@@ -155,7 +157,7 @@ function divisionFood(food_remain){
 }
 //Function for the location of monsters
 function positinBeginMonster(){
-	for (let h =0; h<monster.length; h++){
+	for (let h =0; h < monster.length; h++){
 		if(h == 0){
 			positionMonster(0,board_height-1, board_width-1,6);
 		}else if(h==1){
@@ -197,7 +199,7 @@ function createWalls(){
 	walls [11]= [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0];
 	walls [12]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
 	walls [13]= [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0];
-	walls [14]= [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0];
+	walls [14]= [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0];
 	for (j = 0; j < board_width; j++){
 		walls [15][j] = 0;
 	}
@@ -234,75 +236,47 @@ function GetKeyPressed() {
 	}
 }
 
+function mainSavefood(i, j){
+	saveFood(i, j,1);
+	saveFood(i, j,11);
+	saveFood(i, j,12);
+	saveFood(i, j,13);
+	saveFood(i, j,6);
+	saveFood(i, j,7);
+	saveFood(i, j,8);
+	saveFood(i, j,9);
+
+}
+
+function saveFood( i, j,number){
+	if(j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] == number){
+		food_was[index_food_was] =[i,j,number];
+		index_food_was++;
+	}
+}
+
+
 
 //Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(object){
-	if(object.j  > 0 && board[object.i][object.j - 1] == 11){
-		food_was[index_food_was] =[object.i,object.j-1,11];
-		index_food_was++;
-	}else if(object.j  > 0 && board[object.i][object.j - 1] == 12){
-		food_was[index_food_was] =[object.i,object.j-1,12];
-		index_food_was++;
-	}else if(object.j > 0 && board[object.i][object.j - 1] == 13){
-		food_was[index_food_was] =[object.i,object.j-1,13];
-		index_food_was++;
-	}else if(object.j > 0 && board[object.i][object.j - 1] == 1){
-		food_was[index_food_was] =[object.i,object.j-1,1];
-		index_food_was++;
-	}
+	mainSavefood(object.i,object.j-1);
 	return object.j > 0 && board[object.i][object.j - 1] != 4;
 }
 
 //Function that checks whether the figure can be moved to the Right
 function checkMoveRight(object){
-	if(object.j < board_width-1 && board[object.i][object.j + 1] == 11){
-		food_was[index_food_was] = [object.i,object.j + 1,11];
-		index_food_was++;
-	}else if(object.j < board_width-1 && board[object.i][object.j + 1] == 12){
-		food_was[index_food_was] = [object.i,object.j + 1,12];
-		index_food_was++;
-	}else if(object.j  < board_width-1 && board[object.i][object.j + 1] == 13){
-		food_was[index_food_was] = [object.i,object.j + 1,13];
-		index_food_was++;
-	}else if(object.j  < board_width-1 && board[object.i][object.j + 1] == 1){
-		food_was[index_food_was] = [object.i,object.j + 1,1];
-		index_food_was++;
-	}
+	mainSavefood(object.i,object.j+1);
 	return object.j  < board_width-1 && board[object.i][object.j + 1] != 4;
 }
 //Function that checks whether the figure can be moved to the Down
 function checkMoveDown(object){
-	if(object.i > 0 && board[object.i - 1][object.j] == 11){
-		food_was[index_food_was] = [object.i-1,object.j,11];
-		index_food_was++;
-	}else if(object.i > 0 && board[object.i - 1][object.j] == 12){
-		food_was[index_food_was] = [object.i-1,object.j,12];
-		index_food_was++;
-	}else if(object.i > 0 && board[object.i - 1][object.j] == 13){
-		food_was[index_food_was] = [object.i-1,object.j,13];
-		index_food_was++;
-	}else if(object.i > 0 && board[object.i - 1][object.j] == 1){
-		food_was[index_food_was] = [object.i-1,object.j,1];
-		index_food_was++;
-	}
+	mainSavefood(object.i-1,object.j);
 	return object.i  > 0 && board[object.i - 1][object.j] != 4;
 
 }
 //Function that checks whether the figure can be moved to the Up
 function checkMoveUp(object){
-	if(object.i < board_height-1 && board[object.i + 1][object.j] == 11){
-		food_was[index_food_was] = [object.i+1,object.j,11];
-		index_food_was++;
-	}else if(object.i < board_height-1 && board[object.i + 1][object.j] == 12){
-		food_was[index_food_was] = [object.i+1,object.j,12];
-		index_food_was++;
-	}else if(object.i  < board_height-1 && board[object.i + 1][object.j] == 13){
-		food_was[index_food_was] = [object.i+1,object.j,13];
-		index_food_was++;
-	}else if(object.i  < board_height-1 && board[object.i + 1][object.j] == 1){
-		food_was[index_food_was] = [object.i+1,object.j,1];
-		index_food_was++;
-	}
+	mainSavefood(object.i+1,object.j);
 	return object.i < board_height-1 && board[object.i + 1][object.j] != 4;
 
 }
@@ -320,56 +294,116 @@ function returnFoodWas(){
 
 /*-------------------------------- Position Monster------------------------------------ */
 
-function mainChangPositionMonster(){
+function mainChangPositionMonster(position_pacman){
 	let index = 6
 	for(let i=0; i< monster.length; i++){
 		board[monster[i].i][monster[i].j] = 0;
-		changPositionMonster(i,index);
+		changPositionMonster(i,index,position_pacman);
 		index++;
 	}
 }
 
-function changPositionMonster(index, number_monster){
-	let up = -1;
-	let right = -1;
-	let left = -1;
-	let down =-1;
-	// TODO No need to eat the food
-	if(checkMoveLeft(monster[index])){
-		left = heuristic(i,j - 1);
-	}if(checkMoveRight(monster[index])){
-		right = heuristic(i,j + 1);
-	}if(checkMoveDown(monster[index])){
-		down = heuristic(i-1,j);
-	}if(checkMoveUp(monster[index])){
-		up = heuristic(i+1,j);
-	}
-	if(up >= right && up >= left && up >= down){
-		monster[index].i =monster[index].i + 1;
-		monster[index].j =monster[index].j;
+function changPositionMonster(index, number_monster,position_pacman){
 
-	}else if(right >= up && right >= left && right >= down){
-		monster[index].i =monster[index].i;
-		monster[index].j =monster[index].j +1;
+	if (position_pacman == 1) { //left
+		if (monster[index].j > 0 && board[monster[index].i][monster[index].j - 1] != 4) {
+			checkMoveLeft(monster[index]);
+			monster[index].j--;
+		}else{
+			if(otherPositin(false,false, true, false,index)  ||
+			otherPositin(true,false, false, false,index) ||
+			otherPositin(false,true, false, false,index) ||
+			otherPositin(false,false, false, true,index)){
+				
+			}		}
+	}
+	else if (position_pacman == 2) {//right
+		if (monster[index].j  <  board_width-1 && board[monster[index].i][monster[index].j + 1] != 4) {
+			checkMoveRight(monster[index]);
+			monster[index].j++;
+		}else{
+			if(otherPositin(false,true, false, false,index) ||
+			otherPositin(true,false, false, false,index) ||
+			otherPositin(false,false, true, false,index) ||
+			otherPositin(false,false, false, true,index)){
 
-	}else if(left >= up && left >= right && left >= down){
-		monster[index].i =monster[index].i;
-		monster[index].j =monster[index].j -1;
-	}else if(down >= up && down >= right && down >= left){
-		monster[index].i =monster[index].i-1;
-		monster[index].j =monster[index].j;
+			}
+
+		}
+	}
+	else if (position_pacman == 4) { //down
+		if (monster[index].i  > 0 && board[monster[index].i - 1][monster[index].j] != 4) {
+			checkMoveDown(monster[index])
+			monster[index].i--;
+		}else{
+			if(otherPositin(false,false, false, true,index) ||
+			otherPositin(false,true, false, false,index) ||
+			otherPositin(false,false, true, false,index) ||
+			otherPositin(true,false, false, false,index)){
+
+			}
+
+		}
+	}
+	else if (position_pacman == 3) {//up
+		if (monster[index].i < board_height-1 && board[monster[index].i + 1][monster[index].j] != 4) {
+			checkMoveUp(monster[index]);
+			monster[index].i++;
+		}else{
+			if(otherPositin(false,false, true, false,index) ||
+			otherPositin(false,false, false, true,index) ||
+			otherPositin(false,true, false, false,index) ||
+			otherPositin(true,false, false, false,index) ){
+
+			}
+
+		}
+	}else{
+		if(otherPositin(false,false, false, true,index)  ||
+		otherPositin(true,false, false, false,index)  ||
+		otherPositin(false,true, false, false,index)||
+		otherPositin(false,false, true, false,index)){
+
+		}
 	}
 
-	if(board[monster[index].i][monster[index].j] != 2){
-		board[monster[index].i][monster[index].j] = number_monster;
-	}
+	board[monster[index].i][monster[index].j] = number_monster;
+	
 
 }
 
-function heuristic(i, j) {
-    dx = Math.abs(i - shape.i)
-    dy = Math.abs(j - shape.j)
-    return (dx + dy)
+//A function that looks for a different location for a monster since it cannot do the user's movement
+function otherPositin(up, right, dowm, left,index){
+	if(up){
+		if (monster[index].i < board_height-1 && board[monster[index].i + 1][monster[index].j] != 4) {
+			checkMoveUp(monster[index]);
+			monster[index].i++;
+			return true;
+		}
+	}
+	if(right){
+		if (monster[index].j  <  board_width-1 && board[monster[index].i][monster[index].j + 1] != 4) {
+			checkMoveRight(monster[index]);
+			monster[index].j++;
+			return true;
+		}
+	}
+	if(left){
+		if (monster[index].j > 0 && board[monster[index].i][monster[index].j - 1] != 4) {
+			checkMoveLeft(monster[index]);
+			monster[index].j--;
+			return true;
+		}
+	}
+	if(dowm){
+		if (monster[index].i  > 0 && board[monster[index].i - 1][monster[index].j] != 4) {
+			checkMoveDown(monster[index])
+			monster[index].i--;
+			return true;
+		}
+	}
+	return false;
+	
 }
 
 //Check if a monster has eaten the pacamn
@@ -484,16 +518,15 @@ function Draw() {
 /*-------------------------------- Update Position---------------------------------------- */
 
 function UpdatePosition() {
-	var x = GetKeyPressed();
+	let x = GetKeyPressed();
 	board[character.i][character.j] = 0;
 	returnFoodWas();
-	//mainChangPositionMonster();
+	mainChangPositionMonster(x);
 	changPositionCharacter();
 	board[shape.i][shape.j] = 0;
-	let more_time = 0;
 	//i -x
 	//j - y
-	if (x == 1) { //left
+	if (x == 1) { 
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
@@ -503,7 +536,7 @@ function UpdatePosition() {
 			shape.j++;
 		}
 	}
-	if (x == 3) { //up
+	if (x == 3) { 
 		if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
@@ -536,7 +569,7 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
-		more_time = -300;
+		more_time = -30;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
