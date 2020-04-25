@@ -39,6 +39,7 @@ var character_color = "pink";
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	initiateKeyListener();
+	registerP();
 	hideGame();
 	displaySettings();
 });
@@ -465,7 +466,7 @@ function changPositionCharacter(){
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = game_time_from_user - time_elapsed;
 	for (var i = 0; i < board_height; i++) {
 		for (var j = 0; j < board_width; j++) {
 			var center = new Object();
@@ -586,10 +587,12 @@ function UpdatePosition() {
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
-	time_elapsed = ((currentTime - start_time) / 1000) + more_time;
+	game_time_from_user += more_time;
+	more_time = 0;
+	time_elapsed = Math.floor(((currentTime - start_time) / 1000));
 	if(time_elapsed >= game_time_from_user){
 		//time ended
-		endGame("You lost - Try again");
+		endGame("Time ended, you lost - Try again");
 	}
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
@@ -651,8 +654,7 @@ function updateTwentyFivePointsColor (event){
 //set the settings
 
 function submitSettings(){
-	//TODO keyboard
-	// random button	
+	//TODO keyboard	
 	let submitOK = true;
 
 	//amount of food
@@ -689,6 +691,7 @@ function submitSettings(){
 		monster = new Array(parseInt(num));
 
 		//set settings display
+
 		setSettingsDisplayForUser()
 		Start() // TODO -> is this here?
 	}
@@ -698,16 +701,68 @@ function oneMonster(){
 	document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
 }
 
-function twoMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 2";
+		setSettingsDisplayForUser();
+		pickColor();
+
+		Start(); // TODO -> is this here?
+	}
 }
 
-function threeMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 3";
+function setMostersBtn(num){
+	document.getElementById("mosterts_number").value = "Amount of Monsters: "+num;
+	$("#one").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
+	});
+	$("#two").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 2";
+	});
+	$("#three").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 3";
+	});
+	$("#four").click(function() {
+		//alert(this.id);
+		document.getElementById("mosterts_number").value = "Amount of Monsters: 4";
+	});	
 }
 
-function fourMonsters(){
-	document.getElementById("mosterts_number").value = "Amount of Monsters: 4";
+function randomSettings(){
+
+	let food_number = randomIntFromInterval(50,90);
+	food_from_user = food_number;
+	document.getElementById("food_balls_number").value = food_number;
+
+	let game_number = randomIntFromInterval(60,300);
+	game_time_from_user = game_number;
+	document.getElementById("game_time").value = game_number;
+
+	let monster_num = randomIntFromInterval(1,4);
+	monster = new Array(monster_num);
+	setMostersBtn(monster_num);
+	
+	food_color5 = getRandomColor();
+	document.querySelector("#five_points").value = food_color5;
+	food_color15 = getRandomColor();
+	document.querySelector("#fifteen_points").value = food_color15;
+	food_color25 = getRandomColor();
+	document.querySelector("#twentyfive_points").value = food_color25;
+
+
+}
+
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+	  color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function setSettingsDisplayForUser(){
@@ -739,6 +794,7 @@ function displaySettings() {
 	document.getElementById("settings").style.display = "block";
 }
 
+
 function keyCodeUp(event) {
 	keyUpCode = event.keyCode;
 }
@@ -751,5 +807,39 @@ function keyCodeRight(event) {
 }
 function keyCodeLeft(event) {
 	keyLeftCode = event.keyCode;
+}
+function hideLogin(){
+	document.getElementById("login_form").style.display = "none"
+}
+
+function displayLogin() {
+	document.getElementById("login_form").style.display = "block";
+}
+// -----------------------------------------------------login----------------------------------------------------------//
+function login(){
+	let password_input = document.getElementById("password_input").value;
+	let user_input = localStorage.getItem(document.getElementById("username_input").value);
+	let correct_user_password;
+	if(user_input != null){
+		correct_user_password = JSON.parse(user_input)['password'];
+	}
+	if(password_input != correct_user_password || user_input == null){
+		window.alert("wrong username or password");
+	}
+	else{
+		window.alert("login successful");
+		//TODO go to game
+	}
+} 
+
+function registerP(){
+	let pData = {
+        password:  "p",
+        firstname: "p",
+        lastname: "p",
+        email: "p@gmail.com",
+        date:  ""
+    };
+    localStorage.setItem("p",JSON.stringify(pData));
 }
 

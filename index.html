@@ -13,6 +13,15 @@
 	</head>
 
 	<body>
+<!-------------------------------------------------- login ------------------------------------------------------------>
+		<div id="login_form">
+			<form class="form" >
+				<input type="text" id="username_input" placeholder="User Name" />
+            	<input type="text" id="password_input" placeholder="Password" />
+            	<input type="button" id="login_btn" value="Login" onclick="login()"/>
+			</form>
+		</div>		
+<!-------------------------------------------------- game ------------------------------------------------------------>
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -39,10 +48,13 @@
 				</li>					
 			</ul>
 		</div>
-		
+
 		<!----------------------------------------------- settings definition -------------------------------------------------->
 		<div class="main" id="settings">
-			<form name="form_name" id="form_id" class="form_class" >
+			
+			<input type="button" id="random_settings" value="Set Random Settings" onclick="randomSettings()"/>
+
+			<form class="form_class" >
 			<label>Number of food balls :</label>
 			<input type="text" id="food_balls_number" placeholder="50 to 90" />
 			<label>Game time in seconds :</label>
@@ -53,20 +65,16 @@
 				<div class="dropdown-content">
 				<ul>
 				<li>
-				  <input name="one" type="button" onclick="oneMonster()">
-				  <label for="one">1</label>
+				  <input id="one" type="button" value="1" onclick="setMostersBtn()">				  
 				</li>
 				<li>
-				  <input name="two" type="button" onclick="twoMonsters()">
-				  <label for="two">2</label>
+				  <input id="two" type="button" value="2" onclick="setMostersBtn()">
 				</li>
 				<li>
-				  <input name="three" type="button" onclick="threeMonsters()">
-				  <label for="three">3</label>
+				  <input id="three" type="button" value="3" onclick="setMostersBtn()">
 				</li>
 				<li>
-				  <input name="four" type="button" onclick="fourMonsters()">
-				  <label for="four">4</label>
+				  <input id="four" type="button" value="4" onclick="setMostersBtn()">
 				</li>
 				</ul>
 				</div>
