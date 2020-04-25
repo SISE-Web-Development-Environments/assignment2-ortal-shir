@@ -39,10 +39,8 @@ var character_color = "pink";
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	initiateKeyListener();
-	registerP();
-	hideGame();
-	displaySettings();
 });
+
 /*-------------------------------- Start Game------------------------------------ */
 
 //A function that places the objects on the board at the beginning of a game
@@ -50,8 +48,6 @@ function Start() {
 	createWalls();
 	pickColor();
 	setSettingsDisplayForUser();
-	hideSettings();
-	displayGame();
 	more_time = 0;
 	board = new Array();
 	score = 0;
@@ -694,6 +690,8 @@ function submitSettings(){
 
 		setSettingsDisplayForUser()
 		Start() // TODO -> is this here?
+		ShowContent("Game");
+
 	}
 }
 
@@ -764,30 +762,6 @@ function setSettingsDisplayForUser(){
 	document.getElementById("monster_display").innerHTML = monster.length;
 }
 
-// ----------------------------------- hide and display of divs-----------------------------------------//
-function hideGame(){
-	document.getElementById("game").style.display = "none";
-	document.getElementById("settings_display").style.display = "none";
-	document.getElementById("score").style.display = "none";
-	document.getElementById("time").style.display = "none";
-}
-
-function displayGame() {
-	document.getElementById("game").style.display = "block";
-	document.getElementById("settings_display").style.display = "block";
-	document.getElementById("score").style.display = "block";
-	document.getElementById("time").style.display = "block";
-}
-
-function hideSettings(){
-	document.getElementById("settings").style.display = "none"
-}
-
-function displaySettings() {
-	document.getElementById("settings").style.display = "block";
-}
-
-
 function keyCodeUp(event) {
 	keyUpCode = event.keyCode;
 }
@@ -801,38 +775,3 @@ function keyCodeRight(event) {
 function keyCodeLeft(event) {
 	keyLeftCode = event.keyCode;
 }
-function hideLogin(){
-	document.getElementById("login_form").style.display = "none"
-}
-
-function displayLogin() {
-	document.getElementById("login_form").style.display = "block";
-}
-// -----------------------------------------------------login----------------------------------------------------------//
-function login(){
-	let password_input = document.getElementById("password_input").value;
-	let user_input = localStorage.getItem(document.getElementById("username_input").value);
-	let correct_user_password;
-	if(user_input != null){
-		correct_user_password = JSON.parse(user_input)['password'];
-	}
-	if(password_input != correct_user_password || user_input == null){
-		window.alert("wrong username or password");
-	}
-	else{
-		window.alert("login successful");
-		//TODO go to game
-	}
-} 
-
-function registerP(){
-	let pData = {
-        password:  "p",
-        firstname: "p",
-        lastname: "p",
-        email: "p@gmail.com",
-        date:  ""
-    };
-    localStorage.setItem("p",JSON.stringify(pData));
-}
-
