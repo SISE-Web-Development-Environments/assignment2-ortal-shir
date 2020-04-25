@@ -1,13 +1,21 @@
 
+$(document).ready(function() {
+	registerP();
+});
 
 //-------------------------------------Start switch page-----------------------
 function ShowContent(content) {
     document.getElementById("Welcome").style.display = 'none'
     document.getElementById("Registration").style.display = 'none';
-   // document.getElementById("Presskey").style.display = 'none'
+    document.getElementById("login_form").style.display = 'none';
+    //document.getElementById("About").style.display = 'none';
+    document.getElementById("Setting").style.display = 'none';
+    document.getElementById("Game").style.display = 'none';
     document.getElementById(content).style.display = 'block';
+    if(content == "Game"){
+        displayGame();
+    }
 }
-//-------------------------------------End switch page--------------------
 
 
 //-------------------------------------Start registering-----------------------------------
@@ -30,13 +38,14 @@ $.validator.addMethod('checkname', function (inputtxt) {
      return false; 
 }, 'The name must contain only letters');
 
-
 $(function() {
     // Wait for the DOM to be ready
     $().ready(function() {
         $("form[id='registration']").validate({
             rules: {
-                username:  "required",
+                username: {
+                    required: true
+                },
                 email: {
                     required: true,
                     email: true
@@ -51,7 +60,6 @@ $(function() {
                     equalTo: "#password",
                     minlength: 6,
                     checkpassword: true
-                   
                 },
                 firstname: {
                     checkname: true,
@@ -65,7 +73,9 @@ $(function() {
             },
             // Specify validation error messages
             messages: {
-                username: "Please enter your user name",
+                username:{
+                    required: "Please enter your user name",
+                },
                 password: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 6 characters long",
@@ -91,27 +101,81 @@ $(function() {
                 }
               
             },
+            highlight: function(element) {
+                $(element).css('background', 'rgb(207, 106, 106)');
+            },
+            unhighlight: function(element) {
+                $(element).css('background', 'white');
+            },          
             submitHandler: function(form) {
-                form.submit();
-            }
-           
+                form.Submit();
+            }           
         });
     });
 });
 
 
-//-------------------------------------End registering---------------------------------------
 
 function Submit(){
-    let userData = {
-        password:  document.getElementById("password").value,
-        firstname: document.getElementById("firstname").value,
-        lastname: document.getElementById("lastname").value,
-        email: document.getElementById("email").value,
-        day:  document.getElementById("day").value,
-        month:  document.getElementById("month").value,
-        Year:  document.getElementById("month").value
+    if( $('#registration').valid()){
+        window.alert("Your site registration has been successful");
+        let userData = {
+            password:  document.getElementById("password").value,
+            firstname: document.getElementById("firstname").value,
+            lastname: document.getElementById("lastname").value,
+            email: document.getElementById("email").value,
+            day:  document.getElementById("day").value,
+            month:  document.getElementById("month").value,
+            Year:  document.getElementById("month").value
+        };
+        localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
+    }
+
+}
+
+
+// -----------------------------------------------------login----------------------------------------------------------//
+function login(){
+	let password_input = document.getElementById("password_input").value;
+	let user_input = localStorage.getItem(document.getElementById("username_input").value);
+	let correct_user_password;
+	if(user_input != null){
+		correct_user_password = JSON.parse(user_input)['password'];
+	}
+	if(password_input != correct_user_password || user_input == null){
+		window.alert("wrong username or password");
+	}
+	else{
+        addGameToMenu();
+        window.alert("login successful");
+		//TODO go to game
+	}
+} 
+
+function addGameToMenu() {
+    $('#main').append('<li class=\'menu\'> <a href=\'#Game\' onclick="ShowContent(\'Game\');">Game </a></li>');
+}
+
+
+function registerP(){
+	let pData = {
+        password:  "p",
+        firstname: "p",
+        lastname: "p",
+        email: "p@gmail.com",
+        date:  ""
     };
-    localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
+    localStorage.setItem("p",JSON.stringify(pData));
+}
+
+
+// ----------------------------------- hide and display of divs-----------------------------------------//
+
+function displayGame() {
+	document.getElementById("game").style.display = "block";
+	document.getElementById("settings_display").style.display = "block";
+	document.getElementById("score").style.display = "block";
+    document.getElementById("time").style.display = "block";
+    Start();
 }
 
