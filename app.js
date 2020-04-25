@@ -701,13 +701,6 @@ function oneMonster(){
 	document.getElementById("mosterts_number").value = "Amount of Monsters: 1";
 }
 
-		setSettingsDisplayForUser();
-		pickColor();
-
-		Start(); // TODO -> is this here?
-	}
-}
-
 function setMostersBtn(num){
 	document.getElementById("mosterts_number").value = "Amount of Monsters: "+num;
 	$("#one").click(function() {
