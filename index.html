@@ -10,6 +10,15 @@
 	</head>
 
 	<body>
+<!-------------------------------------------------- login ------------------------------------------------------------>
+		<div id="login_form">
+			<form class="form" >
+				<input type="text" id="username_input" placeholder="User Name" />
+            	<input type="text" id="password_input" placeholder="Password" />
+            	<input type="button" id="login_btn" value="Login" onclick="login()"/>
+			</form>
+		</div>		
+<!-------------------------------------------------- game ------------------------------------------------------------>
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -42,7 +51,7 @@
 			
 			<input type="button" id="random_settings" value="Set Random Settings" onclick="randomSettings()"/>
 
-			<form name="form_name" id="form_id" class="form_class" >
+			<form class="form_class" >
 			<label>Number of food balls :</label>
 			<input type="text" id="food_balls_number" placeholder="50 to 90" />
 			<label>Game time in seconds :</label>
