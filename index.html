@@ -4,6 +4,9 @@
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<link rel="stylesheet" href="./main_design.css"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- icone -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<title>
 			Pacman Game
 		</title>
@@ -89,7 +92,27 @@
 				<input type="color" id="twentyfive_points" name="body"
 						value="#f6b73c">
 				<label for="body">25 points balls</label>
-			</div>			
+			</div>	
+			<div id="Presskey" class="Presskey">
+			   <div id="container">
+			<ul>
+				<li>                    
+					 <i class="fa fa-arrow-circle-up"></i>
+					<input id = "keyUpCode" placeholder = "press key up" class="inputkey" type="text" size="50" onkeydown="keyCodeUp(event)"> </li>
+				<li> 					 
+					<i class="fa fa-arrow-circle-left"></i>
+					<input id = "keyLeftCode" placeholder = "press key left" class="inputkey" type="text" size="50" onkeydown="keyCodeLeft(event)" >
+				
+					<input id = "keyRightCode" placeholder = "press key right" class="inputkey" type="text" size="50" onkeydown="keyCodeRight(event)" >
+					<i class="fa fa-arrow-circle-right"></i>
+				 </li>
+				<li> 
+					<i class="fa fa-arrow-circle-up"></i>
+					<input id = "keyDownCode" placeholder = "press key down" class="inputkey" type="text" size="50" onkeydown="keyCodeDown(event)" >  </li>
+			</ul>
+	
+			   </div>
+			</div>
 			</form>
 		</div>
 	</body>

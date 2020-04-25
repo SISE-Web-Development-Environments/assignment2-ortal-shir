@@ -1,85 +1,42 @@
 
 
-//-------------------------------------Start switch page
+//-------------------------------------Start switch page-----------------------
 function ShowContent(content) {
     document.getElementById("Welcome").style.display = 'none'
     document.getElementById("Registration").style.display = 'none';
+   // document.getElementById("Presskey").style.display = 'none'
     document.getElementById(content).style.display = 'block';
 }
-//-------------------------------------End switch page
+//-------------------------------------End switch page--------------------
 
 
+//-------------------------------------Start registering-----------------------------------
+$.validator.addMethod('checkpassword', function (inputtxt) {
+    var passw=  /^[0-9a-zA-Z]+$/;
+    //(?=.*[0-9])(?=.*[a-zA-Z])
+    if(inputtxt.match(passw)) 
+    { 
+        return true;
+    }
+    return false;
+}, 'The password must contain only letters and numbers');
 
-//------------------------------Start - Script to switch between pages when registering 
-function progressbar() {
-    var current_fs, next_fx,previous_fs; //fieldset
-    var left, opacity,scale;
-    $("#next").click(function(){
-        current_fs = $(this).parent();
-        next_fx=$(this).parent().next();
+$.validator.addMethod('checkname', function (inputtxt) {
+    var name=  /^[a-zA-Z]+$/;
+    if(inputtxt.match(name)) 
+    { 
+        return true;
+    }
+     return false; 
+}, 'The name must contain only letters');
 
-        $("#progressbar li").eq($("#registration fieldset").index(next_fx)).addClass("active");
-        next_fx.show();
-        current_fs.animate({opacity:0 },{
-            step:function(now,mx){
-                scale=1-(1-now)*0.2;
-                left= (now*50)+"%";
-                opacity= 1-now;
-                current_fs.css({'transform':'scale('+scale+')'});
-                next_fx.css({'left':left,'opacity':opacity});
-                },
-                duration: 100,
-                complete:function(){
-                    current_fs.hide();
-                },
-                easing:'easeInOutBack'
-        });
 
-    });
-    $("#previous").click(function(){
-       current_fs=$(this).parent();
-       previous_fs = $(this).parent().prev();
-        
-        //de-activate current step on progressbar
-        $("#progressbar li").eq($("#registration fieldset").index(current_fs)).removeClass("active");
-        
-        //show the previous fieldset
-        previous_fs.show(); 
-        //hide the current fieldset with style
-        current_fs.animate({opacity: 0}, {
-            step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale previous_fs from 80% to 100%
-                scale = 0.8 + (1 - now) * 0.2;
-                //2. take current_fs to the right(50%) - from 0%
-                left = ((1-now) * 50)+"%";
-                //3. increase opacity of previous_fs to 1 as it moves in
-                opacity = 1 - now;
-                current_fs.css({'left': left});
-                previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-            }, 
-            duration: 100, 
-            complete: function(){
-                current_fs.hide();
-                animating = false;
-            }, 
-            //this comes from the custom easing plugin
-            easing: 'easeInOutBack'
-        });
-    });
-}
-
-//-----------------------------End Script to switch between pages when registering
-
-//-------------------------------------Start registering
 $(function() {
     // Wait for the DOM to be ready
     $().ready(function() {
         $("form[id='registration']").validate({
             rules: {
                 username:  "required",
-                firstname: "required",
-                lastname: "required",
                 email: {
                     required: true,
                     email: true
@@ -87,12 +44,22 @@ $(function() {
                 password: {
                     required: true,
                     minlength: 6,
-                    range:[A-Za-z0-9]
+                    checkpassword: true
                 },
                 cpassword: {
                     required: true,
+                    equalTo: "#password",
                     minlength: 6,
-                    equalTo: "#password"
+                    checkpassword: true
+                   
+                },
+                firstname: {
+                    checkname: true,
+                    required: true
+                },
+                lastname: {
+                    checkname: true,
+                    required: true
                 }
                
             },
@@ -101,15 +68,23 @@ $(function() {
                 username: "Please enter your user name",
                 password: {
                     required: "Please provide a password",
-                    minlength: "Your password must be at least 6 characters long"
+                    minlength: "Your password must be at least 6 characters long",
+                    checkpassword: "The password must contain at least one letter and one digit"
                 },
                 cpassword: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 6 characters long",
-                    equalTo: "The passwords do not match"
+                    equalTo: "   The passwords do not match",
+                    checkpassword: "The password must contain at least one letter and one digit"
                 },
-                firstname: "Please enter your firstname",
-                lastname: "Please enter your lastname",
+                firstname: {
+                    checkname: "    The name must contain only letters",
+                    required : "Please enter your firstname"
+                },
+                lastname: {
+                    checkname: "    The name must contain only letters",
+                    required : "Please enter your firstname"
+                },
                 email: {
                     required: "Please enter email address",
                     email: "Please enter a valid email address"
@@ -123,4 +98,20 @@ $(function() {
         });
     });
 });
-//-------------------------------------End registering
+
+
+//-------------------------------------End registering---------------------------------------
+
+function Submit(){
+    let userData = {
+        password:  document.getElementById("password").value,
+        firstname: document.getElementById("firstname").value,
+        lastname: document.getElementById("lastname").value,
+        email: document.getElementById("email").value,
+        day:  document.getElementById("day").value,
+        month:  document.getElementById("month").value,
+        Year:  document.getElementById("month").value
+    };
+    localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
+}
+
