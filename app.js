@@ -462,7 +462,7 @@ function changPositionCharacter(){
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = game_time_from_user - time_elapsed;
 	for (var i = 0; i < board_height; i++) {
 		for (var j = 0; j < board_width; j++) {
 			var center = new Object();
@@ -579,10 +579,12 @@ function UpdatePosition() {
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
-	time_elapsed = ((currentTime - start_time) / 1000) + more_time;
+	game_time_from_user += more_time;
+	more_time = 0;
+	time_elapsed = Math.floor(((currentTime - start_time) / 1000));
 	if(time_elapsed >= game_time_from_user){
 		//time ended
-		endGame("You lost - Try again");
+		endGame("Time ended, you lost - Try again");
 	}
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
