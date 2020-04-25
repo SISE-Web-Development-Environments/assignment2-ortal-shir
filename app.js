@@ -38,6 +38,7 @@ var character_color = "pink";
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
+	initiateKeysListener();
 	hideGame();
 	displaySettings();
 });
@@ -127,7 +128,12 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		pacman_remain--;
 	}
-	positinBeginMonster()
+	initiateKeysListener();
+	positinBeginMonster();
+	interval = setInterval(UpdatePosition, 100);
+}
+
+function initiateKeysListener(){
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -143,7 +149,6 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 100);
 }
 
 //Distribution food function 
