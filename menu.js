@@ -12,9 +12,14 @@ function ShowContent(content) {
     document.getElementById("Setting").style.display = 'none';
     document.getElementById("Game").style.display = 'none';
     document.getElementById(content).style.display = 'block';
-    if(content == "Game"){
-        displayGame();
+    if(content == 'Game'){
+        Start();
+    }else{
+        window.clearInterval(interval);	
+        audio.pause();	
     }
+    
+
 }
 
 
@@ -28,6 +33,15 @@ $.validator.addMethod('checkpassword', function (inputtxt) {
     }
     return false;
 }, 'The password must contain only letters and numbers');
+
+$.validator.addMethod('checkUserName', function (inputtxt) {
+    for(let i=0 ; i< localStorage.length; i++){
+        if(localStorage.key(i) == inputtxt){
+            return false;
+        }
+    }
+    return true;
+}, 'Username already exists on site Please select another name');
 
 $.validator.addMethod('checkname', function (inputtxt) {
     var name=  /^[a-zA-Z]+$/;
@@ -44,7 +58,8 @@ $(function() {
         $("form[id='registration']").validate({
             rules: {
                 username: {
-                    required: true
+                    required: true,
+                    checkUserName: true
                 },
                 email: {
                     required: true,
@@ -75,6 +90,7 @@ $(function() {
             messages: {
                 username:{
                     required: "Please enter your user name",
+                    checkUserName: "Username already exists on site Please select another name"
                 },
                 password: {
                     required: "Please provide a password",
@@ -148,7 +164,7 @@ function login(){
 	else{
         addGameToMenu();
         window.alert("login successful");
-		//TODO go to game
+        ShowContent('Setting');
 	}
 } 
 
@@ -166,16 +182,5 @@ function registerP(){
         date:  ""
     };
     localStorage.setItem("p",JSON.stringify(pData));
-}
-
-
-// ----------------------------------- hide and display of divs-----------------------------------------//
-
-function displayGame() {
-	document.getElementById("game").style.display = "block";
-	document.getElementById("settings_display").style.display = "block";
-	document.getElementById("score").style.display = "block";
-    document.getElementById("time").style.display = "block";
-    Start();
 }
 
