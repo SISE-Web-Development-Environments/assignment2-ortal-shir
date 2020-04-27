@@ -4,6 +4,16 @@ $(document).ready(function() {
 });
 
 //-------------------------------------Start switch page-----------------------
+function exitWelcomePage(content){
+    document.getElementById("navbar").style.display = 'block';
+    ShowContent(content);
+}
+
+function enterWelcomePage(){
+    document.getElementById("navbar").style.display = 'none';
+    ShowContent("Welcome");
+}
+
 function ShowContent(content) {
     document.getElementById("Welcome").style.display = 'none'
     document.getElementById("Registration").style.display = 'none';
@@ -11,7 +21,7 @@ function ShowContent(content) {
     //document.getElementById("About").style.display = 'none';
     document.getElementById("Setting").style.display = 'none';
     document.getElementById("Game").style.display = 'none';
-    document.getElementById(content).style.display = 'block';
+    document.getElementById(content).style.display = 'contents';
     if(content == 'Game'){
         Start();
     }else{
@@ -41,7 +51,7 @@ $.validator.addMethod('checkUserName', function (inputtxt) {
         }
     }
     return true;
-}, 'Username already exists on site Please select another name');
+}, 'Username already exists. Please select another username');
 
 $.validator.addMethod('checkname', function (inputtxt) {
     var name=  /^[a-zA-Z]+$/;
@@ -134,7 +144,7 @@ $(function() {
 
 function Submit(){
     if( $('#registration').valid()){
-        window.alert("Your site registration has been successful");
+        window.alert("Your registration has been successful");
         let userData = {
             password:  document.getElementById("password").value,
             firstname: document.getElementById("firstname").value,
@@ -163,13 +173,14 @@ function login(){
 	}
 	else{
         addGameToMenu();
-        window.alert("login successful");
         ShowContent('Setting');
 	}
 } 
 
 function addGameToMenu() {
-    $('#main').append('<li class=\'menu\'> <a href=\'#Game\' onclick="ShowContent(\'Game\');">Game </a></li>');
+    $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
+    //TODO <li class="menu"> <input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')"> </li>
+    // <li class="menu"> <a class="navbar_a" href="#Setting" onclick="ShowContent('Setting')">Settings</a></li>
 }
 
 

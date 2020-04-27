@@ -22,32 +22,72 @@
 	</head>
 
 	<body>
-		<header>   
-            <img id="backImage" src="./resource/photo/logo2.jpg">  
-            <div class="main"> 
-                <ul id="main">
-                    <li class="menu"> <a  href="#Welcome" onclick="ShowContent('Welcome');" >Home</a></li>
-                    <li class="menu"> <a href="#Registration" onclick="ShowContent('Registration');" >Registration</a></li>
-                    <li class="menu"> <a  href="#login_form" onclick="ShowContent('login_form');" >Login</a></li>
-					<li class="menu"> <a href="#" onclick="ShowContent('About');" >About</a></li>
-					<li class="menu"> <a href="#Setting" onclick="ShowContent('Setting');" >Setting</a></li>
-                </ul>
-            </div>
-        </header>
-<!------------------------------Welcome ------------------------------------>
-<div id = "Welcome" class="container">
-	<a href="#Registration" >  <button class="btn" onclick="ShowContent('Registration');">Registration</button></a>
-	<a href="#login_form" >  <button class="btn" onclick=" ShowContent('login_form');">Login</button></a>
+	<container>
+	<div id="navbar"> 
+	<nav>
+		<!-- <ul id="navbar_btns">
+			<li class="menu"> 
+				<input type="image" src="./resource/photo/welcome_navbar.png" alt="Welcome" onclick="enterWelcomePage()">
+			</li>
+			<li class="menu"> 
+				<input type="image" src="./resource/photo/signup_navbar.png" alt="Sign Up" onclick="ShowContent('Registration')">
+			</li>
+			<li class="menu"> 
+				<input type="image" src="./resource/photo/login_navbar.png" alt="Login" onclick="ShowContent('login_form')">
+			</li>
+			<li class="menu"> 
+				<input type="image" src="./resource/photo/settings_navbar.png" alt="Settings" onclick="ShowContent('Setting')">
+			</li>
+			<li class="menu"> 
+				<input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')">
+			</li>
+		</ul> -->
 
+		<ul id="navbar_btns">
+			<li class="menu"> <a class="navbar_a" href="#Welcome" onclick="enterWelcomePage();" >Home</a></li>
+			<li class="menu"> <a class="navbar_a" href="#Registration" onclick="ShowContent('Registration')" >Registration</a></li>
+			<li class="menu"> <a class="navbar_a" href="#login_form" onclick="ShowContent('login_form')" >Login</a></li>
+			<li class="menu"> <a class="navbar_a" href="#" onclick="ShowContent('About')" >About</a></li>
+			<li class="menu"> <a class="navbar_a" href="#Setting" onclick="ShowContent('Setting')">Settings</a></li>
+		</ul>
+	</nav>
+	</div>
+	</container>
+<!------------------------------Welcome ------------------------------------>
+<container>
+<div id="Welcome">
+	<div class="headers" id="welcome_header" margin="auto">
+		<img src="./resource/photo/welcome.png" width="460" height="155" alt="">
+	</div>
+	<div class="headers" id="signup_btn">
+		<img src="./resource/photo/pacman_character.png" width="58" height="65" alt="">
+		<input type="image" src="./resource/photo/signup_btn.png" width="276" height="73" alt="Sign Up" onclick="exitWelcomePage('Registration')">
+	</div>
+
+	<div id="login_btn">
+		<input type="image" src="./resource/photo/login_btn.png" width="276" height="73" alt="Sign Up" onclick="exitWelcomePage('login_form')">
+		<img src="./resource/photo/monster1.png" width="53" height="55" alt="Login">
+	</div>
 </div>
 
 <!-------------------------------------------------- login ------------------------------------------------------------>
 <div id="login_form">
-	<form class="form" >
-		<input type="text" id="username_input" placeholder="User Name" />
-		<input type="password" id="password_input" placeholder="Password" />
-		<input type="button" id="login_btn" value="Login" onclick="login()"/>
-	</form>
+	<!-- <form class="form" > -->
+		<div class="headers" id="login_header" margin="auto">
+			<img src="./resource/photo/login_header.png" width="367" height="152" alt="">
+		</div>
+		<ul>
+			<li class="text_area">
+				<input class="text_fill" type="text" id="username_input" placeholder="User Name" />
+			</li>
+			<li class="text_area">
+				<input class="text_fill" type="password" id="password_input" placeholder="Password" />
+			</li>
+			<li class="text_area">
+				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Sign Up" onclick="login()">
+			</li>
+		</ul>		
+	<!-- </form> -->
 </div>		
 <!-------------------------------------------------- game ------------------------------------------------------------>
 <div id="Game"> 
@@ -62,11 +102,8 @@
 		<div id="game">
 			<canvas id="canvas" height="1000" width="1250"></canvas>
 		</div>
-</div>
 
-<!----------------------------------------------- settings ------------------- -------------------------------------------------->
-<div id="Setting" >
-	<!---------- settings display -------->
+		<!---------- settings display -------->
 	<div id="settings_display">
 		<ul>
 			<li>
@@ -80,19 +117,80 @@
 			</li>					
 		</ul>
 	</div>
+</div>
 
+<!----------------------------------------------- settings ------------------- -------------------------------------------------->
+<div id="Setting" >
+	<div class="headers" id="settings_header" margin="auto">
+		<img src="./resource/photo/settings_header.png" width="605" height="97" alt="">
+	</div>
 	<!----------- settings definition ------------>
 	<div class="main" id="settings">
+
+		<form method="GET" id="registration" action="" >
+			<div class="sign_up_text">
+				<ul class="inline_signup">
+				<li class="inline_signup"> 
+					<!-- TODO button -->
+					<input type="button" id="random_settings" value="Set Random Settings" onclick="randomSettings()"/>
+				</li>
+				<li class="birthday, inline_signup">
+				<label>Number of food balls:</label>
+				</li>
+				<li class="inline_signup">
+				<input class="text_fill_small" type="text" id="food_balls_number" placeholder="50 to 90" />
+				</li>
+				<li class="birthday, inline_signup">
+				<label>Game time in seconds:</label>
+				</li>
+				<li class="inline_signup">
+				<input class="text_fill_small" type="text" id="game_time" placeholder="60 or more"/>
+				</li>		
+				<li class="inline_signup">
+					<div class="dropdown">
+						<input type="button" id="mosterts_number" class="dropbtn" value="Amount of Monsters: 1"/>
+						<div class="dropdown-content">
+						<ul class="inline_signup">
+						<li>
+							<input id="one" type="button" value="1" onclick="setMostersBtn()">				  
+						</li>
+						<li>
+							<input id="two" type="button" value="2" onclick="setMostersBtn()">
+						</li>
+						<li>
+							<input id="three" type="button" value="3" onclick="setMostersBtn()">
+						</li>
+						<li>
+							<input id="four" type="button" value="4" onclick="setMostersBtn()">
+						</li>
+						</ul>
+						</div>
+					</div>
+				</li>
+				<li class="inline_signup">
+				<input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
+				<!-- <label for="email">Email</label><br> -->
+				<!-- <i class="fa fa-envelope icon"></i> -->
+				</li>
+				<li class="inline_signup">
+				<input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br>
+				<!-- <label for="Date">DateOfBirth</label><br> -->
+				</li>
+				</ul>
+			</div>
+		</form>
+
+
 		
-		<input type="button" id="random_settings" value="Set Random Settings" onclick="randomSettings()"/>
+		
 
-		<form class="form_class" >
-		<label>Number of food balls :</label>
-		<input type="text" id="food_balls_number" placeholder="50 to 90" />
-		<label>Game time in seconds :</label>
-		<input type="text" id="game_time" placeholder="60 or more" />
+		<!-- <form class="form_class" > -->
+		<!-- <label>Number of food balls :</label> -->
+		<!-- <input type="text" id="food_balls_number" placeholder="50 to 90" /> -->
+		<!-- <label>Game time in seconds :</label> -->
+		<!-- <input type="text" id="game_time" placeholder="60 or more" /> -->
 
-		<div class="dropdown">
+		<!-- <div class="dropdown">
 			<input type="button" id="mosterts_number" class="dropbtn" value="Amount of Monsters: 1"/>
 			<div class="dropdown-content">
 			<ul>
@@ -110,7 +208,7 @@
 			</li>
 			</ul>
 			</div>
-		</div>
+		</div> -->
 
 		<p>Choose your food balls colors:</p>
 
@@ -159,159 +257,192 @@
 </div>
 <!--------------------------------------------------Registration ------------------------------------>
 <div id ="Registration" class="Registration">
+	<div class="headers" id="signup_header" margin="auto">
+		<img src="./resource/photo/signup_header.png" width="466" height="158" alt="">
+	</div>
 	<form method="GET" id="registration" action="" >
-		<fieldset>
+		<div class="sign_up_text">
 			<!--Account-->
-			<h1 class="fs-title" >Account</h1><br>
-			<label for="username">User Name</label><br>
-			<i class="fa fa-user icon"></i>
-			<input  id= "username" type="text" name="username" placeholder="User Name"><br>
-			<label  for="password">Password</label><br>
-			<i class="fa fa-key icon"></i>
-			<input   id= "password" type="password" name="password" placeholder="Password"><br>
-			<label  for="cpassword">Confirm Password</label><br>
-			<i class="fa fa-key icon"></i>
-			<input  id= "cpassword" type="password" name="cpassword" placeholder="Confirm Password"><br>
-			<h1 class="fs-title" >Personal Detalils</h2>
-			<label for="firstname">First Name</label><br>
-			<i class="fa fa-user icon" ></i>
-			<input id= "firstname" type="text" name="firstname" placeholder="First Name"><br>
-			<label for="lastname">Last Name</label><br>
-			<i class="fa fa-user icon" ></i>
-			<input id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
-			<label for="email">Email</label><br>
-			<i class="fa fa-envelope icon"></i>
-			<input id= "email" type="email" name="email" placeholder="Email"><br>
-			<label for="Date">DateOfBirth</label><br>
-			<label > Day</label>
-				<select name='day' id="day">
-				<option value='1'>1</option>
-				<option value='2'>2</option>
-				<option value='3'>3</option>
-				<option value='4'>4</option>
-				<option value='5'>5</option>
-				<option value='6'>6</option>
-				<option value='7'>7</option>
-				<option value='8'>8</option>
-				<option value='9'>9</option>
-				<option value='10'>10</option>
-				<option value='11'>11</option>
-				<option value='12'>12</option>
-				<option value='13'>13</option>
-				<option value='14'>14</option>
-				<option value='15'>15</option>
-				<option value='16'>16</option>
-				<option value='17'>17</option>
-				<option value='18'>18</option>
-				<option value='19'>19</option>
-				<option value='20'>20</option>
-				<option value='21'>21</option>
-				<option value='22'>22</option>
-				<option value='23'>23</option>
-				<option value='24'>24</option>
-				<option value='25'>25</option>
-				<option value='26'>26</option>
-				<option value='27'>27</option>
-				<option value='28'>28</option>
-				<option value='29'>29</option>
-				<option value='30'>30</option>
-				<option value='31'>31</option>
+			<!-- <h1 class="fs-title" >Account</h1><br> -->
+			<!-- <label for="username">User Name</label><br> -->
+			<!-- <i class="fa fa-user icon"></i> -->
+			<ul>
+			<li class="birthday">
+			<label>Account Details</label>
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "username" type="text" name="username" placeholder="User Name"><br>
+			<!-- <label for="password">Password</label><br> -->
+			<!-- <i class="fa fa-key icon"></i> -->
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "password" type="password" name="password" placeholder="Password"><br>
+			<!-- <label  for="cpassword">Confirm Password</label><br> -->
+			<!-- <i class="fa fa-key icon"></i> -->
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "cpassword" type="password" name="cpassword" placeholder="Confirm Password"><br>
+			<!-- <h1 class="fs-title" >Personal Detalils</h1> -->
+			<!-- <label for="firstname">First Name</label><br> -->
+			<!-- <i class="fa fa-user icon" ></i> -->
+			</li>
+			<li class="birthday">
+			<label>Personal Details</label>
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "firstname" type="text" name="firstname" placeholder="First Name"><br>
+			<!-- <label for="lastname">Last Name</label><br> -->
+			<!-- <i class="fa fa-user icon" ></i> -->
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
+			<!-- <label for="email">Email</label><br> -->
+			<!-- <i class="fa fa-envelope icon"></i> -->
+			</li>
+			<li class="inline_signup">
+			<input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br>
+			<!-- <label for="Date">DateOfBirth</label><br> -->
+			</li>
+			</ul>
+			<ul>
+			<li class="birthday">
+			<label>Birthday</label>
+			</li>
+			<li class="birthday">
+			<label> Day</label>
+				<select name="day" id="day">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
 				</select>
 				<label > Month</label>  
-				<select name='month'  id="month">
-				<option value='1'>1</option>
-				<option value='2'>2</option>
-				<option value='3'>3</option>
-				<option value='4'>4</option>
-				<option value='5'>5</option>
-				<option value='6'>6</option>
-				<option value='7'>7</option>
-				<option value='8'>8</option>
-				<option value='9'>9</option>
-				<option value='10'>10</option>
-				<option value='11'>11</option>
-				<option value='12'>12</option>
+				<select name="month"  id="month">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
 				</select>
 				<label > Year</label>  
-				<select name='Year' id="Year" >
-				<option value='1947'>1947</option>
-				<option value='1948'>1948</option>
-				<option value='1949'>1949</option>
-				<option value='1950'>1950</option>
-				<option value='1951'>1951</option>
-				<option value='1952'>1952</option>
-				<option value='1953'>1953</option>
-				<option value='1954'>1954</option>
-				<option value='1955'>1955</option>
-				<option value='1956'>1956</option>
-				<option value='1957'>1957</option>
-				<option value='1958'>1958</option>
-				<option value='1959'>1959</option>
-				<option value='1960'>1960</option>
-				<option value='1961'>1961</option>
-				<option value='1962'>1962</option>
-				<option value='1963'>1963</option>
-				<option value='1964'>1964</option>
-				<option value='1965'>1965</option>
-				<option value='1966'>1966</option>
-				<option value='1967'>1967</option>
-				<option value='1968'>1968</option>
-				<option value='1969'>1969</option>
-				<option value='1970'>1970</option>
-				<option value='1971'>1971</option>
-				<option value='1972'>1972</option>
-				<option value='1973'>1973</option>
-				<option value='1974'>1974</option>
-				<option value='1975'>1975</option>
-				<option value='1976'>1976</option>
-				<option value='1977'>1977</option>
-				<option value='1978'>1978</option>
-				<option value='1979'>1979</option>
-				<option value='1980'>1980</option>
-				<option value='1981'>1981</option>
-				<option value='1982'>1982</option>
-				<option value='1983'>1983</option>
-				<option value='1984'>1984</option>
-				<option value='1985'>1985</option>
-				<option value='1986'>1986</option>
-				<option value='1987'>1987</option>
-				<option value='1988'>1988</option>
-				<option value='1989'>1989</option>
-				<option value='1990'>1990</option>
-				<option value='1991'>1991</option>
-				<option value='1992'>1992</option>
-				<option value='1993'>1993</option>
-				<option value='1994'>1994</option>
-				<option value='1995'>1995</option>
-				<option value='1996'>1996</option>
-				<option value='1997'>1997</option>
-				<option value='1998'>1998</option>
-				<option value='1999'>1999</option>
-				<option value='2000'>2000</option>
-				<option value='2001'>2001</option>
-				<option value='2002'>2002</option>
-				<option value='2003'>2003</option>
-				<option value='2004'>2004</option>
-				<option value='2005'>2005</option>
-				<option value='2006'>2006</option>
-				<option value='2007'>2007</option>
-				<option value='2008'>2008</option>
-				<option value='2009'>2009</option>
-				<option value='2010'>2010</option>
-				<option value='2011'>2011</option>
-				<option value='2012'>2012</option>
-				<option value='2013'>2013</option>
-				<option value='2014'>2014</option>
-				<option value='2015'>2015</option>
-				<option value='2016'>2016</option>
-				<option value='2017'>2017</option>
-				<option value='2018'>2018</option>
-				<option value='2019'>2019</option>
-				<option value='2020'>2020</option>
+				<select name="Year" id="Year" >
+				<option value="1947">1947</option>
+				<option value="1948">1948</option>
+				<option value="1949">1949</option>
+				<option value="1950">1950</option>
+				<option value="1951">1951</option>
+				<option value="1952">1952</option>
+				<option value="1953">1953</option>
+				<option value="1954">1954</option>
+				<option value="1955">1955</option>
+				<option value="1956">1956</option>
+				<option value="1957">1957</option>
+				<option value="1958">1958</option>
+				<option value="1959">1959</option>
+				<option value="1960">1960</option>
+				<option value="1961">1961</option>
+				<option value="1962">1962</option>
+				<option value="1963">1963</option>
+				<option value="1964">1964</option>
+				<option value="1965">1965</option>
+				<option value="1966">1966</option>
+				<option value="1967">1967</option>
+				<option value="1968">1968</option>
+				<option value="1969">1969</option>
+				<option value="1970">1970</option>
+				<option value="1971">1971</option>
+				<option value="1972">1972</option>
+				<option value="1973">1973</option>
+				<option value="1974">1974</option>
+				<option value="1975">1975</option>
+				<option value="1976">1976</option>
+				<option value="1977">1977</option>
+				<option value="1978">1978</option>
+				<option value="1979">1979</option>
+				<option value="1980">1980</option>
+				<option value="1981">1981</option>
+				<option value="1982">1982</option>
+				<option value="1983">1983</option>
+				<option value="1984">1984</option>
+				<option value="1985">1985</option>
+				<option value="1986">1986</option>
+				<option value="1987">1987</option>
+				<option value="1988">1988</option>
+				<option value="1989">1989</option>
+				<option value="1990">1990</option>
+				<option value="1991">1991</option>
+				<option value="1992">1992</option>
+				<option value="1993">1993</option>
+				<option value="1994">1994</option>
+				<option value="1995">1995</option>
+				<option value="1996">1996</option>
+				<option value="1997">1997</option>
+				<option value="1998">1998</option>
+				<option value="1999">1999</option>
+				<option value="2000">2000</option>
+				<option value="2001">2001</option>
+				<option value="2002">2002</option>
+				<option value="2003">2003</option>
+				<option value="2004">2004</option>
+				<option value="2005">2005</option>
+				<option value="2006">2006</option>
+				<option value="2007">2007</option>
+				<option value="2008">2008</option>
+				<option value="2009">2009</option>
+				<option value="2010">2010</option>
+				<option value="2011">2011</option>
+				<option value="2012">2012</option>
+				<option value="2013">2013</option>
+				<option value="2014">2014</option>
+				<option value="2015">2015</option>
+				<option value="2016">2016</option>
+				<option value="2017">2017</option>
+				<option value="2018">2018</option>
+				<option value="2019">2019</option>
+				<option value="2020">2020</option>
 				</select>
-			<button id ="submit" class="action-but" value="Submit" type="submit" name="submit" onclick="Submit()" >Submit</button>
-		</fieldset>
+		</li>
+		<li>
+			<input id="signup_btn_form" type="image" src="./resource/photo/signup_btn.png" width="150" height="40" alt="Sign Up" onclick="Submit()">
+		</li>
+		</ul>
+			</div>
 	</form>
 </div>        
-	</body>
+</container>
+</body>
 </html>
