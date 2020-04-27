@@ -4,6 +4,16 @@ $(document).ready(function() {
 });
 
 //-------------------------------------Start switch page-----------------------
+function exitWelcomePage(content){
+    document.getElementById("navbar").style.display = 'contents';
+    ShowContent(content);
+}
+
+function enterWelcomePage(){
+    document.getElementById("navbar").style.display = 'none';
+    ShowContent("Welcome");
+}
+
 function ShowContent(content) {
     document.getElementById("Welcome").style.display = 'none'
     document.getElementById("Registration").style.display = 'none';
@@ -163,13 +173,13 @@ function login(){
 	}
 	else{
         addGameToMenu();
-        window.alert("login successful");
         ShowContent('Setting');
 	}
 } 
 
 function addGameToMenu() {
-    $('#main').append('<li class=\'menu\'> <a href=\'#Game\' onclick="ShowContent(\'Game\');">Game </a></li>');
+    $('#navbar').append('<li class=\'menu\'> <a href=\'#Game\' onclick="ShowContent(\'Game\');">Game </a></li>');
+    //TODO <li class="menu"> <input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')"> </li>
 }
 
 

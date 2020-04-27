@@ -23,31 +23,60 @@
 
 	<body>
 		<header>   
-            <img id="backImage" src="./resource/photo/logo2.jpg">  
-            <div class="main"> 
-                <ul id="main">
-                    <li class="menu"> <a  href="#Welcome" onclick="ShowContent('Welcome');" >Home</a></li>
-                    <li class="menu"> <a href="#Registration" onclick="ShowContent('Registration');" >Registration</a></li>
-                    <li class="menu"> <a  href="#login_form" onclick="ShowContent('login_form');" >Login</a></li>
-					<li class="menu"> <a href="#" onclick="ShowContent('About');" >About</a></li>
-					<li class="menu"> <a href="#Setting" onclick="ShowContent('Setting');" >Setting</a></li>
+            <div id="navbar"> 
+                <ul id="navbar_btns">
+                    <li class="menu"> 
+						<input type="image" src="./resource/photo/welcome_navbar.png" alt="Welcome" onclick="enterWelcomePage()">
+					</li>
+                    <li class="menu"> 
+						<input type="image" src="./resource/photo/signup_navbar.png" alt="Sign Up" onclick="ShowContent('Registration')">
+					</li>
+                    <li class="menu"> 
+						<input type="image" src="./resource/photo/login_navbar.png" alt="Login" onclick="ShowContent('login_form')">
+					</li>
+					<li class="menu"> 
+						<input type="image" src="./resource/photo/settings_navbar.png" alt="Settings" onclick="ShowContent('Setting')">
+					</li>
+					<li class="menu"> 
+						<input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')">
+					</li>
                 </ul>
             </div>
         </header>
 <!------------------------------Welcome ------------------------------------>
-<div id = "Welcome" class="container">
-	<a href="#Registration" >  <button class="btn" onclick="ShowContent('Registration');">Registration</button></a>
-	<a href="#login_form" >  <button class="btn" onclick=" ShowContent('login_form');">Login</button></a>
+<div id="Welcome">
+	<div class="headers" id="welcome_header" margin="auto">
+		<img src="./resource/photo/welcome.png" width="460" height="155" alt="">
+	</div>
+	<div class="headers" id="signup_btn">
+		<img src="./resource/photo/pacman_character.png" width="58" height="65" alt="">
+		<input type="image" src="./resource/photo/signup_btn.png" width="276" height="73" alt="Sign Up" onclick="exitWelcomePage('Registration')">
+	</div>
 
+	<div id="login_btn">
+		<input type="image" src="./resource/photo/login_btn.png" width="276" height="73" alt="Sign Up" onclick="exitWelcomePage('login_form')">
+		<img src="./resource/photo/monster1.png" width="53" height="55" alt="Login">
+	</div>
 </div>
 
 <!-------------------------------------------------- login ------------------------------------------------------------>
 <div id="login_form">
-	<form class="form" >
-		<input type="text" id="username_input" placeholder="User Name" />
-		<input type="password" id="password_input" placeholder="Password" />
-		<input type="button" id="login_btn" value="Login" onclick="login()"/>
-	</form>
+	<!-- <form class="form" > -->
+		<div class="headers" id="login_header" margin="auto">
+			<img src="./resource/photo/login_header.png" width="367" height="152" alt="">
+		</div>
+		<ul>
+			<li class="text_area">
+				<input class="text_fill" type="text" id="username_input" placeholder="User Name" />
+			</li>
+			<li class="text_area">
+				<input class="text_fill" type="password" id="password_input" placeholder="Password" />
+			</li>
+			<li class="text_area">
+				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Sign Up" onclick="login()">
+			</li>
+		</ul>		
+	<!-- </form> -->
 </div>		
 <!-------------------------------------------------- game ------------------------------------------------------------>
 <div id="Game"> 
