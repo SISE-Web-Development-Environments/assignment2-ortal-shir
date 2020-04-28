@@ -78,10 +78,12 @@
 		</div>
 		<ul>
 			<li class="text_area">
+				<img src="./resource/photo/blue_monster.png" width="68" height="61" alt="">
 				<input class="text_fill" type="text" id="username_input" placeholder="User Name" />
 			</li>
 			<li class="text_area">
 				<input class="text_fill" type="password" id="password_input" placeholder="Password" />
+				<img src="./resource/photo/red_monster.png" width="68" height="61" alt="">
 			</li>
 			<li class="text_area">
 				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Sign Up" onclick="login()">
@@ -127,7 +129,7 @@
 	<!----------- settings definition ------------>
 	<div class="main" id="settings">
 
-		<form method="GET" id="registration" action="" >
+		<form method="GET" id="settings_form" action="" >
 			<div class="sign_up_text">
 				<ul class="inline_signup">
 				<li class="inline_signup"> 
@@ -168,12 +170,12 @@
 					</div>
 				</li>
 				<li class="inline_signup">
-				<input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
+				<!-- <input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br> -->
 				<!-- <label for="email">Email</label><br> -->
 				<!-- <i class="fa fa-envelope icon"></i> -->
 				</li>
 				<li class="inline_signup">
-				<input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br>
+				<!-- <input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br> -->
 				<!-- <label for="Date">DateOfBirth</label><br> -->
 				</li>
 				</ul>
@@ -252,7 +254,6 @@
 
 			</div>
 		</div>
-		</form>
 	</div>
 </div>
 <!--------------------------------------------------Registration ------------------------------------>

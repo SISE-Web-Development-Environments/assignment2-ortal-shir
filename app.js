@@ -435,8 +435,10 @@ function Draw() {
 	for (var i = 0; i < board_height; i++) {
 		for (var j = 0; j < board_width; j++) {
 			var center = new Object();
-			center.y = i * 60 + 30;
-			center.x = j * 60 + 30;
+			// center.y = i * 60 + 30;
+			// center.x = j * 60 + 30;
+			 center.y = i * 40 + 30;
+			 center.x = j * 40 + 30;
 			if (board[i][j] == 2) { // pacman
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
