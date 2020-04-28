@@ -95,7 +95,8 @@ $(function() {
                 lastname: {
                     checkname: true,
                     required: true
-                }
+                },
+                birthday: "required"
                
             },
             // Specify validation error messages
@@ -126,7 +127,8 @@ $(function() {
                 email: {
                     required: "Please enter email address",
                     email: "Please enter a valid email address"
-                }
+                },
+                birthday : "Please provide a birthday"
               
             },
             highlight: function(element) {
