@@ -574,11 +574,14 @@ function UpdatePosition() {
 		}else{
 			game_over--;
 			score -= 10;
+			window.clearInterval(interval);		
 			window.alert("We believe in you! Keep playing");
+			interval = setInterval(UpdatePosition, 100);
+			initiateKeyListener();
 			PacmanEaten();
 		}
 	}
-	else {
+	if(flag_end_game == false) {
 		Draw();
 	}
 }
@@ -773,16 +776,26 @@ function setSettingsDisplayForUser(){
 	document.getElementById("monster_display").innerHTML = monster.length;
 }
 
+
 function keyCodeUp(event) {
+	document.getElementById("keyUpCode").value = '';
 	keyUpCode = event.keyCode;
+	document.getElementById("keyUpCode").placeholder = event.key;
 }
 
 function keyCodeDown(event) {
+	document.getElementById("keyDownCode").value = '';
 	keyDownCode = event.keyCode;
+	document.getElementById("keyDownCode").placeholder = event.key;
 }
 function keyCodeRight(event) {
+	document.getElementById("keyRightCode").value = '';
 	keyRightCode = event.keyCode;
+	document.getElementById("keyRightCode").placeholder = event.key;
 }
 function keyCodeLeft(event) {
+	document.getElementById("keyLeftCode").value = '';
 	keyLeftCode = event.keyCode;
+	document.getElementById("keyLeftCode").placeholder = event.key;
+
 }
