@@ -149,6 +149,7 @@ function initial(){
 	more_time = 0;
 	score = 0;
 	game_over = 5;
+	updateHeartDisplay();
 	start_time = new Date();
 }
 
@@ -393,6 +394,26 @@ function MonsterAtePacman(){
 	return [-1,-1];
 }
 
+/*----------------------------heart display--------------------------------------------*/
+function updateHeartDisplay(){
+	for (let k = 1; k <= game_over; k++){
+		document.getElementById('heart'+k).style.display = 'flex';
+	}
+	for (let k = game_over + 1; k <= 6 ; k++){
+		document.getElementById('heart'+k).style.display = 'none';
+	}
+	
+}
+
+// game_over.registerListener(function(){
+// 	for (let k = 1; k <= game_over; k++){
+// 		document.getElementById('heart'+k).style.display = 'flex';
+// 	}
+// 	for (let k = game_over + 1; k <= 6 ; k++){
+// 		document.getElementById('heart'+k).style.display = 'none';
+// 	}
+// });
+
 
 /*-------------------------------- Position Character------------------------------------ */
 
@@ -621,6 +642,7 @@ function UpdatePosition() {
 		}
 	}
 	if(flag_end_game == false) {
+		updateHeartDisplay();
 		Draw();
 	}
 }

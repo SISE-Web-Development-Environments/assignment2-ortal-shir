@@ -53,6 +53,10 @@
 	</nav>
 	</div>
 	</container>
+
+	<div id="hello">
+		<label id="hello_user">Hello Guest</label>
+	</div>
 <!------------------------------Welcome ------------------------------------>
 <container>
 <div id="Welcome">
@@ -72,7 +76,7 @@
 
 <!-------------------------------------------------- login ------------------------------------------------------------>
 <div id="login_form">
-	<!-- <form class="form" > -->
+	
 		<div class="headers" id="login_header" margin="auto">
 			<img src="./resource/photo/login_header.png" width="367" height="152" alt="">
 		</div>
@@ -86,15 +90,22 @@
 				<img src="./resource/photo/red_monster.png" width="68" height="61" alt="">
 			</li>
 			<li class="text_area">
-				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Sign Up" onclick="login()">
+				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Login" onclick="login()">
 			</li>
 		</ul>		
-	<!-- </form> -->
 </div>		
 <!-------------------------------------------------- game ------------------------------------------------------------>
 <div id="Game"> 
 		<ul id="score_time">
-			<li>
+			<li id="hearts">
+				<img id="heart1" src="./resource/photo/heart.png" width="30" height="30" alt="">
+				<img id="heart2" src="./resource/photo/heart.png" width="30" height="30" alt="">
+				<img id="heart3" src="./resource/photo/heart.png" width="30" height="30" alt="">
+				<img id="heart4" src="./resource/photo/heart.png" width="30" height="30" alt="">
+				<img id="heart5" src="./resource/photo/heart.png" width="30" height="30" alt="">
+				<img id="heart6" src="./resource/photo/heart.png" width="30" height="30" alt="">
+			</li>
+			<li id="start_settings_display">
 				<label>Amount of food: <span id="food_display">50</span></label>
 			</li>
 			<li>

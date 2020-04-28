@@ -6,11 +6,13 @@ $(document).ready(function() {
 //-------------------------------------Start switch page-----------------------
 function exitWelcomePage(content){
     document.getElementById("navbar").style.display = 'block';
+    document.getElementById("hello").style.display = 'block';
     ShowContent(content);
 }
 
 function enterWelcomePage(){
     document.getElementById("navbar").style.display = 'none';
+    document.getElementById("hello").style.display = 'none';
     ShowContent("Welcome");
 }
 
@@ -174,6 +176,7 @@ function login(){
 		window.alert("wrong username or password");
 	}
 	else{
+        document.getElementById('hello_user').innerHTML = "Hello "+JSON.parse(user_input)['firstname'];
         addGameToMenu();
         ShowContent('Setting');
 	}

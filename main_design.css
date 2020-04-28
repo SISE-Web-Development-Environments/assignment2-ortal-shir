@@ -14,9 +14,16 @@ body{
   text-align: center;
 }
 
+#hello{
+  position: absolute;
+  top: 5rem;
+  left: 1rem;
+  text-align: left;
+  font-size: large;
+}
 
 /*------------------------------hide in welcome page----------------------------------- */
-#Registration , #login_form, #About ,#Setting, #Game, #navbar{
+#Registration , #login_form, #About ,#Setting, #Game, #navbar, #hello{
   display: none;
 }
 
@@ -311,7 +318,7 @@ label{
 
   #score_time{
     position: relative;
-    top: 4rem;
+    top: 3rem;
     text-align: left;
     height: 15rem;
   }
@@ -327,4 +334,15 @@ label{
     border-radius: 20px;
     box-shadow:  0 0 15px 1px #0e0156;
   }
-  
+
+  #heart6{
+    display: none;
+  }
+
+  #hearts{
+    display: flex;
+  }
+
+  #start_settings_display{
+    margin-top: 1rem;
+  }
