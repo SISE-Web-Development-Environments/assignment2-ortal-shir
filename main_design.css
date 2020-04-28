@@ -1,89 +1,141 @@
+body{
+  background-image: url("./resource/photo/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
-  *,body,html{
-    margin: 0;
-    padding: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.headers{
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
 }
-/* Style for mune */
-.main{
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background-color: rgb(17, 4, 75);
-    background-color: linear-gradient(#444,rgb(17, 4, 75));
-    border-bottom: 5px solid #252b85;
-    height: 80px;
-    line-height: 80px;
-}
-#main ul{
-    position: relative;
-    display: inline-block;
-    margin: 0;
-    padding: 0 0 0 50px;
-    line-height: 1px;
-    vertical-align: top;
-    list-style-type: none;
-    margin-top: 50px;
-    height: 100px;
-
-}
-ul li{
-  display: inline-block;
-}
-ul li a{
-
-    display: block;
-    padding: 22px 70px 70px 10px;
-    margin: 0;
-    text-decoration: none;
-    text-transform: uppercase;
-    text-decoration: none;
-    height: 70px;
-    color: white;
-    padding: 5px 20px;
-    border: 1px solid white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: large;
-}
-ul li a:hover{
-    background-color:white;
-    color: black;
-}
-/* image up */
-#backImage{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    overflow: auto;
-    width: 100%;
-    height: 200px;
-}
-/* button register and login*/
-.container{
-    text-align: center; 
-    margin-top: 200px;
- 
- }
 
 
-ul {
-  list-style-type: none;
-}
-/* hide*/
-#Registration , #login_form, #About ,#Setting, #Game{
+/*------------------------------hide in welcome page----------------------------------- */
+#Registration , #login_form, #About ,#Setting, #Game, #navbar{
   display: none;
 }
 
-/* Dropdown Button */
+/*-------------------------------Nav bar design------------------------------------------*/
+
+#logo{
+	padding-left: 0.5rem;
+	width: 3.5rem;
+	height: 4rem;
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#navbar{
+  overflow: hidden;
+  position: fixed;
+	width: 100%;
+  margin-top: 0;
+  opacity: 1;
+	box-shadow: 1px 1px 100px #0e0156, -15px -15px 50px #0e0156;
+  z-index: 1;  
+}
+
+#navbar_btns{
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+li{
+	list-style-type: none;
+	font-size: large;
+}
+
+.menu{
+  padding: 0.85rem;
+}
+
+.menu:hover{
+	opacity: 0.7;
+}
+
+.menu_writing:hover{
+	opacity: 0.7;
+}
+
+.navbar_a{
+    font-size: 29.375px;
+    font-family: "Bauhaus 93";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+/*------------------------------------------ welcome page --------------------------------*/
+#welcome_header{
+  margin-top: 4rem !important;
+}
+
+#signup_btn{
+  padding-top: 4rem;
+  padding-right: 2.25rem;
+}
+
+#login_btn{
+  padding-top: 2rem;
+  padding-left: 5.25rem;
+}
+
+#signup_btn, #login_btn{
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+/*-----------------------------------------login-------------------------------------------------*/
+#login_header, #signup_header, #settings_header{
+  position: relative;
+  top: 5rem;  
+}
+
+.text_fill{
+  background: url("./resource/photo/text_area_noyellow.png") no-repeat center;
+  border: 0px;
+  width: 326px;
+  height: 80px;
+  color: #ccc;
+  padding-left: 5rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-radius: 50px;
+}
+
+.text_fill_small{
+  background: url("./resource/photo/small_text_area_noyellow.png") no-repeat center;
+  border: 0px;
+  width: 100px;
+  height: 55px;
+  color: #ccc;
+  padding-left: 3rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-radius: 50px;
+}
+
+.text_area{
+  text-align: center;
+  position: relative;
+  top: 6rem;
+  padding-top: 0.5rem;
+}
+
+/* ---------------------------------------Dropdown Button -----------------------------------*/
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #3350ff;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
+    border-radius: 50px;
   }
   
   /* The container <div> - needed to position the dropdown content */
@@ -117,7 +169,7 @@ ul {
   .dropdown:hover .dropdown-content {display: block;}
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  .dropdown:hover .dropbtn {opacity: 0.7;}
 
   .inputkey{
     padding: 5px;
@@ -173,46 +225,47 @@ ul {
       top:4px;
 }
 
-/* Style for form */
+/*---------------------------------------- Style for sign up form----------------------------- */
+
+.sign_up_text{
+  background: linear-gradient(#050104,#0e0156);
+  opacity: 0.9;
+  border:  0 none;
+  border-radius: 10px;
+  box-shadow:  0 0 15px 1px #0e0156;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: 2rem;
+}
+
 #registration{
-    width: 600px;
-    margin: 50px auto ;
-    text-align: center;
-}
-#registration fieldset{
-    background: linear-gradient(rgb(112, 89, 216),rgb(17, 4, 75));
-    border:  0 none;
-    border-radius: 10px;
-    box-shadow:  0 0 15px 1px rgb(13, 2, 66);
-    padding: 20px 30px;
-    box-sizing: border-box;
-    width: 70%;
-    margin: 0 10%;
+    width: 100%;
+    position: relative;
+    top: 4rem;
+    margin: 0 auto;
 }
 
-#registration input, #registration textarea{
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    width: 80%;
-    box-sizing: border-box;
-    color: #252b85
+#username{
+  padding-top: 0.5rem;
 }
 
-#registration .action-but{
-    width: 150px;
-    font-size: bold;
-    background-color: rgb(17, 4, 75);
-    color: white;
-    border-radius: 1px;
-    cursor: pointer;
-    padding:  10px 5px;
-    margin: 10px 5px;
+.birthday{
+  text-align: left;
+  padding-top: 0.5rem;
+  padding-left: 8rem;
 }
-#registration .action-but:hover, #registration .action-but:focus{
-    box-sizing: 0 0 0 2px white 0 0 0 3px  rgb(17, 4, 75);
+
+#signup_btn_form{
+  padding-top: 0.75rem;
 }
+
+.inline_signup{
+  display: inline-grid;
+}
+
 /*Account Personal Detalils*/
 .fs-title{
     font-size: 30px;
