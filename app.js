@@ -8,6 +8,7 @@ var walls;
 
 //pacman
 var shape = new Object();
+var last_move = "right";
 //object
 var character = new Object();
 var monster = new Array(1);
@@ -432,65 +433,99 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = game_time_from_user - time_elapsed;
+	let cell_width = screen.width*0.02;
+	let cell_height = screen.height*0.03;
+	let radius = 0.4 * cell_width;
+	let offset = 50;
 	for (var i = 0; i < board_height; i++) {
 		for (var j = 0; j < board_width; j++) {
 			var center = new Object();
-			center.y = i * 60 + 30;
-			center.x = j * 60 + 30;
+			//  center.y = i * 20 + 50;
+			//  center.x = j * 25 + 50;
+			center.y = i * 25 + offset;
+			center.x = j * 25 + offset;
+			let center_for_circle_x = center.x + cell_width*0.5;
+			let center_for_circle_y = center.y + cell_height*0.5;
 			if (board[i][j] == 2) { // pacman
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color;
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black";
-				context.fill();
+				let img = new Image();
+				img.src = "resource/photo/pacman_character_"+last_move+".png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height);
+
+				// context.beginPath();
+				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				// context.lineTo(center.x, center.y);
+				// context.fillStyle = pac_color;
+				// context.fill();
+				// context.beginPath();
+				// context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "black";
+				// context.fill();
 			} else if (board[i][j] == 11) { // 5 points food 
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center_for_circle_x, center_for_circle_y, radius, 0, 2 * Math.PI); // circle
 				context.fillStyle = food_color5;
 				context.fill();
 			} else if (board[i][j] == 12) { // 15 points food 
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center_for_circle_x, center_for_circle_y, radius, 0, 2 * Math.PI); // circle
 				context.fillStyle = food_color15;
 				context.fill();
 			} else if (board[i][j] == 13) { // 25 points food 
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center_for_circle_x, center_for_circle_y, radius, 0, 2 * Math.PI); // circle
 				context.fillStyle = food_color25;
 				context.fill();
 			} else if (board[i][j] == 4) { // wall 
-				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = wall_color;
-				context.fill();
+				// context.beginPath();
+				// context.rect(center.x - 50, center.y - 50, cell_width, cell_height);
+				// context.fillStyle = wall_color;
+				// context.fill();
+
+				let img = new Image();
+				img.src = "resource/photo/wall.png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height + 2.5);
+
 			}else if (board[i][j] == 5) { // bonus character
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = character_color;
-				context.fill();
-				context.beginPath();
-			}else if (board[i][j] == 6 || board[i][j] == 7 || board[i][j] == 8 || board[i][j] == 9) { //ghosts
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = ghost_color; 
-				context.fill();
-				context.beginPath();
+
+				let img = new Image();
+				img.src = "resource/photo/cherry.png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height)
+
+				// context.beginPath();
+				// context.arc(center_for_circle_x, center_for_circle_y, radius, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				// context.lineTo(center_for_circle_x, center_for_circle_y);
+				// context.fillStyle = character_color;
+				// context.fill();
+				// context.beginPath();
+			}else if (board[i][j] == 6 || board[i][j] == 7 || board[i][j] == 8 || board[i][j] == 9) { //monster
+				let img = new Image();
+				img.src = "resource/photo/red_monster.png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height);
+
+				// context.beginPath();
+				// context.arc(center.x, center.y, radius, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				// context.lineTo(center.x, center.y);
+				// context.fillStyle = ghost_color; 
+				// context.fill();
+				// context.beginPath();
 			}else if (board[i][j] == 1) { // hourglass
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "red";
-				context.fill();
+				let img = new Image();
+				img.src = "resource/photo/clock.png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height)
+
+				// context.beginPath();
+				// context.arc(center_for_circle_x, center_for_circle_y, radius, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "red";
+				// context.fill();
 			}else if (board[i][j] == 3) { // power
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "green";
-				context.fill();
+				let img = new Image();
+				img.src = "resource/photo/medicine.png";
+				context.drawImage(img, center.x, center.y, cell_width, cell_height - 4.5)
+
+				// context.beginPath();
+				// context.arc(center_for_circle_x, center_for_circle_y, radius, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "green";
+				// context.fill();
 			}
 		}
 	}
@@ -508,21 +543,25 @@ function UpdatePosition() {
 	if (x == 1) { 
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
+			last_move = "left";
 		}
 	}
 	if (x == 2) {
 		if (shape.j  <  board_width-1 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
+			last_move = "right";
 		}
 	}
 	if (x == 3) { 
 		if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
+			last_move = "up";
 		}
 	}
 	if (x == 4) {
 		if (shape.i < board_height-1 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
+			last_move = "down";
 		}
 	}
 	if (board[shape.i][shape.j] == 11) {

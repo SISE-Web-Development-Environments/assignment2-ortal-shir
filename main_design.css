@@ -100,23 +100,26 @@ li{
 }
 
 .text_fill{
-  background: url("./resource/photo/text_area_noyellow.png") no-repeat center;
-  border: 0px;
-  width: 326px;
-  height: 80px;
+  /* background: url("./resource/photo/text_area_noyellow.png") no-repeat center; */
+  border-width: 10px;
+  /* border-color: #253bb6; */
+  border-color: #344ef8;
+  width: 255px;
+  height: 50px;
   color: #ccc;
-  padding-left: 5rem;
+  padding-left: 2rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   border-radius: 50px;
 }
 
 .text_fill_small{
-  background: url("./resource/photo/small_text_area_noyellow.png") no-repeat center;
-  border: 0px;
-  width: 100px;
-  height: 55px;
+  /* background: url("./resource/photo/small_text_area_noyellow.png") no-repeat center; */
+  border-width: 10px;
+  border-color: #344ef8;
+  width: 80px;
+  height: 35px;
   color: #ccc;
-  padding-left: 3rem;
+  padding-left: 1.5rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   border-radius: 50px;
 }
@@ -128,7 +131,16 @@ li{
   padding-top: 0.5rem;
 }
 
-/* ---------------------------------------Dropdown Button -----------------------------------*/
+#username_input{
+  margin-right: 4.25rem;
+}
+
+#password_input{
+  margin-left: 5.25rem;
+}
+
+/*----------------------------------------Settings-----------------------------------------*/
+/* -------------------Dropdown Button -----------------*/
 .dropbtn {
     background-color: #3350ff;
     color: white;
@@ -249,7 +261,7 @@ li{
 }
 
 #username{
-  padding-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .birthday{
@@ -290,5 +302,29 @@ label{
     
   }
 
+  /*--------------------------Game--------------------------*/
+  #Game{
+    text-align: center;
+    position: relative;
+    top: 4rem;
+  }
+
+  #score_time{
+    position: relative;
+    top: 4rem;
+    text-align: left;
+    height: 15rem;
+  }
+
+  #score, #time{
+    position: relative;
+    top: 1rem;
+  }
   
+  #game{
+    margin-left: 6rem;
+    background: #050104;
+    border-radius: 20px;
+    box-shadow:  0 0 15px 1px #0e0156;
+  }
   
