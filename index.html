@@ -15,7 +15,7 @@
 		<script src="./app.js"></script>
 		<script src="./menu.js"></script>
 		<!-- style -->
-		<link rel="stylesheet" href="./main_design.css"></script>
+		<link rel="stylesheet" href="./main_design.css">
 		<title>
 			Pacman Game
 		</title>
@@ -60,7 +60,7 @@
 		<img src="./resource/photo/welcome.png" width="460" height="155" alt="">
 	</div>
 	<div class="headers" id="signup_btn">
-		<img src="./resource/photo/pacman_character.png" width="58" height="65" alt="">
+		<img src="./resource/photo/pacman_character_right.png" width="58" height="65" alt="">
 		<input type="image" src="./resource/photo/signup_btn.png" width="276" height="73" alt="Sign Up" onclick="exitWelcomePage('Registration')">
 	</div>
 
@@ -78,10 +78,12 @@
 		</div>
 		<ul>
 			<li class="text_area">
+				<img src="./resource/photo/blue_monster.png" width="68" height="61" alt="">
 				<input class="text_fill" type="text" id="username_input" placeholder="User Name" />
 			</li>
 			<li class="text_area">
 				<input class="text_fill" type="password" id="password_input" placeholder="Password" />
+				<img src="./resource/photo/red_monster.png" width="68" height="61" alt="">
 			</li>
 			<li class="text_area">
 				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Sign Up" onclick="login()">
@@ -91,21 +93,7 @@
 </div>		
 <!-------------------------------------------------- game ------------------------------------------------------------>
 <div id="Game"> 
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
-		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
-			<canvas id="canvas" height="1000" width="1250"></canvas>
-		</div>
-
-		<!---------- settings display -------->
-	<div id="settings_display">
-		<ul>
+		<ul id="score_time">
 			<li>
 				<label>Amount of food: <span id="food_display">50</span></label>
 			</li>
@@ -114,9 +102,24 @@
 			</li>
 			<li>
 				<label>Amount of monsters:<span id="monster_display">1</span></label>						
-			</li>					
-		</ul>
-	</div>
+			</li>
+		<li>
+		<div id="score">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
+		</div>
+		</li>
+		<li>
+		<div id="time">
+			<label for="lblTime">TIME:</label>
+			<input id="lblTime" type="text" />
+		</div>
+		</li>
+									
+			</ul>
+		<div id="game">
+			<canvas id="canvas" height="500" width="500"></canvas>
+		</div>
 </div>
 
 <!----------------------------------------------- settings ------------------- -------------------------------------------------->
@@ -127,7 +130,7 @@
 	<!----------- settings definition ------------>
 	<div class="main" id="settings">
 
-		<form method="GET" id="registration" action="" >
+		<form method="GET" id="settings_form" action="" >
 			<div class="sign_up_text">
 				<ul class="inline_signup">
 				<li class="inline_signup"> 
@@ -168,12 +171,12 @@
 					</div>
 				</li>
 				<li class="inline_signup">
-				<input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
+				<!-- <input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br> -->
 				<!-- <label for="email">Email</label><br> -->
 				<!-- <i class="fa fa-envelope icon"></i> -->
 				</li>
 				<li class="inline_signup">
-				<input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br>
+				<!-- <input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br> -->
 				<!-- <label for="Date">DateOfBirth</label><br> -->
 				</li>
 				</ul>
@@ -252,7 +255,6 @@
 
 			</div>
 		</div>
-		</form>
 	</div>
 </div>
 <!--------------------------------------------------Registration ------------------------------------>
