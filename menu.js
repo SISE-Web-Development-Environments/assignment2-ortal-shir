@@ -21,10 +21,12 @@ function ShowContent(content) {
     //document.getElementById("About").style.display = 'none';
     document.getElementById("Setting").style.display = 'none';
     document.getElementById("Game").style.display = 'none';
-    document.getElementById(content).style.display = 'contents';
+    
     if(content == 'Game'){
+        document.getElementById(content).style.display = 'flex';
         Start();
     }else{
+        document.getElementById(content).style.display = 'contents';
         window.clearInterval(interval);	
         audio.pause();	
     }
@@ -179,8 +181,6 @@ function login(){
 
 function addGameToMenu() {
     $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
-    //TODO <li class="menu"> <input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')"> </li>
-    // <li class="menu"> <a class="navbar_a" href="#Setting" onclick="ShowContent('Setting')">Settings</a></li>
 }
 
 

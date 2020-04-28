@@ -138,7 +138,9 @@ li{
 #password_input{
   margin-left: 5.25rem;
 }
-/* ---------------------------------------Dropdown Button -----------------------------------*/
+
+/*----------------------------------------Settings-----------------------------------------*/
+/* -------------------Dropdown Button -----------------*/
 .dropbtn {
     background-color: #3350ff;
     color: white;
@@ -300,5 +302,29 @@ label{
     
   }
 
+  /*--------------------------Game--------------------------*/
+  #Game{
+    text-align: center;
+    position: relative;
+    top: 4rem;
+  }
+
+  #score_time{
+    position: relative;
+    top: 4rem;
+    text-align: left;
+    height: 15rem;
+  }
+
+  #score, #time{
+    position: relative;
+    top: 1rem;
+  }
   
+  #game{
+    margin-left: 6rem;
+    background: #050104;
+    border-radius: 20px;
+    box-shadow:  0 0 15px 1px #0e0156;
+  }
   
