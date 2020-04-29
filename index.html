@@ -16,6 +16,12 @@
 		<script src="./menu.js"></script>
 		<!-- style -->
 		<link rel="stylesheet" href="./main_design.css">
+
+		<!-- jQuery and stylesheet for modal -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 		<title>
 			Pacman Game
 		</title>
@@ -47,8 +53,8 @@
 			<li class="menu"> <a class="navbar_a" href="#Welcome" onclick="enterWelcomePage();" >Home</a></li>
 			<li class="menu"> <a class="navbar_a" href="#Registration" onclick="ShowContent('Registration')" >Registration</a></li>
 			<li class="menu"> <a class="navbar_a" href="#login_form" onclick="ShowContent('login_form')" >Login</a></li>
-			<li class="menu"> <a class="navbar_a" href="#" onclick="ShowContent('About')" >About</a></li>
 			<li class="menu"> <a class="navbar_a" href="#Setting" onclick="ShowContent('Setting')">Settings</a></li>
+			<li class="menu"> <a class="navbar_a" href="#About" rel="modal:open" >About</a></li>
 		</ul>
 	</nav>
 	</div>
@@ -139,116 +145,68 @@
 		<img src="./resource/photo/settings_header.png" width="605" height="97" alt="">
 	</div>
 	<!----------- settings definition ------------>
-	<div class="main" id="settings">
+	<div class="sign_up_text" id="settings_text_div">
 
-		<form method="GET" id="settings_form" action="" >
-			<div class="sign_up_text">
+		<input type="image" src="./resource/photo/random_btn.png" width="250" height="35" alt="Random Settings" onclick="randomSettings()">
+		<!-- <form method="GET" id="settings_form" action="" > -->
+			<div>
 				<ul class="inline_signup">
-				<li class="inline_signup"> 
-					<!-- TODO button -->
-					<input type="button" id="random_settings" value="Set Random Settings" onclick="randomSettings()"/>
-				</li>
-				<li class="birthday, inline_signup">
-				<label>Number of food balls:</label>
-				</li>
+				<label class="settings_writing">Number of food balls:</label>
 				<li class="inline_signup">
 				<input class="text_fill_small" type="text" id="food_balls_number" placeholder="50 to 90" />
 				</li>
-				<li class="birthday, inline_signup">
-				<label>Game time in seconds:</label>
-				</li>
+				<label class="settings_writing">Game time in seconds:</label>
 				<li class="inline_signup">
 				<input class="text_fill_small" type="text" id="game_time" placeholder="60 or more"/>
 				</li>		
-				<li class="inline_signup">
+				<li class="inline_signup mosterts_number_li">
 					<div class="dropdown">
-						<input type="button" id="mosterts_number" class="dropbtn" value="Amount of Monsters: 1"/>
+						<input id="mosterts_number" type="button" class="dropbtn" value="Amount of Monsters: 1"/>
 						<div class="dropdown-content">
 						<ul class="inline_signup">
-						<li>
-							<input id="one" type="button" value="1" onclick="setMostersBtn()">				  
+						<li class="mosterts_number_li">
+							<input id="one" type="button" value="1" onclick="setMostersBtn(1)">				  
 						</li>
-						<li>
-							<input id="two" type="button" value="2" onclick="setMostersBtn()">
+						<li class="mosterts_number_li">
+							<input id="two" type="button" value="2" onclick="setMostersBtn(2)">
 						</li>
-						<li>
-							<input id="three" type="button" value="3" onclick="setMostersBtn()">
+						<li class="mosterts_number_li">
+							<input id="three" type="button" value="3" onclick="setMostersBtn(3)">
 						</li>
-						<li>
-							<input id="four" type="button" value="4" onclick="setMostersBtn()">
+						<li class="mosterts_number_li">
+							<input id="four" type="button" value="4" onclick="setMostersBtn(4)">
 						</li>
 						</ul>
 						</div>
 					</div>
 				</li>
-				<li class="inline_signup">
-				<!-- <input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br> -->
-				<!-- <label for="email">Email</label><br> -->
-				<!-- <i class="fa fa-envelope icon"></i> -->
-				</li>
-				<li class="inline_signup">
-				<!-- <input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br> -->
-				<!-- <label for="Date">DateOfBirth</label><br> -->
-				</li>
 				</ul>
 			</div>
-		</form>
-
-
-		
 		
 
-		<!-- <form class="form_class" > -->
-		<!-- <label>Number of food balls :</label> -->
-		<!-- <input type="text" id="food_balls_number" placeholder="50 to 90" /> -->
-		<!-- <label>Game time in seconds :</label> -->
-		<!-- <input type="text" id="game_time" placeholder="60 or more" /> -->
-
-		<!-- <div class="dropdown">
-			<input type="button" id="mosterts_number" class="dropbtn" value="Amount of Monsters: 1"/>
-			<div class="dropdown-content">
-			<ul>
-			<li>
-				<input id="one" type="button" value="1" onclick="setMostersBtn()">				  
-			</li>
-			<li>
-				<input id="two" type="button" value="2" onclick="setMostersBtn()">
-			</li>
-			<li>
-				<input id="three" type="button" value="3" onclick="setMostersBtn()">
-			</li>
-			<li>
-				<input id="four" type="button" value="4" onclick="setMostersBtn()">
-			</li>
-			</ul>
-			</div>
-		</div> -->
-
-		<p>Choose your food balls colors:</p>
+		<label class="settings_writing">Choose your food balls colors:</label>
 
 		<div>
-			<input type="color" id="five_points" name="head"
+			<input class="color" type="color" id="five_points" name="head"
 					value="#e66465">
-			<label for="head">5 points balls</label>
+			<label for="head">  5 points balls</label>
 		</div>
 		
 		<div>
-			<input type="color" id="fifteen_points" name="body"
+			<input class="color" type="color" id="fifteen_points" name="body"
 					value="#f6b73c">
 			<label for="body">15 points balls</label>
 		</div>
 
 		<div>
-			<input type="color" id="twentyfive_points" name="body"
+			<input class="color" type="color" id="twentyfive_points" name="body"
 					value="#f6b73c">
 			<label for="body">25 points balls</label>
 		</div>	
 		<div id="Presskey" class="Presskey">
-			<div id="container">
-			<h4>
-				<p> If you want to change the game buttons:
-				 Insert the appropriate cell with the button with which you want to execute the movement </p>
-			 </h4> 
+			<div id="key_change_writing">
+				<label class="settings_writing"> If you want to change the game buttons:<br></label>
+				<label class="settings_writing"> Type in the appropriate cell with the button  <br> with which you want to execute the movement </label>
 			<ul>
 			<li class="keyPress">                    
 					<i class="fa fa-arrow-circle-up"></i>
@@ -263,11 +221,19 @@
 				<i class="fa fa-arrow-circle-up"></i>
 				<input id = "keyDownCode" placeholder = "press key down" class="inputkey" type="text" size="50" onkeydown="keyCodeDown(event)" >  </li>
 			</ul>
-
 			</div>
 		</div>
+		<input id="settings_btn_form" type="image" src="./resource/photo/set_btn.png" width="150" height="40" alt="Set" onclick="submitSettings()">
+	<!-- </form> -->
 	</div>
 </div>
+<!---------------------------------------------- About ---------------------------------------------->
+<div id="About" class="modal">
+	<label>
+		about
+	</label>
+</div>
+
 <!--------------------------------------------------Registration ------------------------------------>
 <div id ="Registration" class="Registration">
 	<div class="headers" id="signup_header" margin="auto">

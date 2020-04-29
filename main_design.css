@@ -15,7 +15,7 @@ body{
 }
 
 #hello{
-  position: absolute;
+  position: fixed;
   top: 5rem;
   left: 1rem;
   text-align: left;
@@ -147,6 +147,7 @@ li{
 }
 
 /*----------------------------------------Settings-----------------------------------------*/
+
 /* -------------------Dropdown Button -----------------*/
 .dropbtn {
     background-color: #3350ff;
@@ -155,6 +156,7 @@ li{
     font-size: 16px;
     border: none;
     border-radius: 50px;
+    margin-top: 1rem;
   }
   
   /* The container <div> - needed to position the dropdown content */
@@ -171,24 +173,46 @@ li{
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    border-radius: 10px;
   }
   
   /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
+  .dropdown-content ul{
     text-decoration: none;
     display: block;
+    padding: 0px;
   }
-  
+   
   /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown-content {background-color: #ddd;}
   
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {opacity: 0.7;}
+
+  .mosterts_number_li{
+    padding-left: 0px !important;
+  }
+
+  .color{
+    margin-top: 0.5rem;
+  }
+
+  .settings_writing{
+    text-align: left;
+    font-size: large;
+  }
+
+  .sign_up_text li{
+    padding-left: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  #key_change_writing{
+    margin-top: 1rem;
+  }
 
   .inputkey{
     padding: 5px;
@@ -197,8 +221,20 @@ li{
     text-align: center;
   }
 
+  .fa{
+    color: #ddd;
+  }
+
+  
+  .keyPress{
+    display: block;
+    padding-left: 0px !important;
+  }
+
   #keyUpCode , #keyDownCode {
-    margin:10px 60px;
+    margin:10px;
+    margin-right:  60px;
+    margin-right: 50px;
   }
 
   #keyRightCode{
@@ -260,6 +296,11 @@ li{
   top: 2rem;
 }
 
+#settings_text_div{
+  top: 6rem;
+  padding-top: 1rem;
+}
+
 #registration{
     width: 100%;
     position: relative;
@@ -302,11 +343,6 @@ label{
     background:rgb(17, 4, 75);
     color: white;
     min-width: 20px;
-  }
-
-  .keyPress{
-    display: block;
-    
   }
 
   /*--------------------------Game--------------------------*/
