@@ -563,10 +563,10 @@ function UpdatePosition() {
 	returnFoodWas();
 	//slow down the characters, they will not move in every interval:
 	let move_characters = Math.random();
-	if (move_characters >= 0.6){
+	// (move_characters >= 0.6){
 		mainChangPositionMonster();
 		changPositionCharacter();
-	}
+	//}
 	board[shape.i][shape.j] = 0;
 	//i -x
 	//j - y
