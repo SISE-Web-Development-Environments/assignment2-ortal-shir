@@ -154,9 +154,7 @@ function Submit(){
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             email: document.getElementById("email").value,
-            day:  document.getElementById("day").value,
-            month:  document.getElementById("month").value,
-            Year:  document.getElementById("month").value
+            date:  document.getElementById("birthday").value,
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
     }

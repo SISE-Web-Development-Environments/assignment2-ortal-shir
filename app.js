@@ -312,11 +312,11 @@ function checkMoveUp(object){
 //A function that returns the drawing of the food if it was present
 function returnFoodWas(){
 	board[character.i][character.j] = 0;
-	for(let j=0; j< monster.length; j++){
-		board[monster[j].i][monster[j].j] = 0;
+	for(let k=0; k < monster.length; k++){
+		board[monster[k].i][monster[k].j] = 0;
 	}
-	for(let i=0 ; i < food_was.length ; i++){
-		obj = food_was[i];
+	for(let w=0 ; w < food_was.length ; w++){
+		obj = food_was[w];
 		board[obj[0]][obj[1]] = obj[2];
 	}
 	index_food_was = 0;
@@ -361,18 +361,21 @@ function changPositionMonster(index, number_monster){
 	}
 	let min = Math.min(up, down, right, left);
 	if(min != Number.MAX_VALUE){
-		if(min == up ){
-			checkMoveUp(monster[index]);
-			monster[index].i++;
-		}else if(min == down){
-			checkMoveDown(monster[index])
-			monster[index].i--;
-		}else if(min == left){
-			checkMoveLeft(monster[index]);
-			monster[index].j--;
-		}else if(min == right){
-			checkMoveRight(monster[index]);
-			monster[index].j++;
+		var randomNum = Math.random();
+		if(randomNum > 0.2){
+			if(min == up ){
+				checkMoveUp(monster[index]);
+				monster[index].i++;
+			}else if(min == down){
+				checkMoveDown(monster[index])
+				monster[index].i--;
+			}else if(min == left){
+				checkMoveLeft(monster[index]);
+				monster[index].j--;
+			}else if(min == right){
+				checkMoveRight(monster[index]);
+				monster[index].j++;
+			}
 		}
 	}
 	
