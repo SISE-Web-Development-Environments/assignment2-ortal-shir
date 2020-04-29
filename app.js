@@ -615,7 +615,7 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score >= 100 ) {
+	if (score >= 500 ) {
 //		Draw();
 		endGame("Winner!!!");
 	}

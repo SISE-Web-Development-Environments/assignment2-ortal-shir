@@ -22,6 +22,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+		<!-- website icon -->
+		<link rel="shortcut icon" type="image/png" href="./resource/photo/pacman_character_right.png"/>
 		<title>
 			Pacman Game
 		</title>
@@ -30,6 +32,13 @@
 	<body>
 	<container>
 	<div id="navbar"> 
+		<div id="header">
+			<img src="./resource/photo/pacman_character_right.png" width="18" height="20" alt="">
+			<label>
+				<span id="header_pacman">Pacman </span>
+				Ortal Parpara 311127005 Shir Cohen 315805168 
+			</label>
+		  </div>
 	<nav>
 		<!-- <ul id="navbar_btns">
 			<li class="menu"> 
@@ -229,8 +238,18 @@
 </div>
 <!---------------------------------------------- About ---------------------------------------------->
 <div id="About" class="modal">
-	<label>
-		about
+	<label class="about_writing">
+		<span class="header_about">About</span> <br>
+		Pacman game project for web development course in Ben Gurion University.<br>
+		Created by Ortal Parpara and Shir Cohen. <br>
+		<span class="header_about">Use of jQuery plugins</span> <br> 
+		1. validate <br>
+		2. jQuery Modal <br>
+		<span class="header_about">Struggles in the project</span> <br>
+		Surprisingly, the main struggle for us was the design. Having the game to match the screen<br>
+		in the correct resolution and arranging the buttons properly in the menus.<br>
+		Another challenge for us was deciding on the correct algorithm to move the bonus character <br>
+		and the monsters on the board.
 	</label>
 </div>
 

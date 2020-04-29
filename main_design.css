@@ -16,7 +16,7 @@ body{
 
 #hello{
   position: fixed;
-  top: 5rem;
+  top: 7rem;
   left: 1rem;
   text-align: left;
   font-size: large;
@@ -103,7 +103,7 @@ li{
 /*-----------------------------------------login-------------------------------------------------*/
 #login_header, #signup_header, #settings_header{
   position: relative;
-  top: 5rem;  
+  top: 7rem;  
 }
 
 .text_fill{
@@ -293,11 +293,11 @@ li{
   margin: 0 auto;
   text-align: center;
   position: relative;
-  top: 2rem;
+  top: 3rem;
 }
 
 #settings_text_div{
-  top: 6rem;
+  top: 8rem;
   padding-top: 1rem;
 }
 
@@ -349,7 +349,7 @@ label{
   #Game{
     text-align: center;
     position: relative;
-    top: 4rem;
+    top: 7rem;
   }
 
   #score_time{
@@ -381,4 +381,19 @@ label{
 
   #start_settings_display{
     margin-top: 1rem;
+  }
+
+  /*-------------------------------------About and header--------------------------*/
+
+  .about_writing{
+    color: #181c5c;
+  }
+
+  .header_about{
+    font-size: large;
+    font-weight: bold;
+  }
+
+  #header_pacman{
+    font-weight: bold;
   }
