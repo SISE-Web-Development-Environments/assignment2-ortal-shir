@@ -40,24 +40,6 @@
 			</label>
 		  </div>
 	<nav>
-		<!-- <ul id="navbar_btns">
-			<li class="menu"> 
-				<input type="image" src="./resource/photo/welcome_navbar.png" alt="Welcome" onclick="enterWelcomePage()">
-			</li>
-			<li class="menu"> 
-				<input type="image" src="./resource/photo/signup_navbar.png" alt="Sign Up" onclick="ShowContent('Registration')">
-			</li>
-			<li class="menu"> 
-				<input type="image" src="./resource/photo/login_navbar.png" alt="Login" onclick="ShowContent('login_form')">
-			</li>
-			<li class="menu"> 
-				<input type="image" src="./resource/photo/settings_navbar.png" alt="Settings" onclick="ShowContent('Setting')">
-			</li>
-			<li class="menu"> 
-				<input type="image" src="./resource/photo/about_navbar.png" alt="About" onclick="ShowContent('About')">
-			</li>
-		</ul> -->
-
 		<ul id="navbar_btns">
 			<li class="menu"> <a class="navbar_a" href="#Welcome" onclick="enterWelcomePage();" >Home</a></li>
 			<li class="menu"> <a class="navbar_a" href="#Registration" onclick="ShowContent('Registration')" >Registration</a></li>
@@ -73,7 +55,7 @@
 		<label id="hello_user">Hello Guest</label>
 	</div>
 <!------------------------------Welcome ------------------------------------>
-<container>
+<main role="main">
 <div id="Welcome">
 	<div class="headers" id="welcome_header" margin="auto">
 		<img src="./resource/photo/welcome.png" width="460" height="155" alt="">
@@ -108,9 +90,19 @@
 				<input type="image" src="./resource/photo/login_btn.png" width="150" height="40" alt="Login" onclick="login()">
 			</li>
 		</ul>		
+
+		<div class="footer" id="footer_login">
+			<hr>
+		<label>
+			The website is written with HTML5, CSS, javascript and jQuery. Contact us via: ortalpa@post.bgu.ac.il , shir0.post.bgu.ac.il
+		</label>
+		</div>
 </div>		
 <!-------------------------------------------------- game ------------------------------------------------------------>
 <div id="Game"> 
+	<ul>
+
+	<li id="game_container_including_footer">
 		<ul id="score_time">
 			<li id="hearts">
 				<img id="heart1" src="./resource/photo/heart.png" width="30" height="30" alt="">
@@ -142,10 +134,22 @@
 		</div>
 		</li>
 									
-			</ul>
+		</ul>
 		<div id="game">
 			<canvas id="canvas" height="500" width="500"></canvas>
 		</div>
+		</li>
+		<li>
+		<div class="footer" id="footer_game">
+			<hr>
+		<label>
+			The website is written with HTML5, CSS, javascript and jQuery. Contact us via: ortalpa@post.bgu.ac.il , shir0.post.bgu.ac.il
+		</label>
+		</div>
+		</li>
+		</ul>
+	</div>
+
 </div>
 
 <!----------------------------------------------- settings ------------------- -------------------------------------------------->
@@ -235,6 +239,14 @@
 		<input id="settings_btn_form" type="image" src="./resource/photo/set_btn.png" width="150" height="40" alt="Set" onclick="submitSettings()">
 	<!-- </form> -->
 	</div>
+
+	<div class="footer" id="footer_settings">
+		<hr>
+		<label>
+			The website is written with HTML5, CSS, javascript and jQuery. Contact us via: ortalpa@post.bgu.ac.il , shir0.post.bgu.ac.il
+		</label>
+	</div>
+
 </div>
 <!---------------------------------------------- About ---------------------------------------------->
 <div id="About" class="modal">
@@ -260,46 +272,30 @@
 	</div>
 	<form method="GET" id="registration" action="" >
 		<div class="sign_up_text">
-			<!--Account-->
-			<!-- <h1 class="fs-title" >Account</h1><br> -->
-			<!-- <label for="username">User Name</label><br> -->
-			<!-- <i class="fa fa-user icon"></i> -->
 			<ul>
 			<li class="birthday">
 			<label>Account Details</label>
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "username" type="text" name="username" placeholder="User Name"><br>
-			<!-- <label for="password">Password</label><br> -->
-			<!-- <i class="fa fa-key icon"></i> -->
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "password" type="password" name="password" placeholder="Password"><br>
-			<!-- <label  for="cpassword">Confirm Password</label><br> -->
-			<!-- <i class="fa fa-key icon"></i> -->
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "cpassword" type="password" name="cpassword" placeholder="Confirm Password"><br>
-			<!-- <h1 class="fs-title" >Personal Detalils</h1> -->
-			<!-- <label for="firstname">First Name</label><br> -->
-			<!-- <i class="fa fa-user icon" ></i> -->
 			</li>
 			<li class="birthday">
 			<label>Personal Details</label>
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "firstname" type="text" name="firstname" placeholder="First Name"><br>
-			<!-- <label for="lastname">Last Name</label><br> -->
-			<!-- <i class="fa fa-user icon" ></i> -->
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "lastname" type="text" name="lastname" placeholder="Last Name"> <br>
-			<!-- <label for="email">Email</label><br> -->
-			<!-- <i class="fa fa-envelope icon"></i> -->
 			</li>
 			<li class="inline_signup">
 			<input class="text_fill" id= "email" type="email" name="email" placeholder="Email"><br>
-			<!-- <label for="Date">DateOfBirth</label><br> -->
 			</li>
 			</ul>
 			<ul>
@@ -439,8 +435,22 @@
 		</li>
 		</ul>
 			</div>
-	</form>
-</div>        
-</container>
+	
+
+	<div class="footer" id="footer_registration">
+		<hr>
+		<label>
+			The website is written with HTML5, CSS, javascript and jQuery. Contact us via: ortalpa@post.bgu.ac.il , shir0.post.bgu.ac.il
+		</label>
+	</div>
+
+</form>
+
+</div>
+</main>
+
+
+
+
 </body>
 </html>

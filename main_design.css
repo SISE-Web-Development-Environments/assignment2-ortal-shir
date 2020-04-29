@@ -23,7 +23,7 @@ body{
 }
 
 /*------------------------------hide in welcome page----------------------------------- */
-#Registration , #login_form, #About ,#Setting, #Game, #navbar, #hello{
+#Registration , #login_form, #About ,#Setting, #Game, #navbar, #hello, #footer{
   display: none;
 }
 
@@ -46,6 +46,7 @@ body{
   opacity: 1;
 	box-shadow: 1px 1px 100px #0e0156, -15px -15px 50px #0e0156;
   z-index: 1;  
+  background-color: #050025;
 }
 
 #navbar_btns{
@@ -383,6 +384,10 @@ label{
     margin-top: 1rem;
   }
 
+  #game_container_including_footer{
+    display: flex;
+  }
+
   /*-------------------------------------About and header--------------------------*/
 
   .about_writing{
@@ -396,4 +401,33 @@ label{
 
   #header_pacman{
     font-weight: bold;
+  }
+
+  /*------------------------------footer------------------------------------*/
+  .footer{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    opacity: 0.5;
+    text-align: left;
+  }
+
+  .footer label{
+    padding-left: 2rem;
+  }
+
+  #footer_game{
+    position: relative;
+    top: 3rem;
+  }
+
+  #footer_settings{
+    position: relative;
+    top: 10rem;
+  }
+
+  #footer_registration{
+    position: relative;
+    top: 5rem;
+
   }

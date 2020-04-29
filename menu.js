@@ -7,12 +7,14 @@ $(document).ready(function() {
 function exitWelcomePage(content){
     document.getElementById("navbar").style.display = 'block';
     document.getElementById("hello").style.display = 'block';
+  //  document.getElementById("footer").style.display = 'block';
     ShowContent(content);
 }
 
 function enterWelcomePage(){
     document.getElementById("navbar").style.display = 'none';
     document.getElementById("hello").style.display = 'none';
+//document.getElementById("footer").style.display = 'none';
     ShowContent("Welcome");
 }
 
