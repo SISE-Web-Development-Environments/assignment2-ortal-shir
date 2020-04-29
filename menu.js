@@ -22,7 +22,6 @@ function ShowContent(content) {
     document.getElementById("Welcome").style.display = 'none'
     document.getElementById("Registration").style.display = 'none';
     document.getElementById("login_form").style.display = 'none';
-    //document.getElementById("About").style.display = 'none';
     document.getElementById("Setting").style.display = 'none';
     document.getElementById("Game").style.display = 'none';
     
@@ -40,7 +39,10 @@ function ShowContent(content) {
 
 
 //-------------------------------------Start registering-----------------------------------
-$.validator.addMethod('checkpassword', function (inputtxt) {
+
+var $j = jQuery.noConflict();
+
+$j.validator.addMethod('checkpassword', function (inputtxt) {
     var passw=  /^[0-9a-zA-Z]+$/;
     //(?=.*[0-9])(?=.*[a-zA-Z])
     if(inputtxt.match(passw)) 
@@ -50,7 +52,7 @@ $.validator.addMethod('checkpassword', function (inputtxt) {
     return false;
 }, 'The password must contain only letters and numbers');
 
-$.validator.addMethod('checkUserName', function (inputtxt) {
+$j.validator.addMethod('checkUserName', function (inputtxt) {
     for(let i=0 ; i< localStorage.length; i++){
         if(localStorage.key(i) == inputtxt){
             return false;
@@ -59,7 +61,7 @@ $.validator.addMethod('checkUserName', function (inputtxt) {
     return true;
 }, 'Username already exists. Please select another username');
 
-$.validator.addMethod('checkname', function (inputtxt) {
+$j.validator.addMethod('checkname', function (inputtxt) {
     var name=  /^[a-zA-Z]+$/;
     if(inputtxt.match(name)) 
     { 
@@ -68,10 +70,10 @@ $.validator.addMethod('checkname', function (inputtxt) {
      return false; 
 }, 'The name must contain only letters');
 
-$(function() {
+$j(function() {
     // Wait for the DOM to be ready
-    $().ready(function() {
-        $("form[id='registration']").validate({
+    $j().ready(function() {
+        $j("form[id='registration']").validate({
             rules: {
                 username: {
                     required: true,
@@ -151,16 +153,19 @@ $(function() {
 
 
 function Submit(){
-    if( $('#registration').valid()){
+    if( $j('#registration').valid()){
         window.alert("Your registration has been successful");
         let userData = {
             password:  document.getElementById("password").value,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             email: document.getElementById("email").value,
-            date:  document.getElementById("birthday").value,
+            day:  document.getElementById("day").value,
+            month:  document.getElementById("month").value,
+            Year:  document.getElementById("Year").value
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
+        ShowContent('login_form');
     }
 
 }
@@ -195,7 +200,9 @@ function registerP(){
         firstname: "p",
         lastname: "p",
         email: "p@gmail.com",
-        date:  ""
+        day: "",
+        month: "",
+        Year:  ""
     };
     localStorage.setItem("p",JSON.stringify(pData));
 }

@@ -4,6 +4,7 @@ Pacman Online game.
 The game is realized by:
 1. html 5
 2. jQuery 
+3. css
 
 
 ortal parpara  311127005
