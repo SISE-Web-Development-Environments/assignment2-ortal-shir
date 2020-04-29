@@ -99,7 +99,8 @@ $(function() {
                 lastname: {
                     checkname: true,
                     required: true
-                }
+                },
+                birthday: "required"
                
             },
             // Specify validation error messages
@@ -130,7 +131,8 @@ $(function() {
                 email: {
                     required: "Please enter email address",
                     email: "Please enter a valid email address"
-                }
+                },
+                birthday : "Please provide a birthday"
               
             },
             highlight: function(element) {
@@ -156,9 +158,7 @@ function Submit(){
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             email: document.getElementById("email").value,
-            day:  document.getElementById("day").value,
-            month:  document.getElementById("month").value,
-            Year:  document.getElementById("month").value
+            date:  document.getElementById("birthday").value,
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
     }
