@@ -104,7 +104,7 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		hourglass--;
 	}
-	 if(power > 0){
+	if(power > 0){
 		let emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 3;
 		power--;
@@ -268,6 +268,7 @@ function GetKeyPressed() {
 
 function mainSavefood(i, j){
 	saveFood(i, j,1);
+	saveFood(i, j,3);
 	saveFood(i, j,11);
 	saveFood(i, j,12);
 	saveFood(i, j,13);
@@ -275,7 +276,6 @@ function mainSavefood(i, j){
 	saveFood(i, j,7);
 	saveFood(i, j,8);
 	saveFood(i, j,9);
-
 }
 
 function saveFood( i, j,number){
@@ -284,7 +284,6 @@ function saveFood( i, j,number){
 		index_food_was++;
 	}
 }
-
 
 //Function that checks whether the figure can be moved to the Left
 function checkMoveLeft(object){
@@ -613,7 +612,6 @@ function UpdatePosition() {
 		}else{
 			game_over--;
 			score -= 10;
-			window.clearInterval(interval);		
 			window.alert("We believe in you! Keep playing");
 			interval = setInterval(UpdatePosition, 100);
 			initiateKeyListener();
