@@ -736,46 +736,64 @@ function updateTwentyFivePointsColor (event){
 //set the settings
 
 function submitSettings(){
-	let submitOK = true;
+	//first, check the user is logged in
+	if(loggedin()){
 
-	//amount of food
-	let food_balls_number = document.getElementById("food_balls_number").value;
-	if (food_balls_number != "" && (food_balls_number < 50 || food_balls_number > 90)) {
-		window.alert("The amount of food balls must be between 50 and 90");
-		submitOK = false;
+
+		let submitOK = true;
+
+		//amount of food
+		let food_balls_number = document.getElementById("food_balls_number").value;
+		if (food_balls_number != "" && (food_balls_number < 50 || food_balls_number > 90)) {
+			window.alert("The amount of food balls must be between 50 and 90");
+			submitOK = false;
+		}
+
+		//game time
+		let game_time = document.getElementById("game_time").value;
+		if (game_time != "" && game_time < 60) {
+			window.alert("Game time must be at least 60 seconds");
+			submitOK = false;
+		}
+
+		if(submitOK){
+			// update global parameters
+			if(food_balls_number == ""){
+				food_from_user = 50; //default
+			}
+			else{
+				food_from_user = Math.floor(food_balls_number); //in case user input is not an int
+			}
+			if(game_time == ""){
+				game_time_from_user = 200; // default
+			}
+			else{
+				game_time_from_user = Math.floor(game_time); //in case user input is not an int
+			}
+			
+			//taking amount of monsterts from user
+			let num = document.getElementById("mosterts_number").value.substring(document.getElementById("mosterts_number").value.length-1);
+			monster = new Array(parseInt(num));
+
+			//set settings display
+
+			setSettingsDisplayForUser()
+			ShowContent("Game");
+
+		}
 	}
-
-	//game time
-	let game_time = document.getElementById("game_time").value;
-	if (game_time != "" && game_time < 60) {
-		window.alert("Game time must be at least 60 seconds");
-		submitOK = false;
+	//the user is not logged in and cannot start the game
+	else{
+		alert("You are not logged in");
 	}
+}
 
-	if(submitOK){
-		// update global parameters
-		if(food_balls_number == ""){
-			food_from_user = 50; //default
-		}
-		else{
-			food_from_user = Math.floor(food_balls_number); //in case user input is not an int
-		}
-		if(game_time == ""){
-			game_time_from_user = 200; // default
-		}
-		else{
-			game_time_from_user = Math.floor(game_time); //in case user input is not an int
-		}
-		
-		//taking amount of monsterts from user
-		let num = document.getElementById("mosterts_number").value.substring(document.getElementById("mosterts_number").value.length-1);
-		monster = new Array(parseInt(num));
-
-		//set settings display
-
-		setSettingsDisplayForUser()
-		ShowContent("Game");
-
+function loggedin(){
+	if(document.getElementById('hello_user').innerHTML.includes("Guest")){
+		return false;
+	}
+	else{
+		return true;
 	}
 }
 
