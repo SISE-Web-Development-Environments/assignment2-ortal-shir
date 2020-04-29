@@ -518,7 +518,7 @@ function Draw() {
 
 			}else if (board[i][j] == 5) { // bonus character
 
-				context.drawImage(bonus_img, center.x, center.y, cell_width, cell_height);
+				context.drawImage(bonus_img, center.x, center.y, cell_width, cell_height - 6.5);
 
 				// context.beginPath();
 				// context.arc(center_for_circle_x, center_for_circle_y, radius, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
