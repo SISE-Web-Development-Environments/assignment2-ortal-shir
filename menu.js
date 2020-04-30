@@ -45,14 +45,23 @@ function ShowContent(content) {
 var $j = jQuery.noConflict();
 
 $j.validator.addMethod('checkpassword', function (inputtxt) {
-    var passw=  /^(?=.*[0-9])(?=.*[a-zA-Z])+$/;
-    // /^[0-9a-zA-Z]+$/;
+    var passw=  /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
     if(inputtxt.match(passw)) 
     { 
         return true;
     }
     return false;
 }, 'The password must contain only letters and numbers');
+
+
+$j.validator.addMethod('onlyletteranddigit', function (inputtxt) {
+    var passw=  /^[a-z0-9]+$/i;
+    if(inputtxt.match(passw)) 
+    { 
+        return true;
+    }
+    return false;
+}, 'The password must contain only letter and digit');
 
 $j.validator.addMethod('checkUserName', function (inputtxt) {
     for(let i=0 ; i< localStorage.length; i++){
@@ -87,12 +96,14 @@ $j(function() {
                 password: {
                     required: true,
                     minlength: 6,
+                    onlyletteranddigit: true,
                     checkpassword: true
                 },
                 cpassword: {
                     required: true,
                     equalTo: "#password",
                     minlength: 6,
+                    onlyletteranddigit: true,
                     checkpassword: true
                 },
                 firstname: {
@@ -115,12 +126,14 @@ $j(function() {
                 password: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 6 characters long",
+                    onlyletteranddigit: "The password must contain only letter and digit",
                     checkpassword: "The password must contain at least one letter and one digit"
                 },
                 cpassword: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 6 characters long",
                     equalTo: "   The passwords do not match",
+                    onlyletteranddigit: "The password must contain only letter and digit",
                     checkpassword: "The password must contain at least one letter and one digit"
                 },
                 firstname: {

@@ -293,13 +293,6 @@ function GetKeyPressed() {
 function mainSavefood(i, j){
 	saveFood(i, j,1);
 	saveFood(i, j,3);
-	/*
-	saveFood(i, j,5);
-	saveFood(i, j,6);
-	saveFood(i, j,7);
-	saveFood(i, j,8);
-	saveFood(i, j,9);
-	*/
 	saveFood(i, j,11);
 	saveFood(i, j,12);
 	saveFood(i, j,13);
@@ -352,22 +345,7 @@ function checkMoveStay(i, j, index){
 	}else if(j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==13){
 		food_was[index_food_was] =[i,j,13];
 		index_food_was++;
-	}/*else if(index!= 6 & j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==6){
-		food_was[index_food_was] =[i,j,6];
-		index_food_was++;
-	}else if(index!= 7 && j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==7){
-		food_was[index_food_was] =[i,j,7];
-		index_food_was++;
-	}else if(index!= 8 &&j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==8){
-		food_was[index_food_was] =[i,j,8];
-		index_food_was++;
-	}else if(index!= 9 && j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==9){
-		food_was[index_food_was] =[i,j,9];
-		index_food_was++;
-	}else if(index!= 5 && j >= 0 && i >=0 && i < board_height && j < board_width && board[i][j] ==5){
-		food_was[index_food_was] =[i,j,5];
-		index_food_was++;
-	}*/
+	}
 	return true;
 
 }
@@ -559,100 +537,103 @@ function Draw() {
 /*-------------------------------- Update Position---------------------------------------- */
 
 function UpdatePosition() {
-	let x = GetKeyPressed();
-	returnFoodWas();
-	mainChangPositionMonster();
-	if(character_live){
-		changPositionCharacter();
-
-	}
-	board[shape.i][shape.j] = 0;
-	//i -x
-	//j - y
-	if ((x == 1) || (x == undefined && last_move == "left" )) { 
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
-			shape.j--;
-			last_move = "left";
+	if( document.getElementById("Game").style.display != 'none'){
+		let x = GetKeyPressed();
+		returnFoodWas();
+		mainChangPositionMonster();
+		if(character_live){
+			changPositionCharacter();
+	
 		}
-	}
-	if (x == 2 || (x == undefined && last_move == "right" )) {
-		if (shape.j  <  board_width-1 && board[shape.i][shape.j + 1] != 4) {
-			shape.j++;
-			last_move = "right";
+		board[shape.i][shape.j] = 0;
+		//i -x
+		//j - y
+		if ((x == 1) || (x == undefined && last_move == "left" )) { 
+			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+				shape.j--;
+				last_move = "left";
+			}
 		}
-	}
-	if (x == 3  || (x == undefined && last_move == "up" )) { 
-		if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
-			shape.i--;
-			last_move = "up";
+		if (x == 2 || (x == undefined && last_move == "right" )) {
+			if (shape.j  <  board_width-1 && board[shape.i][shape.j + 1] != 4) {
+				shape.j++;
+				last_move = "right";
+			}
 		}
-	}
-	if (x == 4  ||  (x == undefined && last_move == "down" )) {
-		if (shape.i < board_height-1 && board[shape.i + 1][shape.j] != 4) {
-			shape.i++;
-			last_move = "down";
+		if (x == 3  || (x == undefined && last_move == "up" )) { 
+			if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
+				shape.i--;
+				last_move = "up";
+			}
 		}
-	}else{
-
-	}
-	if (board[shape.i][shape.j] == 11) {
-		score += 5;
-	}else if(board[shape.i][shape.j] == 12){
-		score += 15;
-	}else if(board[shape.i][shape.j] == 13){
-		score += 25;
-	}
-	if (board[shape.i][shape.j] == 5) {
-		score = score + 50;
-		character_live= false;
-	}
-	if (board[shape.i][shape.j] == 1) {
-		more_time = -30;
-	}
-	if (board[shape.i][shape.j] == 3) {//power
-		game_over += 1;
-	}
-	if (board[shape.i][shape.j] != 6 && board[shape.i][shape.j] != 7
-		&& board[shape.i][shape.j] != 8 && board[shape.i][shape.j] != 9) {
-		board[shape.i][shape.j] = 2;
-	}
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-	if (score >= 500 ) {
-		endGame("Winner!!!");
-	}
-	var currentTime = new Date();
-	game_time_from_user += more_time;
-	more_time = 0;
-	time_elapsed = Math.floor(((currentTime - start_time) / 1000));
-	if(time_elapsed >= game_time_from_user){
-		//time ended
-		if(score < 100){
-			endGame("You are better than " + score + " points!");
+		if (x == 4  ||  (x == undefined && last_move == "down" )) {
+			if (shape.i < board_height-1 && board[shape.i + 1][shape.j] != 4) {
+				shape.i++;
+				last_move = "down";
+			}
 		}else{
+	
+		}
+		if (board[shape.i][shape.j] == 11) {
+			score += 5;
+		}else if(board[shape.i][shape.j] == 12){
+			score += 15;
+		}else if(board[shape.i][shape.j] == 13){
+			score += 25;
+		}
+		if (board[shape.i][shape.j] == 5) {
+			score = score + 50;
+			character_live= false;
+		}
+		if (board[shape.i][shape.j] == 1) {
+			more_time = -30;
+		}
+		if (board[shape.i][shape.j] == 3) {//power
+			game_over += 1;
+		}
+		if (board[shape.i][shape.j] != 6 && board[shape.i][shape.j] != 7
+			&& board[shape.i][shape.j] != 8 && board[shape.i][shape.j] != 9) {
+			board[shape.i][shape.j] = 2;
+		}
+		if (score >= 20 && time_elapsed <= 10) {
+			pac_color = "green";
+		}
+		if (score >= 500 ) {
 			endGame("Winner!!!");
 		}
-	}
-	if(MonsterAtePacman()[0] != -1){
-		if(game_over == 1){
-			game_over --;
-			endGame("Loser!");		
-		}else{
-			game_over--;
-			score -= 10;
-			window.alert("We believe in you! Keep playing");
-			initiateKeyListener();
-			PacmanEaten();
+		var currentTime = new Date();
+		game_time_from_user += more_time;
+		more_time = 0;
+		time_elapsed = Math.floor(((currentTime - start_time) / 1000));
+		if(time_elapsed >= game_time_from_user){
+			//time ended
+			if(score < 100){
+				endGame("You are better than " + score + " points!");
+			}else{
+				endGame("Winner!!!");
+			}
 		}
+		if(MonsterAtePacman()[0] != -1){
+			if(game_over == 1){
+				game_over --;
+				endGame("Loser!");		
+			}else{
+				game_over--;
+				score -= 10;
+				window.alert("We believe in you! Keep playing");
+				initiateKeyListener();
+				PacmanEaten();
+			}
+		}
+		if(flag_end_game == false) {
+			updateHeartDisplay();
+		}if(flag_end_game == true){
+			ShowContent("Setting");
+		}
+	
+		Draw();
 	}
-	if(flag_end_game == false) {
-		updateHeartDisplay();
-	}if(flag_end_game == true){
-		ShowContent("Setting");
-	}
-
-	Draw();
+	
 }
 
 function endGame(msg){
