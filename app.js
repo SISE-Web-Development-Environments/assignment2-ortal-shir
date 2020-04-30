@@ -636,6 +636,7 @@ function UpdatePosition() {
 		}
 	
 		Draw();
+		audio.currentTime = 0;
 	}
 	
 }
