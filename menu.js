@@ -198,7 +198,7 @@ function login(){
 		window.alert("wrong username or password");
 	}
 	else{
-        document.getElementById('hello_user').innerHTML = "Hello "+JSON.parse(user_input)['firstname'];
+        document.getElementById('hello_user').innerHTML = "Hello "+document.getElementById("username_input").value);
         addGameToMenu();
         ShowContent('Setting');
 	}
