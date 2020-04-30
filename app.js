@@ -49,7 +49,9 @@ var game_over =5;//Several attempts
 var more_time; //A hourglass that allows for more time
 var flag_end_game = false
 
-var audio = new Audio('./resource/audio/Pac-man.mp3');
+//var audio = new Audio('./resource/audio/Pac-man.mp3');
+var audio = new Audio();
+
 var interval;
 
 //initial settings definition
@@ -585,7 +587,7 @@ function UpdatePosition() {
 			character_live= false;
 		}
 		if (board[shape.i][shape.j] == 1) {
-			more_time = -30;
+			more_time = 30;
 		}
 		if (board[shape.i][shape.j] == 3) {//power
 			game_over += 1;
@@ -639,7 +641,13 @@ function endGame(msg){
 	window.clearInterval(interval);		
 	window.alert(msg);
 	flag_end_game = true;
-	Start();
+	var r = confirm(msg + "\nIf you want to start a new game click OK");
+	if (r == true) {
+		Start();
+	} else {
+		ShowContent("Setting");
+	}
+	
 }
 
 function PacmanEaten(){
