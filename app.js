@@ -52,6 +52,7 @@ var flag_end_game = false
 var audio = new Audio('./resource/audio/Pac-man.mp3');
 
 var interval;
+var interval_presskey;
 
 //initial settings definition
 var food_from_user = 50;
@@ -157,6 +158,7 @@ function Start() {
 	}
 	initiateKeyListener();
 	interval = setInterval(UpdatePosition, 100);
+
 }
 
 function initial(){
@@ -179,24 +181,37 @@ function initial(){
 }
 
 
+document.addEventListener('keydown', function(e){ 
+	keysDown = {};
+	keysDown[e.keyCode] = true;
+});
+
+document.addEventListener('keyup', function(e){ 
+	keysDown = {};
+	keysDown[e.keyCode] = false;
+});
+
+
 //A function that saves the key the user pressed
 function initiateKeyListener(){
-	keysDown = {};
-	addEventListener(
-		"keydown",
-		function(e) {
-			keysDown[e.keyCode] = true;
-		},
-		false
-	);
-	addEventListener(
-		"keyup",
-		function(e) {
-			keysDown[e.keyCode] = false;
-		},
-		false
+keysDown = {};
+addEventListener(
+	"keydown",
+	function(e) {
+		keysDown[e.keyCode] = true;
+	},
+	false
+);
+addEventListener(
+	"keyup",
+	function(e) {
+		keysDown[e.keyCode] = false;
+	},
+	false
+
 	);
 }
+
 
 //Distribution food function 
 function divisionFood(food_remain){
@@ -550,29 +565,29 @@ function UpdatePosition() {
 		board[shape.i][shape.j] = 0;
 		//i -x
 		//j - y
-		if ((x == 1) ) { 
-		//if ((x == 1) || (x == undefined && last_move == "left" )) { 
+		//if ((x == 1) ) { 
+		if ((x == 1) || (x == undefined && last_move == "left" )) { 
 			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 				shape.j--;
 				last_move = "left";
 			}
 		}
-		if (x == 2 ) {
-		//if (x == 2 || (x == undefined && last_move == "right" )) {
+		//if (x == 2 ) {
+		if (x == 2 || (x == undefined && last_move == "right" )) {
 			if (shape.j  <  board_width-1 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
 				last_move = "right";
 			}
 		}
-		if (x == 3 ) { 
-		//if (x == 3  || (x == undefined && last_move == "up" )) { 
+		//if (x == 3 ) { 
+		if (x == 3  || (x == undefined && last_move == "up" )) { 
 			if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
 				shape.i--;
 				last_move = "up";
 			}
 		}
-		if (x == 4 ) {
-		//if (x == 4  ||  (x == undefined && last_move == "down" )) {
+		//if (x == 4 ) {
+		if (x == 4  ||  (x == undefined && last_move == "down" )) {
 			if (shape.i < board_height-1 && board[shape.i + 1][shape.j] != 4) {
 				shape.i++;
 				last_move = "down";
