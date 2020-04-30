@@ -730,7 +730,7 @@ function submitSettings(){
 
 		//game time
 		let game_time = document.getElementById("game_time").value;
-		if (game_time != "" && (game_time < 60 || game_time.match(reg))) {
+		if (game_time != "" && (game_time < 60 || !game_time.match(reg))) {
 			window.alert("Game time must be at least 60 seconds");
 			submitOK = false;
 		}
