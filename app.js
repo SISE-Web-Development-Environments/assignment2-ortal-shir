@@ -572,8 +572,6 @@ function UpdatePosition() {
 				shape.i++;
 				last_move = "down";
 			}
-		}else{
-	
 		}
 		if (board[shape.i][shape.j] == 11) {
 			score += 5;
@@ -621,9 +619,8 @@ function UpdatePosition() {
 			}else{
 				game_over--;
 				score -= 10;
-				window.alert("We believe in you! Keep playing");
-				initiateKeyListener();
 				PacmanEaten();
+				window.alert("We believe in you! Keep playing");
 			}
 		}
 		if(flag_end_game == false) {
