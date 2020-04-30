@@ -49,8 +49,7 @@ var game_over =5;//Several attempts
 var more_time; //A hourglass that allows for more time
 var flag_end_game = false
 
-//var audio = new Audio('./resource/audio/Pac-man.mp3');
-var audio = new Audio();
+var audio = new Audio('./resource/audio/Pac-man.mp3');
 
 var interval;
 
@@ -639,7 +638,6 @@ function UpdatePosition() {
 function endGame(msg){
 	audio.pause();
 	window.clearInterval(interval);		
-	window.alert(msg);
 	flag_end_game = true;
 	var r = confirm(msg + "\nIf you want to start a new game click OK");
 	if (r == true) {
