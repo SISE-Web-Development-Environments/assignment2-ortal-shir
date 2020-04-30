@@ -722,14 +722,15 @@ function submitSettings(){
 		let submitOK = true;
 		//amount of food
 		let food_balls_number = document.getElementById("food_balls_number").value;
-		if (food_balls_number != "" && (food_balls_number < 50 || food_balls_number > 90)) {
+		var reg=   /^[0-9]+$/;
+		if (food_balls_number != "" && (food_balls_number < 50 || food_balls_number > 90 ||!food_balls_number.match(reg))) {
 			window.alert("The amount of food balls must be between 50 and 90");
 			submitOK = false;
 		}
 
 		//game time
 		let game_time = document.getElementById("game_time").value;
-		if (game_time != "" && game_time < 60) {
+		if (game_time != "" && (game_time < 60 || game_time.match(reg))) {
 			window.alert("Game time must be at least 60 seconds");
 			submitOK = false;
 		}
