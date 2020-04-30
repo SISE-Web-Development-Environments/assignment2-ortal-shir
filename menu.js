@@ -203,7 +203,10 @@ function login(){
 } 
 
 function addGameToMenu() {
-    $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
+    if(document.getElementById('Game') == undefined){
+        $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
+
+    }
 }
 
 
