@@ -540,6 +540,7 @@ function Draw() {
 
 function UpdatePosition() {
 	if( document.getElementById("Game").style.display != 'none'){
+		initiateKeyListener();
 		let x = GetKeyPressed();
 		returnFoodWas();
 		mainChangPositionMonster();
