@@ -2,6 +2,10 @@
  
 Pacman Online game.
 
+Additional functionality
+1. Clock that increases time
+2. Adding a remedy to increase the life of Pacman
+
 Pacman game project for web development course in Ben Gurion University.
 Created by Ortal Parpara and Shir Cohen.
 Use of jQuery plugins
