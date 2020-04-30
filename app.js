@@ -163,6 +163,7 @@ function initial(){
 	for (let i = 0; i < board_height; i++) {
 		board[i] = new Array();
 	}
+	audio.currentTime = 0;
 	audio.play();
 	createWalls();
 	pickColor();
