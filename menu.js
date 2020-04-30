@@ -179,7 +179,7 @@ function Submit(){
             Year:  document.getElementById("Year").value
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
-	ShowContent("login_form");
+	    ShowContent("login_form");
 
     }
 
@@ -198,16 +198,18 @@ function login(){
 		window.alert("wrong username or password");
 	}
 	else{
+        if(!loggedin()){
+            addGameToMenu();
+        }
         document.getElementById('hello_user').innerHTML = "Hello "+document.getElementById("username_input").value;
-        addGameToMenu();
         ShowContent('Setting');
 	}
 } 
 
 function addGameToMenu() {
-   // if(document.getElementById('Game') == undefined){
+   //if(document.getElementById('Game') == undefined){
         $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
-   // }
+   //}
 }
 
 
