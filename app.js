@@ -1,3 +1,9 @@
+
+/*
+*This file is responsible for managing the Pacman game.
+*/
+
+
 //canvas
 var context;
 //game board

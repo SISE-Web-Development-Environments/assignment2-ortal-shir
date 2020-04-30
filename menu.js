@@ -1,3 +1,7 @@
+/*
+**This file is responsible for displaying the menu and div replacement functionality.
+*/
+
 
 $(document).ready(function() {
 	registerP();
@@ -7,14 +11,12 @@ $(document).ready(function() {
 function exitWelcomePage(content){
     document.getElementById("navbar").style.display = 'block';
     document.getElementById("hello").style.display = 'block';
-  //  document.getElementById("footer").style.display = 'block';
     ShowContent(content);
 }
 
 function enterWelcomePage(){
     document.getElementById("navbar").style.display = 'none';
     document.getElementById("hello").style.display = 'none';
-//document.getElementById("footer").style.display = 'none';
     ShowContent("Welcome");
 }
 
@@ -71,7 +73,6 @@ $j.validator.addMethod('checkname', function (inputtxt) {
 }, 'The name must contain only letters');
 
 $j(function() {
-    // Wait for the DOM to be ready
     $j().ready(function() {
         $j("form[id='registration']").validate({
             rules: {
