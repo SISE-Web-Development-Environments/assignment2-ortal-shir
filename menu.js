@@ -198,14 +198,16 @@ function login(){
 		window.alert("wrong username or password");
 	}
 	else{
-        document.getElementById('hello_user').innerHTML = "Hello "+document.getElementById("username_input").value);
+        document.getElementById('hello_user').innerHTML = "Hello "+document.getElementById("username_input").value;
         addGameToMenu();
         ShowContent('Setting');
 	}
 } 
 
 function addGameToMenu() {
-    $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
+   // if(document.getElementById('Game') == undefined){
+        $('#navbar_btns').append('<li class=\'menu\'> <a class="navbar_a" href=\'#Game\' onclick="ShowContent(\'Game\');">Game</a></li>');
+   // }
 }
 
 

@@ -49,8 +49,7 @@ var game_over =5;//Several attempts
 var more_time; //A hourglass that allows for more time
 var flag_end_game = false
 
-//var audio = new Audio('./resource/audio/Pac-man.mp3');
-var audio = new Audio();
+var audio = new Audio('./resource/audio/Pac-man.mp3');
 
 var interval;
 
@@ -551,25 +550,29 @@ function UpdatePosition() {
 		board[shape.i][shape.j] = 0;
 		//i -x
 		//j - y
-		if ((x == 1) || (x == undefined && last_move == "left" )) { 
+		if ((x == 1) ) { 
+		//if ((x == 1) || (x == undefined && last_move == "left" )) { 
 			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 				shape.j--;
 				last_move = "left";
 			}
 		}
-		if (x == 2 || (x == undefined && last_move == "right" )) {
+		if (x == 2 ) {
+		//if (x == 2 || (x == undefined && last_move == "right" )) {
 			if (shape.j  <  board_width-1 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
 				last_move = "right";
 			}
 		}
-		if (x == 3  || (x == undefined && last_move == "up" )) { 
+		if (x == 3 ) { 
+		//if (x == 3  || (x == undefined && last_move == "up" )) { 
 			if (shape.i  > 0 && board[shape.i - 1][shape.j] != 4) {
 				shape.i--;
 				last_move = "up";
 			}
 		}
-		if (x == 4  ||  (x == undefined && last_move == "down" )) {
+		if (x == 4 ) {
+		//if (x == 4  ||  (x == undefined && last_move == "down" )) {
 			if (shape.i < board_height-1 && board[shape.i + 1][shape.j] != 4) {
 				shape.i++;
 				last_move = "down";
@@ -639,7 +642,6 @@ function UpdatePosition() {
 function endGame(msg){
 	audio.pause();
 	window.clearInterval(interval);		
-	window.alert(msg);
 	flag_end_game = true;
 	var r = confirm(msg + "\nIf you want to start a new game click OK");
 	if (r == true) {
