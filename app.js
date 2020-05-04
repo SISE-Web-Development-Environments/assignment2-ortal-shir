@@ -69,7 +69,7 @@ var keyLeftCode = 37;
 var food_color5 = "#556611";
 var food_color15 = "#528c6c";
 var food_color25 = "#f6b73c";
-var pac_color = "yellow";
+// var pac_color = "yellow";
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -614,9 +614,6 @@ function UpdatePosition() {
 			&& board[shape.i][shape.j] != 8 && board[shape.i][shape.j] != 9) {
 			board[shape.i][shape.j] = 2;
 		}
-		if (score >= 20 && time_elapsed <= 10) {
-			pac_color = "green";
-		}
 		if (score >= 500 ) {
 			endGame("Winner!!!");
 		}
@@ -703,7 +700,7 @@ function PacmanEaten(){
 
 function pickColor() {
 	//restart pacman color
-	pac_color = "yellow";
+	//pac_color = "yellow";
 
 	// five points
 	fivePoints = document.querySelector("#five_points");
@@ -726,14 +723,23 @@ function pickColor() {
 
 function updateFivePointsColor (event){
 	food_color5 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("five_points_ingame").style.color = food_color5; 
+	});
 }
 
 function updateFifteenPointsColor (event){
 	food_color15 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("fifteen_points_ingame").style.color = food_color15;
+	});
 }
 
 function updateTwentyFivePointsColor (event){
 	food_color25 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("twentyfive_points_ingame").style.color = food_color25;
+	});
 }
 
 
