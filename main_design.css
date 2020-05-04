@@ -389,6 +389,18 @@ label{
     display: flex;
   }
 
+  #five_points_ingame{
+    color: #556611;
+  }
+
+  #fifteen_points_ingame{
+    color: #528c6c;
+  }
+
+  #twentyfive_points_ingame{
+    color: #f6b73c;
+  }
+
 
   /*-------------------------------------About and header--------------------------*/
 
