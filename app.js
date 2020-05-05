@@ -850,28 +850,56 @@ function setSettingsDisplayForUser(){
 	document.getElementById("food_display").innerHTML = food_from_user;
 	document.getElementById("time_display").innerHTML = game_time_from_user;
 	document.getElementById("monster_display").innerHTML = monster.length;
+	document.getElementById("KeyUp").innerHTML = document.getElementById("keyUpCode").value;
+	document.getElementById("KeyDown").innerHTML = document.getElementById("keyDownCode").value;
+	document.getElementById("KeyLeft").innerHTML = document.getElementById("keyLeftCode").value;
+	document.getElementById("KeyRight").innerHTML = document.getElementById("keyRightCode").value;
+
+
+	
 }
 
 
 function keyCodeUp(event) {
-	document.getElementById("keyUpCode").value = '';
+	document.getElementById("keyUpCode").value =  event.key;
 	keyUpCode = event.keyCode;
-	document.getElementById("keyUpCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyUpCode").placeholder = "space";
+		document.getElementById("keyUpCode").value =  "space";
+
+	}
+	setSettingsDisplayForUser()
 }
 
 function keyCodeDown(event) {
-	document.getElementById("keyDownCode").value = '';
+	document.getElementById("keyDownCode").value = event.key;
 	keyDownCode = event.keyCode;
-	document.getElementById("keyDownCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyDownCode").placeholder = "space";
+		document.getElementById("keyDownCode").value = "space";
+
+	}
+	setSettingsDisplayForUser()
+
 }
 function keyCodeRight(event) {
-	document.getElementById("keyRightCode").value = '';
+	document.getElementById("keyRightCode").value = event.key;
 	keyRightCode = event.keyCode;
-	document.getElementById("keyRightCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyRightCode").placeholder = "space";
+		document.getElementById("keyRightCode").value = "space";
+	}
+	setSettingsDisplayForUser()
+
 }
 function keyCodeLeft(event) {
-	document.getElementById("keyLeftCode").value = '';
+	document.getElementById("keyLeftCode").value = event.key;
 	keyLeftCode = event.keyCode;
-	document.getElementById("keyLeftCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyLeftCode").placeholder = "space";
+		document.getElementById("keyLeftCode").value = "space";
+	}
+	setSettingsDisplayForUser()
+
 
 }

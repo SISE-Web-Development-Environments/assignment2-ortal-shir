@@ -179,12 +179,8 @@ function Submit(){
             Year:  document.getElementById("Year").value
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
-	ShowContent("Welcome");
-	    
-	 
-
     }
-
+    ShowContent("login_form");
 }
 
 
