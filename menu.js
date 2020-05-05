@@ -180,7 +180,7 @@ function Submit(){
         };
         localStorage.setItem(document.getElementById("username").value,JSON.stringify(userData));
     }
-
+    ShowContent("login_form");
 }
 
 

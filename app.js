@@ -69,7 +69,7 @@ var keyLeftCode = 37;
 var food_color5 = "#556611";
 var food_color15 = "#528c6c";
 var food_color25 = "#f6b73c";
-var pac_color = "yellow";
+// var pac_color = "yellow";
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -614,9 +614,6 @@ function UpdatePosition() {
 			&& board[shape.i][shape.j] != 8 && board[shape.i][shape.j] != 9) {
 			board[shape.i][shape.j] = 2;
 		}
-		if (score >= 20 && time_elapsed <= 10) {
-			pac_color = "green";
-		}
 		if (score >= 500 ) {
 			endGame("Winner!!!");
 		}
@@ -703,7 +700,7 @@ function PacmanEaten(){
 
 function pickColor() {
 	//restart pacman color
-	pac_color = "yellow";
+	//pac_color = "yellow";
 
 	// five points
 	fivePoints = document.querySelector("#five_points");
@@ -726,14 +723,23 @@ function pickColor() {
 
 function updateFivePointsColor (event){
 	food_color5 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("five_points_ingame").style.color = food_color5; 
+	});
 }
 
 function updateFifteenPointsColor (event){
 	food_color15 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("fifteen_points_ingame").style.color = food_color15;
+	});
 }
 
 function updateTwentyFivePointsColor (event){
 	food_color25 =  event.target.value;
+	$(document).ready(function(){
+	document.getElementById("twentyfive_points_ingame").style.color = food_color25;
+	});
 }
 
 
@@ -844,28 +850,56 @@ function setSettingsDisplayForUser(){
 	document.getElementById("food_display").innerHTML = food_from_user;
 	document.getElementById("time_display").innerHTML = game_time_from_user;
 	document.getElementById("monster_display").innerHTML = monster.length;
+	document.getElementById("KeyUp").innerHTML = document.getElementById("keyUpCode").value;
+	document.getElementById("KeyDown").innerHTML = document.getElementById("keyDownCode").value;
+	document.getElementById("KeyLeft").innerHTML = document.getElementById("keyLeftCode").value;
+	document.getElementById("KeyRight").innerHTML = document.getElementById("keyRightCode").value;
+
+
+	
 }
 
 
 function keyCodeUp(event) {
-	document.getElementById("keyUpCode").value = '';
+	document.getElementById("keyUpCode").value =  event.key;
 	keyUpCode = event.keyCode;
-	document.getElementById("keyUpCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyUpCode").placeholder = "space";
+		document.getElementById("keyUpCode").value =  "space";
+
+	}
+	setSettingsDisplayForUser()
 }
 
 function keyCodeDown(event) {
-	document.getElementById("keyDownCode").value = '';
+	document.getElementById("keyDownCode").value = event.key;
 	keyDownCode = event.keyCode;
-	document.getElementById("keyDownCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyDownCode").placeholder = "space";
+		document.getElementById("keyDownCode").value = "space";
+
+	}
+	setSettingsDisplayForUser()
+
 }
 function keyCodeRight(event) {
-	document.getElementById("keyRightCode").value = '';
+	document.getElementById("keyRightCode").value = event.key;
 	keyRightCode = event.keyCode;
-	document.getElementById("keyRightCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyRightCode").placeholder = "space";
+		document.getElementById("keyRightCode").value = "space";
+	}
+	setSettingsDisplayForUser()
+
 }
 function keyCodeLeft(event) {
-	document.getElementById("keyLeftCode").value = '';
+	document.getElementById("keyLeftCode").value = event.key;
 	keyLeftCode = event.keyCode;
-	document.getElementById("keyLeftCode").placeholder = event.key;
+	if(event.keyCode == 32){
+		document.getElementById("keyLeftCode").placeholder = "space";
+		document.getElementById("keyLeftCode").value = "space";
+	}
+	setSettingsDisplayForUser()
+
 
 }

@@ -4,15 +4,15 @@
 		<!-- jQuery -->
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		
-		<!-- jQuery local host	-->
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<!-- jQuery local host	
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-		<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-		<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script> 
+		<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script> 
+ 		<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
+		<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>  
 		
-		
+-->
 		
 		<!-- jQuery and stylesheet for modal -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -21,6 +21,8 @@
 	
 		<!-- jQuery validation -->
 		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script> 
+<!-- 		<script src="//thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script> -->
+<!-- 		<script src="//thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script> -->
 	
 	
 		<!-- website icon -->
@@ -128,6 +130,28 @@
 			<li>
 				<label>Amount of monsters:<span id="monster_display">1</span></label>						
 			</li>
+			
+			<li>
+				<!-- <label class="settings_writing">Food balls colors:</label> -->
+
+				<div>
+					<label id="five_points_ingame">5 points balls</label>
+				</div>
+				
+				<div>
+					<label id="fifteen_points_ingame">15 points balls</label>
+				</div>
+
+				<div>
+					<label id="twentyfive_points_ingame">25 points balls</label>
+				</div>
+			</li>
+			<li>
+				<div> <label>Up:  <span id="KeyUp">ArrowUp</span></label> </div>
+				<div> <label>Down:  <span id="KeyDown">ArrowDown</span></label> </div>
+				<div> <label>Left:  <span id="KeyLeft">ArrowLeft</span></label> </div>
+				<div> <label>Right:  <span id="KeyRight">ArrowRight</span></label> </div>
+			</li>
 		<li>
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
@@ -208,13 +232,13 @@
 
 		<div>
 			<input class="color" type="color" id="five_points" name="head"
-					value="#e66465">
+					value="#556611">
 			<label for="head">  5 points balls</label>
 		</div>
 		
 		<div>
 			<input class="color" type="color" id="fifteen_points" name="body"
-					value="#f6b73c">
+					value="#528c6c">
 			<label for="body">15 points balls</label>
 		</div>
 
@@ -230,16 +254,16 @@
 			<ul>
 			<li class="keyPress">                    
 					<i class="fa fa-arrow-circle-up"></i>
-				<input id = "keyUpCode" placeholder = "press key up" class="inputkey" type="text" size="50" onkeydown="keyCodeUp(event)"> </li>
+				<input id = "keyUpCode" placeholder = "press key up" value = "ArrowUp" class="inputkey" type="text" maxlength = "1" onkeydown="keyCodeUp(event)"> </li>
 			<li class="keyPress"> 					 
 				<i class="fa fa-arrow-circle-left"></i>
-				<input id = "keyLeftCode" placeholder = "press key left" class="inputkey" type="text" size="50" onkeydown="keyCodeLeft(event)" >
-				<input id = "keyRightCode" placeholder = "press key right" class="inputkey" type="text" size="50" onkeydown="keyCodeRight(event)" >
+				<input id = "keyLeftCode" placeholder = "press key left" value = "ArrowLeft" class="inputkey" type="text" maxlength = "1" onkeydown="keyCodeLeft(event)" >
+				<input id = "keyRightCode" placeholder = "press key right" value = "ArrowRight" class="inputkey" type="text" maxlength = "1" onkeydown="keyCodeRight(event)" >
 				<i class="fa fa-arrow-circle-right"></i>
 				</li>
 			<li class="keyPress"> 
 				<i class="fa fa-arrow-circle-up"></i>
-				<input id = "keyDownCode" placeholder = "press key down" class="inputkey" type="text" size="50" onkeydown="keyCodeDown(event)" >  </li>
+				<input id = "keyDownCode" placeholder = "press key down"  value = "ArrowDown" class="inputkey" type="text" maxlength = "1" onkeydown="keyCodeDown(event)" >  </li>
 			</ul>
 			</div>
 		</div>
